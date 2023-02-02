@@ -1,0 +1,44 @@
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--spacer-xl);
+}
+
+.group > * {
+  flex: 1;
+  min-width: 300px;
+}
+
+.spacingsmall > * {
+  margin: var(--spacer-s);
+}
+
+.spacingmedium > * {
+  margin: var(--spacer-m);
+}
+
+.spacinglarge > * {
+  margin: var(--spacer-l);
+}
+
+.spacingextralarge > * {
+  margin: var(--spacer-xl);
+}
+
+.left {
+  justify-content: flex-start;
+}
+
+.right {
+  justify-content: flex-end;
+}
+
+.center {
+  justify-content: center;
+}
+
+@media only screen and (max-width: 900px) {
+  .group {
+    column-gap: 0;
+  }
+}

@@ -1,0 +1,16 @@
+/* https: //en.bestfonts.pro/font/recoleta */
+@font-face {
+  font-family: "Recoleta";
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+  src: url("../assets/fonts/Recoleta-Black.ttf") format("woff2");
+}
+
+@font-face {
+  font-family: "Recoleta";
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+  src: url("../assets/fonts/Recoleta-Regular.woff2") format("woff2");
+}

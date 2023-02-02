@@ -1,0 +1,22 @@
+.wavey {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.top {
+  transform: rotate(180deg);
+}
+
+.wavey svg {
+  position: relative;
+  display: block;
+  width: calc(400% + 1.3px);
+  height: 100px;
+}
+
+.wavey .shapeFill {
+  fill: var(--hex-blue);
+}

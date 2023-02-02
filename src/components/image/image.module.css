@@ -1,0 +1,28 @@
+.s {
+  height: 50px;
+}
+
+.m {
+  height: 100px;
+}
+
+.ml {
+  height: 150px;
+}
+
+.l {
+  height: 200px;
+}
+
+.xl {
+  height: 300px;
+}
+
+.container img {
+  object-fit: contain;
+  border-radius: var(--border-radius-l);
+}
+
+.centered {
+  margin: auto;
+}

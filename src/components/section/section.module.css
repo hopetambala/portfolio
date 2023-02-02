@@ -1,0 +1,24 @@
+.section {
+  padding-top: var(--spacer-m);
+  padding-bottom: var(--spacer-m);
+}
+
+.content {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacer-xxl);
+  padding-right: var(--spacer-xxl);
+}
+
+.altBG {
+  background-color: var(--hex-blue);
+}
+
+@media only screen and (max-width: 900px) {
+  .content {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--spacer-l);
+    padding-right: var(--spacer-l);
+  }
+}
