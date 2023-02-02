@@ -17,41 +17,19 @@ import adventure from "../assets/photos/things-to-do/adventure.gif";
 import taco from "../assets/photos/things-to-do/taco.gif";
 
 import * as styles from "./index.module.css";
-// import { Carousel } from "../components/carousel/carousel";
-
-// const items = [
-//   <div>
-//     For me, Hope’s and my love story started months before we actually met when
-//     Peace Corps headquarters ignored my ranked country preferences for service
-//     and decided to send me to the Dominican Republic, which was nowhere on my
-//     application. By the time I got there, Hope had already been a Peace Corps
-//     Volunteer for a year, and throughout training I just kept hearing stories
-//     about this larger-than-life guy named Hope.{" "}
-//   </div>,
-//   <div>
-//     When I finally met him, I confirmed the rumors were true: he was unlike
-//     anyone I had ever met before, and in the best way! One night, after coming
-//     back to the Peace Corps hostel after a volunteer Thanksgiving celebration, I
-//     (as a Christmas fanatic) followed the sound of Christmas music to the hostel
-//     lobby, where Hope was sitting alone curating the perfect Christmas playlist.
-//     We stayed up until 4am debating the greatest Christmas hits, discussing
-//     Zingerman’s and Ann Arbor, and ??? As our host communities were two long bus
-//     rides apart, we fell in love over hours and hours of flip phone
-//     conversations, never running out of things to talk about.{" "}
-//   </div>,
-// ];
-
-export default function Home() {
+import { useStaticQuery, graphql, Link } from "gatsby"
+const Home = ({data}) => {
+  console.log(data)
+  const {landingPageTitle, landingPageSubtitle, intro } = data
   return (
     <div>
       <Section title="landing" isNoTitle className={styles.landing}>
         <div className={styles.landingText}>
-          <h1>Hope</h1>
-          <h1>& Carly</h1>
-          {/* <h2>RSVP</h2> */}
+          <h1>{landingPageTitle}</h1>
+          <h2>{landingPageSubtitle}</h2>
         </div>
       </Section>
-      <Section title="Welcome">
+      {/* <Section title="Welcome">
         <Grid>
           <GridItem>
             <p>Excited for some beach vibes?</p>
@@ -69,11 +47,6 @@ export default function Home() {
             </p>
 
             <em>Love, Hope &amp; Carly</em>
-            {/* <p>
-              You'll also find bits about our love story, our amazing wedding
-              party, and deets on our registry.
-            </p> */}
-            {/* <p>Don&rsquo;t forget to RSVP!</p> */}
           </GridItem>
           <GridItem>
             <iframe
@@ -355,36 +328,6 @@ export default function Home() {
 
       <SectionDivider isTop />
 
-      {/* <Section title="Love Story">
-        <h3>As told by him...</h3>
-
-        <Grid>
-          <GridItem>
-            <Carousel items={items} />
-          </GridItem>
-          <GridItem>
-            <Image alt="Love" source={lovestory} isCentered />
-          </GridItem>
-        </Grid>
-        <h3>As told by her...</h3>
-
-        <Grid>
-          <GridItem>
-            <Carousel items={items} />
-          </GridItem>
-          <GridItem>
-            <Image alt="Love" source={lovestory} isCentered />
-          </GridItem>
-        </Grid>
-      </Section> */}
-
-      {/* <Section title="Wedding Party">
-        <p>Zzip zip zipz izp</p>
-      </Section> */}
-
-      {/* <Section title="Fun Little Game!">
-        <p>Zzip zip zipz izp</p>
-      </Section> */}
 
       <Section title="Registry">
         <p>
@@ -401,7 +344,28 @@ export default function Home() {
           Registry
         </a>
       </Section>
-      <Section title=""></Section>
+      <Section title=""></Section> */}
     </div>
   );
 }
+
+const Container = () => {
+   const {nodes} = useStaticQuery(
+    graphql`
+      query {
+        allContentfulLandingPage {
+          nodes {
+            landingPageSubtitle
+            landingPageTitle
+            intro {
+              raw
+            }
+          }
+        }
+      }
+    `
+  ).allContentfulLandingPage
+  return <Home data={nodes[0]}/>
+}
+
+export default Container
