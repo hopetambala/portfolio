@@ -1,5 +1,7 @@
 import "../css/_main.css";
 import React from "react";
+import { useStaticQuery, graphql, Link } from "gatsby"
+import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { Section } from "../components/section/section";
 import { SectionDivider } from "../components/section/section-divider/section-divider";
 import { Grid } from "../components/grid/grid";
@@ -17,9 +19,8 @@ import adventure from "../assets/photos/things-to-do/adventure.gif";
 import taco from "../assets/photos/things-to-do/taco.gif";
 
 import * as styles from "./index.module.css";
-import { useStaticQuery, graphql, Link } from "gatsby"
+
 const Home = ({data}) => {
-  console.log(data)
   const {landingPageTitle, landingPageSubtitle, intro } = data
   return (
     <div>
@@ -29,42 +30,16 @@ const Home = ({data}) => {
           <h2>{landingPageSubtitle}</h2>
         </div>
       </Section>
-      {/* <Section title="Welcome">
+       <Section title="Welcome">
         <Grid>
           <GridItem>
-            <p>Excited for some beach vibes?</p>
-            <p>
-              Welcome to our wedding website! We&rsquo;ve created this website
-              (from scratch!) to share everything you need to know leading up to
-              our wedding day. Please continue to check our website for the most
-              up-to-date information. Enjoy some of our favorite music we listen
-              to as a couple in the meantime 😊
-            </p>
-            <p>
-              Thank you for your love, encouragement, and support. We
-              can&rsquo;t wait to celebrate with our friends and family as we
-              enter this next chapter!
-            </p>
-
-            <em>Love, Hope &amp; Carly</em>
-          </GridItem>
-          <GridItem>
-            <iframe
-              title="our music playlist"
-              allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-              frameborder="0"
-              height="450"
-              width="100%"
-              overflow="hidden"
-              background="transparent"
-              sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-              src="https://embed.music.apple.com/us/playlist/love-picks/pl.u-RRbV08VCxZEbdK"
-            ></iframe>
+            {intro && renderRichText(intro)}
           </GridItem>
         </Grid>
       </Section>
 
       <SectionDivider />
+      {/*
 
       <Section title="Details" isAltBG className={styles.details}>
         <Grid position="center">
@@ -364,7 +339,9 @@ const Container = () => {
         }
       }
     `
-  ).allContentfulLandingPage
+  ).allContentfulLandingPage;
+
+  
   return <Home data={nodes[0]}/>
 }
 
