@@ -1,27 +1,21 @@
 import "../css/_main.css";
 import React from "react";
-import { useStaticQuery, graphql, Link } from "gatsby"
-import { renderRichText } from 'gatsby-source-contentful/rich-text'
+import { useStaticQuery, graphql, Link } from "gatsby";
+import { renderRichText } from "gatsby-source-contentful/rich-text";
 import { Section } from "../components/section/section";
 import { SectionDivider } from "../components/section/section-divider/section-divider";
 import { Grid } from "../components/grid/grid";
 import { GridItem } from "../components/grid/grid-item/grid-item";
-import { Image } from "../components/image/image";
-
-import wedding from "../assets/icons/wedding-couple.png";
-import dancing from "../assets/icons/dancing.png";
-// import lovestory from "../assets/photos/love-story.png";
-import beach from "../assets/photos/things-to-do/beach.gif";
-import uber from "../assets/photos/things-to-do/uber.gif";
-import flying from "../assets/photos/things-to-do/flying.gif";
-import traffic from "../assets/photos/things-to-do/traffic.gif";
-import adventure from "../assets/photos/things-to-do/adventure.gif";
-import taco from "../assets/photos/things-to-do/taco.gif";
+// import { Image } from "../components/image/image";
 
 import * as styles from "./index.module.css";
+import { Card } from "../components/card/card";
 
-const Home = ({data}) => {
-  const {landingPageTitle, landingPageSubtitle, intro } = data
+const Home = ({ data }) => {
+  const { landingPageTitle, landingPageSubtitle, intro } =
+    data.allContentfulLandingPage.nodes[0];
+
+  const { nodes } = data.allContentfulPortfolioItem;
   return (
     <div>
       <Section title="landing" isNoTitle className={styles.landing}>
@@ -30,47 +24,39 @@ const Home = ({data}) => {
           <h2>{landingPageSubtitle}</h2>
         </div>
       </Section>
-       <Section title="Welcome">
+      <Section title="Hiya!">
         <Grid>
-          <GridItem>
-            {intro && renderRichText(intro)}
-          </GridItem>
+          <GridItem>{intro && renderRichText(intro)}</GridItem>
         </Grid>
       </Section>
 
       <SectionDivider />
-      {/*
 
-      <Section title="Details" isAltBG className={styles.details}>
+      <Section title="Selected Projects" isAltBG className={styles.details}>
         <Grid position="center">
-          <GridItem>
-            <Image alt="Wedding Couple" source={wedding} size="ml" />
-            <h3>Saturday, August 12, 2023</h3>
-            <strong>Ceremony</strong>
-            <p>4:30 pm @ Corona del Mar Community Church</p>
-            <p>611 Heliotrope Ave, Corona Del Mar, CA 92625</p>
-            <p>
-              We are honored to have friends and family witness our exchange of
-              vows as we officially become husband and wife!
-            </p>
-            <em>Attire: Cocktail</em>
-          </GridItem>
-
-          <GridItem>
-            <Image alt="Reception Dancing" source={dancing} size="ml" />
-            <h3>Saturday, August 12, 2023</h3>
-            <strong>Reception!</strong>
-            <p>6:00pm @ Orange County Museum of Art</p>
-            <p>3333 Avenue of the Arts, Costa Mesa, CA 92626</p>
-            <p>
-              Join us for dinner, drinks, and dancing among the art galleries of
-              OCMA! Our reception will be both indoors and outdoors, so please
-              dress accordingly.
-            </p>
-            <em>Attire: Cocktail (Get ready to dance!)</em>
-          </GridItem>
+          {nodes.map((node) => {
+            if (!node.selectedProject) return;
+            return (
+              <GridItem>
+                {/* <Image alt="Wedding Couple" source={wedding} size="ml" /> */}
+                <Card>
+                  <h3>{node.title}</h3>
+                  <strong>{node.role}</strong>
+                  {/* <p>4:30 pm @ Corona del Mar Community Church</p>
+              <p>611 Heliotrope Ave, Corona Del Mar, CA 92625</p>
+              <p>
+                We are honored to have friends and family witness our exchange
+                of vows as we officially become husband and wife!
+              </p>
+              <em>Attire: Cocktail</em> */}
+                </Card>
+              </GridItem>
+            );
+          })}
         </Grid>
       </Section>
+
+      {/*
 
       <SectionDivider isTop />
 
@@ -322,10 +308,10 @@ const Home = ({data}) => {
       <Section title=""></Section> */}
     </div>
   );
-}
+};
 
 const Container = () => {
-   const {nodes} = useStaticQuery(
+  const data = useStaticQuery(
     graphql`
       query {
         allContentfulLandingPage {
@@ -337,12 +323,19 @@ const Container = () => {
             }
           }
         }
+        allContentfulPortfolioItem {
+          nodes {
+            title
+            selectedProject
+            role
+          }
+        }
       }
     `
-  ).allContentfulLandingPage;
+  );
 
-  
-  return <Home data={nodes[0]}/>
-}
+  return <Home data={data} />;
+  return <h1>hi</h1>;
+};
 
-export default Container
+export default Container;
