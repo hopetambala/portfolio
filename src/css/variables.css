@@ -38,7 +38,7 @@
   /* STACKING ORDER
   /* =============================================================== */
 
-  --z-notifications-count: 1;
+  /* --z-notifications-count: 1;
   --z-focused: 2;
   --z-table-overflow: 3;
   --z-table-first-col: 4;
@@ -54,7 +54,7 @@
   --z-portal: 50;
   --z-modal: 99;
   --z-modal-dropdown: 100;
-  --z-tooltip: 101;
+  --z-tooltip: 101; */
 
   /* Colors
   /* ===============================================================

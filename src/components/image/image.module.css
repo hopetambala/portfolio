@@ -20,7 +20,7 @@
 
 .container img {
   object-fit: contain;
-  border-radius: var(--border-radius-l);
+  border-radius: var(--border-radius-s);
 }
 
 .centered {

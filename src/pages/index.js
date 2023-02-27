@@ -1,15 +1,16 @@
 import "../css/_main.css";
 import React from "react";
-import { useStaticQuery, graphql, Link } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
 import { Section } from "../components/section/section";
 import { SectionDivider } from "../components/section/section-divider/section-divider";
 import { Grid } from "../components/grid/grid";
 import { GridItem } from "../components/grid/grid-item/grid-item";
-// import { Image } from "../components/image/image";
 
 import * as styles from "./index.module.css";
 import { Card } from "../components/card/card";
+import Layout from "../components/layout/layout";
+import { Menu } from "../components/menu/menu";
 
 const Home = ({ data }) => {
   const { landingPageTitle, landingPageSubtitle, intro } =
@@ -17,8 +18,9 @@ const Home = ({ data }) => {
 
   const { nodes } = data.allContentfulPortfolioItem;
   return (
-    <div>
+    <Layout hasNoMenu>
       <Section title="landing" isNoTitle className={styles.landing}>
+        <Menu menuItems={nodes}></Menu>
         <div className={styles.landingText}>
           <h1>{landingPageTitle}</h1>
           <h2>{landingPageSubtitle}</h2>
@@ -34,9 +36,9 @@ const Home = ({ data }) => {
 
       <Section title="Selected Projects" isAltBG className={styles.details}>
         <Grid position="center">
-          {nodes.map((node) => {
-            if (!node.selectedProject) return;
-            return (
+          {nodes
+            .filter((node) => node.selectedProject)
+            .map((node) => (
               <GridItem>
                 {/* <Image alt="Wedding Couple" source={wedding} size="ml" /> */}
                 <Card>
@@ -51,8 +53,7 @@ const Home = ({ data }) => {
               <em>Attire: Cocktail</em> */}
                 </Card>
               </GridItem>
-            );
-          })}
+            ))}
         </Grid>
       </Section>
 
@@ -306,7 +307,7 @@ const Home = ({ data }) => {
         </a>
       </Section>
       <Section title=""></Section> */}
-    </div>
+    </Layout>
   );
 };
 
@@ -326,6 +327,7 @@ const Container = () => {
         allContentfulPortfolioItem {
           nodes {
             title
+            slug
             selectedProject
             role
           }
@@ -335,7 +337,6 @@ const Container = () => {
   );
 
   return <Home data={data} />;
-  return <h1>hi</h1>;
 };
 
 export default Container;

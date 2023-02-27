@@ -6,12 +6,17 @@
 
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
-})
+});
 
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
+  siteMetadata: {
+    title: `Hope's Portfolio`,
+    siteUrl: `https://www.hopetambala.com`,
+    description: `UX Engineering Portfolio`,
+  },
   plugins: [
     {
       resolve: `gatsby-plugin-google-gtag`,
