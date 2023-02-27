@@ -30,7 +30,6 @@ body {
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
-  background-color: var(--color-bg);
   color: var(--color-text);
   margin: 0;
   height: 100%;

@@ -36,7 +36,7 @@ export default function Post({ data }) {
   );
   console.log(parsedHTML);
   return (
-    <Layout>
+    <Layout isPadded>
       <h1>{title}</h1>
       {description && parsedHTML}
     </Layout>

@@ -24,6 +24,7 @@
   --spacer-l: 32px;
   --spacer-xl: 64px;
   --spacer-xxl: 128px;
+  --spacer-xxxl: calc(var(--spacer-xxl) * 2);
 
   /* BORDER
   /* =============================================================== */
@@ -59,7 +60,7 @@
   /* Colors
   /* ===============================================================
 
-    /* Neutral */
+  /* Neutral */
   --hex-white: #fff;
   --hex-neutral-100: #f3f3f3;
   --hex-neutral-200: #e9e9e9;
@@ -74,7 +75,7 @@
   --hex-black: #000;
 
   /* Blue */
-  /* --hex-blue-100: #dfecf7;
+  --hex-blue-100: #dfecf7;
   --hex-blue-200: #c9e0f5;
   --hex-blue-300: #9ec4f0;
   --hex-blue-400: #5993ea;
@@ -82,7 +83,7 @@
   --hex-blue-600: #0045cc;
   --hex-blue-700: #003bae;
   --hex-blue-800: #003293;
-  --hex-blue-900: #00237a; */
+  --hex-blue-900: #00237a;
   --hex-blue: #6ac3ff;
 
   /* Green */
@@ -154,21 +155,15 @@
   --hex-pink-900: #831540;
 
   /* COLOR: LIGHT MODE
-    /* =============================================================== */
+  /* =============================================================== */
 
   /* Backgrounds */
   --color-bg-light: var(--hex-white);
-  --color-bg: var(--hex-yellow);
-  --color-bg-dark: var(--hex-neutral-200);
+  --color-bg: var(--hex-blue-100);
 
   /* Text */
-  --color-link: var(--hex-purple-800);
-  --color-link-active: var(--hex-blue-700);
-  --color-link-hover: var(--hex-blue-500);
   --color-text: var(--hex-neutral-900);
   --color-text-light: var(--hex-neutral-700);
-  --color-text-placeholder: var(--hex-neutral-600);
-  --color-text-placeholder-red: var(--hex-red-400);
 
   /* Borders */
   --color-border: rgba(0, 0, 0, 0.1);

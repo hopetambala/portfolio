@@ -11,7 +11,7 @@
 }
 
 .altBG {
-  background-color: var(--hex-blue);
+  background-color: var(--hex-neutral-100);
 }
 
 @media only screen and (max-width: 900px) {
