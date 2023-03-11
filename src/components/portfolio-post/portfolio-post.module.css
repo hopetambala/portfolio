@@ -8,3 +8,26 @@
 .portfolioPost img {
     margin:  auto ;
 }
+
+
+@media only screen and (max-width: 1024px) {
+    .portfolioPost {
+        padding: var(--spacer-l);
+    }
+
+    .portfolioPost h1 {
+        font-size: calc(var(--font-size-h1) * .75);
+    }
+
+    .portfolioPost h2 {
+        font-size: calc(var(--font-size-h2) * .75);
+    }
+
+        .portfolioPost h3 {
+            font-size: calc(var(--font-size-h3) * .75);
+        }
+
+    img {
+        margin: auto;
+    }
+}

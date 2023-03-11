@@ -123,12 +123,13 @@ const Container = () => {
             }
           }
         }
-        allContentfulPortfolioItem {
+        allContentfulPortfolioItem(sort: { date: DESC }) {
           nodes {
             title
             slug
             selectedProject
             role
+            date
           }
         }
       }
