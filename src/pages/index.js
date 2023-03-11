@@ -2,24 +2,42 @@ import "../css/_main.css";
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
+
+import { Image } from "../components/image/image";
 import { Section } from "../components/section/section";
 import { Grid } from "../components/grid/grid";
 import { GridItem } from "../components/grid/grid-item/grid-item";
 import { Card } from "../components/card/card";
 import Layout from "../components/layout/layout";
 import { Tag } from "../components/tag/tag";
+
 import * as styles from "./index.module.css";
 
 const Home = ({ data }) => {
-  const { landingPageTitle, landingPageSubtitle, intro } =
+  const { landingPageTitle, landingPageSubtitle, intro, pictureOfMe } =
     data.allContentfulLandingPage.nodes[0];
 
   const { nodes } = data.allContentfulPortfolioItem;
   return (
     <Layout>
-      <Section title="landing" isNoTitle className={styles.landing}>
-        <h1>{landingPageTitle}</h1>
-        <h2>{landingPageSubtitle}</h2>
+      <Section title="landing" isNoTitle noHorizontalPadding noVerticalPadding>
+        <Grid spacing="none">
+          <GridItem>
+            <div className={styles.landingTextContainer}>
+              <h2>{landingPageTitle}</h2>
+              <p>{landingPageSubtitle}</p>
+            </div>
+          </GridItem>
+          <GridItem>
+            <div className={styles.landingImageContainer}>
+              <Image
+                alt="Funny Profile Pic"
+                source={pictureOfMe.file.url}
+                size="xxl"
+              />
+            </div>
+          </GridItem>
+        </Grid>
       </Section>
       <Section title="Hiya" className={styles.hiya}>
         <div>{intro && renderRichText(intro)}</div>
@@ -95,6 +113,11 @@ const Container = () => {
       query {
         allContentfulLandingPage {
           nodes {
+            pictureOfMe {
+              file {
+                url
+              }
+            }
             landingPageSubtitle
             landingPageTitle
             intro {

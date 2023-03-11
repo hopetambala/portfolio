@@ -1,16 +1,26 @@
 .footer {
     display: flex;
+    flex-direction: column;
+    padding: var(--spacer-xl);
+    row-gap: var(--spacer-xl);
+    color: var(--color-neutral-100);
+    background-color: var(--color-neutral-900);
+}
+
+.contactBar {
+    display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content:space-around;
     font-size: var(--font-size-body-small);
 }
 
-.footer > * {
+ .contactBar > * {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 400px;
+    color: var(--color-neutral-100);
 }
 
 .social {

@@ -1,7 +1,7 @@
 .section {
   padding-top: var(--spacer-m);
   padding-bottom: var(--spacer-m);
-  border-bottom: calc(var(--spacer-xxs)/2) solid var(--color-neutral-900);
+  border-bottom: var(--spacer-xs) solid var(--color-neutral-900);
 }
 
 .content {

@@ -11,9 +11,7 @@ const Layout = ({ menuItems, children, hasNoMenu, isPadded, className }) => {
   const classNames = clxNs.join(" ");
   return (
     <div className={styles.layoutWrapper}>
-      <div className={styles.menuWrapper}>
-        {hasNoMenu ? null : <Menu menuItems={menuItems} />}
-      </div>
+      {hasNoMenu ? null : <Menu menuItems={menuItems} />}
       <div className={classNames}>{children}</div>
       <Footer />
     </div>

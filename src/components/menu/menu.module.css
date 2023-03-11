@@ -1,7 +1,8 @@
 .menu {
+  position: relative;
   font-size: var(--font-size-body);
   width: 100%;
-  border-bottom: var(--spacer-xxs) solid var(--color-neutral-900);
+  border: var(--spacer-xxs) solid var(--color-neutral-900);
 }
 .menuHeaderList,.menuHeaderListActions{
   display: flex;
@@ -25,7 +26,7 @@
 
 .menuHeaderListActions >*:hover {
   color: var(--color-neutral-100);
-  background-color: var(--color-blue-300);
+  background-color: var(--color-pink-700);
 }
 
 .menuContent {
