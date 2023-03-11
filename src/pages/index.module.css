@@ -46,8 +46,8 @@ p {
 }
 
 .hiya div:first-child {
-    margin: 0 calc(var(--spacer-xxl) * 2);
-    margin-bottom: var(--spacer-l);
+  margin: 0 calc(var(--spacer-xxl) * 2);
+  margin-bottom: var(--spacer-l);
 }
 
 .selectedProjects {
@@ -87,16 +87,14 @@ p {
   border: calc(var(--spacer-xxs)/2) solid var(--color-neutral-900);
 }
 
-
-
 @media only screen and (max-width: 1024px) {
-.hiya div:first-child {
+  .hiya div:first-child {
     margin: 0 calc(var(--spacer-xxl));
   }
 
-    .workDescription {
-      margin: 0 calc(var(--spacer-xxl));
-    }
+  .workDescription {
+    margin: 0 calc(var(--spacer-xxl));
+  }
 
   img {
     margin: auto;
