@@ -36,7 +36,10 @@ const Footer = () => {
             </svg>
           </a>
 
-          <a href="https://www.instagram.com/hello_effy" class="icon-instagram">
+          <a
+            href="https://www.instagram.com/tamballer911"
+            class="icon-instagram"
+          >
             <svg
               width="24"
               height="24"
@@ -71,7 +74,7 @@ const Footer = () => {
             </svg>
           </a>
         </div>
-        <div>Made with ❤️ in 700 sqft abode in Brooklyn - 2023</div>
+        <div>Made with ❤️ in 700 sqft abode in Brooklyn</div>
       </div>
     </div>
   );

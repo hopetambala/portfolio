@@ -36,6 +36,7 @@ const Home = ({ data }) => {
                 alt="Funny Profile Pic"
                 source={pictureOfMe.file.url}
                 size="xxl"
+                isCentered
               />
             </div>
           </GridItem>
@@ -99,7 +100,6 @@ const Home = ({ data }) => {
                     <div className={styles.skillTags}>
                       {skills && skills.map((skill) => <Tag text={skill} />)}
                     </div>
-                    {/* <p>{description.description}</p> */}
                     {descriptionRich && renderRichText(descriptionRich)}
                     <p>{time}</p>
                   </div>
