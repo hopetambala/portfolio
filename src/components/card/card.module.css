@@ -1,6 +1,6 @@
 .card {
-  width: calc(var(--spacer-xxl) * 2);
-  height: calc(var(--spacer-xxl) * 2);
+  width: calc(var(--spacer-xxl) * 5);
+  height: calc(var(--spacer-xxl) * 2.5  );
   padding: var(--spacer-xs) var(--spacer-m);
   border: var(--spacer-xs) solid var(--color-neutral-900);
   border-radius: var(--border-radius-s);

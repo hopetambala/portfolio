@@ -22,7 +22,7 @@ const renderOptions = (richText) => {
         const { title, url } = references.find(
           (element) => element.contentful_id === nodeId
         );
-        return <Image source={url} alt={title} size="xl" />;
+        return <Image source={url} alt={title} size="xxl" />;
       },
     },
   };
