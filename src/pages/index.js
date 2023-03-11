@@ -53,7 +53,7 @@ const Home = ({ data }) => {
             .filter((node) => node.selectedProject)
             .map((node) => (
               <GridItem>
-                <Card link={`${node.slug}`} className={styles.card}>
+                <Card link={`${node.slug}`}>
                   <strong>{node.title}</strong>
                   <Tag text={node.role} />
                 </Card>
