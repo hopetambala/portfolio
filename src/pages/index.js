@@ -10,7 +10,6 @@ import { GridItem } from "../components/grid/grid-item/grid-item";
 import * as styles from "./index.module.css";
 import { Card } from "../components/card/card";
 import Layout from "../components/layout/layout";
-import { Menu } from "../components/menu/menu";
 
 const Home = ({ data }) => {
   const { landingPageTitle, landingPageSubtitle, intro } =
@@ -18,13 +17,10 @@ const Home = ({ data }) => {
 
   const { nodes } = data.allContentfulPortfolioItem;
   return (
-    <Layout hasNoMenu>
+    <Layout>
       <Section title="landing" isNoTitle className={styles.landing}>
-        <Menu menuItems={nodes}></Menu>
-        <div className={styles.landingText}>
-          <h1>{landingPageTitle}</h1>
-          <h2>{landingPageSubtitle}</h2>
-        </div>
+        <h1>{landingPageTitle}</h1>
+        <h2>{landingPageSubtitle}</h2>
       </Section>
       <Section title="Hiya!">
         <Grid>

@@ -4,13 +4,16 @@ import { Menu } from "../menu/menu";
 import * as styles from "./layout.module.css";
 
 const Layout = ({ menuItems, children, hasNoMenu, isPadded, className }) => {
-  const classNames = [`layout ${styles.layout}`];
-  if (isPadded) classNames.push(`isPadded ${styles.isPadded}`);
-  if (className) classNames.push(className);
+  const clxNs = [`layout ${styles.layout}`];
+  if (isPadded) clxNs.push(`isPadded ${styles.isPadded}`);
+  if (className) clxNs.push(className);
+  const classNames = clxNs.join(" ");
   return (
-    <div>
-      {hasNoMenu ? null : <Menu menuItems={menuItems} />}
-      <div className={classNames.join(" ")}>{children}</div>
+    <div className={styles.layoutWrapper}>
+      <div className={styles.menuWrapper}>
+        {hasNoMenu ? null : <Menu menuItems={menuItems} />}
+      </div>
+      <div className={classNames}>{children}</div>
     </div>
   );
 };

@@ -12,16 +12,22 @@
   height: 100vh;
 }
 
-.landingText h1 {
-  color: var(--hex-yellow);
-  font-size: calc(var(--font-size-h1) );
+.landing {
+  color: var(--color-yellow-100);
+}
+
+.landing h1 {
+  position: absolute;
+  font-size: calc(var(--font-size-h1));
+  right:calc(var(--spacer-xxl) *2);
+  left: var(--spacer-xl);
+  text-align: left;
 }
 
 .landing h2 {
-  color: var(--hex-yellow);
   position: absolute;
   bottom: var(--spacer-l);
-  /* right: var(--spacer-xl); */
+  right: var(--spacer-xl);
   left: calc(var(--spacer-xxl) *2);
   text-align: right;
 }
@@ -38,11 +44,6 @@ p {
 @media only screen and (max-width: 900px) {
   * {
     text-align: center;
-  }
-
-  .landingText h1 {
-    font-size: calc(var(--font-size-h1));
-    text-align: left;
   }
 
   img {

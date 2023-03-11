@@ -4,6 +4,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { Image } from "../image/image";
 import Layout from "../layout/layout";
+import * as styles from "./portfolio-post.module.css";
 
 const Bold = ({ children }) => <span>{children}</span>;
 const Text = ({ children }) => <p>{children}</p>;
@@ -36,7 +37,7 @@ export default function Post({ data }) {
   );
   console.log(parsedHTML);
   return (
-    <Layout isPadded>
+    <Layout isPadded className={styles.portfolioPost}>
       <h1>{title}</h1>
       {description && parsedHTML}
     </Layout>

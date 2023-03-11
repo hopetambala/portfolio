@@ -14,7 +14,9 @@ exports.createPages = async function ({ actions, graphql }) {
     const slug = edge.node.slug;
     actions.createPage({
       path: slug,
-      component: require.resolve(`./src/components/portfolio-post/index.js`),
+      component: require.resolve(
+        `./src/components/portfolio-post/portfolio-post.js`
+      ),
       context: { slug: slug },
     });
   });

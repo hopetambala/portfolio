@@ -1,23 +1,36 @@
-.menuButtonRow {
+.menu {
+  font-size: var(--font-size-body);
+  width: 100%;
+  border: var(--spacer-xxs) solid var(--color-neutral-900);
+}
+.menuHeaderList {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-}
-.menuItems {
-  display: flex;
-  flex-direction: column;
-  text-align: right;
-  column-gap: var(--spacer-m);
+  justify-content: flex-start;
 }
 
-.menuItem > * {
-  flex: 1;
-  /* min-width: 150px; */
+.menuHeaderList > * {
+  padding: var(--spacer-m) 3vw;
+}
+.menuHeaderList .primaryAction {
+  color: var(--color-neutral-100);
+  background-color: var(--color-neutral-900);
 }
 
+.menuContent {
+  display: none;
+  position: absolute;
+  min-width: 200px;
+  background-color: #f1f1f1;
+  z-index: var(--z-menu);
+}
+.menuContent a {
+  color: var(--color-text);
+  padding: var(--spacer-s) var(--spacer-m);
+  text-decoration: none;
+  display: block;
+}
 
-@media only screen and (max-width: 900px) {
-  .menu {
-    column-gap: 0;
-  }
+.menuHeaderList div:hover .menuContent{
+  display: block;
 }

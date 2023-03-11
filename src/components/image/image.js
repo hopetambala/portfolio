@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import * as styles from "./image.module.css";
 
 export const Image = ({ source, alt, size, isCentered }) => {
-  const classNames = [styles.container];
+  const classNames = [styles.imageContainer];
   const classNameImg = [];
   if (size) classNameImg.push(styles[size]);
   if (isCentered) classNameImg.push(styles.centered);

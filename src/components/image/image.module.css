@@ -18,7 +18,7 @@
   height: 300px;
 }
 
-.container img {
+.imageContainer img {
   object-fit: contain;
   border-radius: var(--border-radius-s);
 }
