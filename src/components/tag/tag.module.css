@@ -3,7 +3,6 @@
     align-items: center;
     justify-content: center;
     border: var(--spacer-xxs) solid var(--color-neutral-900);
-    /* border-radius: 99999px; */
     border-radius: var(--border-radius-m);
     background-color: var(--color-neutral-100);
     transition: all 140ms cubic-bezier(.25, .46, .45, .94);

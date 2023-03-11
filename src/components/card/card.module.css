@@ -1,7 +1,10 @@
 .card {
-  width: calc(var(--spacer-xxl) * 5);
-  height: calc(var(--spacer-xxl) * 2.5  );
-  padding: var(--spacer-xs) var(--spacer-m);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  max-width: calc(var(--spacer-xxl) * 4);
+  height: calc(var(--spacer-xxl) * 2);
+  padding: var(--spacer-m) var(--spacer-l);
   border: var(--spacer-xs) solid var(--color-neutral-900);
   border-radius: var(--border-radius-s);
   transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out;
@@ -11,9 +14,7 @@
   box-shadow: var(--spacer-s) var(--spacer-s) 0 0 var(--color-neutral-900);
   transform: translate(calc(-1 * var(--spacer-s)), calc(-1 * var(--spacer-s))); 
 }
-.card-wrap:hover {
-  box-shadow: 6px 6px 0 0 #000;
-  -webkit-transform: translate(-6px, -6px);
-  -ms-transform: translate(-6px, -6px);
-  transform: translate(-6px, -6px);
+
+.card:hover div {
+  background-color: var(--color-yellow-300);
 }

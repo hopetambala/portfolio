@@ -54,8 +54,6 @@ const Home = ({ data }) => {
             .map((node) => (
               <GridItem>
                 <Card link={`${node.slug}`} className={styles.card}>
-                  {/* <Image alt="Wedding Couple" source={wedding} size="ml" /> */}
-
                   <strong>{node.title}</strong>
                   <Tag text={node.role} />
                 </Card>
