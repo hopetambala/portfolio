@@ -1,3 +1,6 @@
 .portfolioPost {
     padding: var(--spacer-xl) var(--spacer-xxl);
+    border: var(--spacer-xxs) solid var(--color-neutral-900);
+    border-top: var(--spacer-xxs)/2 solid var(--color-neutral-900);
+    background-color: var(--color-yellow-100);
 }

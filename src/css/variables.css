@@ -33,6 +33,7 @@
   /* BORDER
   /* =============================================================== */
 
+  --border-radius-xs: 4px;
   --border-radius-s: 8px;
   --border-radius-m: 16px;
   --border-radius-l: 32px;
@@ -88,7 +89,7 @@
   --color-green-900: hsl(120, 100%, 40%);
 
   /* Yellow */
-  --color-yellow-100: hsl(61, 100%, 85%);
+  --color-yellow-100: hsl(61, 100%, 90%);
   --color-yellow-300: hsl(61, 89%, 58%);
   --color-yellow-500: hsl(61, 100%, 50%);
   --color-yellow-700: hsl(61, 100%, 40%);
@@ -127,7 +128,7 @@
 
   /* Backgrounds */
   --color-bg-light: var(--color-white);
-  --color-bg: var(--color-blue-100);
+  --color-bg: var(--color-teal-100);
 
   /* Text */
   --color-text: var(--color-neutral-900);
