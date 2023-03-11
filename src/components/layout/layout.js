@@ -1,5 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
+import { Footer } from "../footer/footer";
 import { Menu } from "../menu/menu";
 import * as styles from "./layout.module.css";
 
@@ -14,6 +15,7 @@ const Layout = ({ menuItems, children, hasNoMenu, isPadded, className }) => {
         {hasNoMenu ? null : <Menu menuItems={menuItems} />}
       </div>
       <div className={classNames}>{children}</div>
+      <Footer />
     </div>
   );
 };

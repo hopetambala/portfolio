@@ -5,15 +5,21 @@
 }
 
 .content {
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
   padding-left: var(--spacer-xxl);
   padding-right: var(--spacer-xxl);
 }
 
-.noPadding {
+.noHorizontalPadding {
   padding-left: 0;
   padding-right: 0;
+}
+
+.noVerticalPadding {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .altBG {
@@ -27,7 +33,7 @@
     padding-left: var(--spacer-l);
     padding-right: var(--spacer-l);
   }
-  .noPadding{
+  .noHorizontalPadding{
     padding-left: 0;
     padding-right: 0;
   }

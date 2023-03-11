@@ -69,8 +69,7 @@ p {
 }
 
 .workDescription {
-  margin: 0 calc(var(--spacer-xxl) * 2);
-  margin-bottom: var(--spacer-l);
+  margin: var(--spacer-l) calc(var(--spacer-xxl) * 2);
 }
 
 .infoRectangleWrapper > * {

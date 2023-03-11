@@ -6,17 +6,22 @@ export const Section = ({
   title,
   isNoTitle,
   isAltBG,
-  noPadding,
+  noHorizontalPadding,
+  noVerticalPadding,
   className,
 }) => {
   const id = title.replaceAll(" ", "").toLowerCase();
   const altBg = isAltBG ? `altBg ${styles.altBG}` : "";
   const clx = [`section ${styles.section} ${altBg}`];
+  if (noVerticalPadding)
+    clx.push(`noVerticalPadding ${styles.noVerticalPadding}`);
   if (className) clx.push(className);
   const classNames = clx.join(" ");
 
   const contentClx = [`content ${styles.content}`];
-  if (noPadding) contentClx.push(`noPadding ${styles.noPadding}`);
+  if (noHorizontalPadding)
+    contentClx.push(`noHorizontalPadding ${styles.noHorizontalPadding}`);
+
   const contentClassNames = contentClx.join(" ");
 
   return (
