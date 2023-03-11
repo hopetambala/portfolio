@@ -2,13 +2,11 @@
   display: flex;
   flex-direction: column;
 }
-.layoutWrapper .menuWrapper > * {
-  display: flex;
-  justify-content: flex-end;
-}
+
 .layout {
   position: static;
 }
+
 .isPadded {
   display: flex;
   flex-direction: column;

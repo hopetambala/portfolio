@@ -1,20 +1,31 @@
 .menu {
   font-size: var(--font-size-body);
   width: 100%;
-  border: var(--spacer-xxs) solid var(--color-neutral-900);
+  border-bottom: var(--spacer-xxs) solid var(--color-neutral-900);
 }
-.menuHeaderList {
+.menuHeaderList,.menuHeaderListActions{
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
-.menuHeaderList > * {
+.menuHeaderList .home {
   padding: var(--spacer-m) 3vw;
 }
-.menuHeaderList .primaryAction {
+
+ .menuHeaderListActions > * {
+  padding: var(--spacer-m) 3vw;
+}
+
+
+.menuHeaderListActions .primaryAction {
   color: var(--color-neutral-100);
   background-color: var(--color-neutral-900);
+}
+
+.menuHeaderListActions >*:hover {
+  color: var(--color-neutral-100);
+  background-color: var(--color-blue-300);
 }
 
 .menuContent {
@@ -38,6 +49,6 @@
   background-color: var(--color-pink-500);
 }
 
-.menuHeaderList div:hover .menuContent{
+.menuHeaderListActions div:hover .menuContent{
   display: block;
 }

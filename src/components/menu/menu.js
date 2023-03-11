@@ -2,9 +2,13 @@ import { Link } from "gatsby";
 import React from "react";
 import * as styles from "./menu.module.css";
 
-const MenuItem = ({ item }) => {
+const MenuItem = ({ item, className }) => {
   const { title, slug } = item;
-  return <Link to={`/${slug}`}>{title}</Link>;
+  return (
+    <Link className={className} to={`/${slug}`}>
+      {title}
+    </Link>
+  );
 };
 
 export const Menu = ({ menuItems, className }) => {
@@ -14,28 +18,30 @@ export const Menu = ({ menuItems, className }) => {
   return (
     <div className={classNames.join(" ")}>
       <div className={styles.menuHeaderList}>
-        <div>
-          <div>All Projects</div>
-          <div className={styles.menuContent}>
-            <MenuItem item={{ title: "Home", slug: "" }} />
-            {menuItems.map((menuItem) => (
-              <MenuItem item={menuItem} />
-            ))}
+        <MenuItem className={styles.home} item={{ title: "Home", slug: "" }} />
+        <div className={styles.menuHeaderListActions}>
+          <div>
+            <div>All Projects</div>
+            <div className={styles.menuContent}>
+              {menuItems.map((menuItem) => (
+                <MenuItem item={menuItem} />
+              ))}
+            </div>
           </div>
+          <a
+            href="https://drive.google.com/file/d/1qzyOJV0OklvxV6LniOSvQLjWld5lkJg2/view?usp=sharing"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Resume
+          </a>
+          <a
+            className={styles.primaryAction}
+            href="mailto: hopetambala@gmail.com"
+          >
+            Hit me up!
+          </a>
         </div>
-        <a
-          href="https://drive.google.com/file/d/1qzyOJV0OklvxV6LniOSvQLjWld5lkJg2/view?usp=sharing"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Resume
-        </a>
-        <a
-          className={styles.primaryAction}
-          href="mailto: hopetambala@gmail.com"
-        >
-          Hit me up!
-        </a>
       </div>
     </div>
   );
