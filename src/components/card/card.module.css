@@ -17,10 +17,3 @@
   -ms-transform: translate(-6px, -6px);
   transform: translate(-6px, -6px);
 }
-
-@media only screen and (max-width: 900px) {
-  .card {
-    width: calc(var(--spacer-xxl));
-    height: calc(var(--spacer-xxl));
-  }
-}

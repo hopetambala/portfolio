@@ -1,6 +1,7 @@
 .section {
   padding-top: var(--spacer-m);
   padding-bottom: var(--spacer-m);
+  border-bottom: calc(var(--spacer-xxs)/2) solid var(--color-neutral-900);
 }
 
 .content {
@@ -8,6 +9,11 @@
   margin-right: auto;
   padding-left: var(--spacer-xxl);
   padding-right: var(--spacer-xxl);
+}
+
+.noPadding {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .altBG {
@@ -20,5 +26,9 @@
     margin-right: auto;
     padding-left: var(--spacer-l);
     padding-right: var(--spacer-l);
+  }
+  .noPadding{
+    padding-left: 0;
+    padding-right: 0;
   }
 }

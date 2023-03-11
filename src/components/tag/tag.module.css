@@ -1,0 +1,12 @@
+.tag {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border: var(--spacer-xxs) solid var(--color-neutral-900);
+    border-radius: 99999px;
+    background-color: var(--color-neutral-100);
+    -webkit-transition: all 140ms cubic-bezier(.25, .46, .45, .94);
+    transition: all 140ms cubic-bezier(.25, .46, .45, .94);
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-body-small);
+    line-height: var(--line-height-body-small);
+}

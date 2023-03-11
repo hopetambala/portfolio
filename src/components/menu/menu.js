@@ -24,8 +24,9 @@ export const Menu = ({ menuItems, className }) => {
           </div>
         </div>
         <a
-          href="https://drive.google.com/drive/u/4/folders/1p--kNd2IKk_u2K2hKsYuD5h0lSRH1vm0"
-          target=""
+          href="https://drive.google.com/file/d/1qzyOJV0OklvxV6LniOSvQLjWld5lkJg2/view?usp=sharing"
+          target="_blank"
+          rel="noreferrer"
         >
           Resume
         </a>

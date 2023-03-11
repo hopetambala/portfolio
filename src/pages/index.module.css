@@ -1,3 +1,12 @@
+em,
+p {
+  margin-bottom: var(--spacer-m);
+}
+
+.page {
+  text-align: center;
+}
+
 .landing {
   position: relative;
   background: url("../assets/photos/me.jpg") no-repeat center
@@ -32,19 +41,63 @@
   text-align: right;
 }
 
-em,
-p {
-  margin-bottom: var(--spacer-m);
+.hiya {
+  text-align: center;
 }
 
-.details p {
-  margin-bottom: var(--spacer-s);
+.hiya div:first-child {
+    margin: 0 calc(var(--spacer-xxl) * 2);
+    margin-bottom: var(--spacer-l);
 }
 
-@media only screen and (max-width: 900px) {
-  * {
-    text-align: center;
+.selectedProjects {
+  padding-bottom: var(--spacer-xl);
+}
+
+.selectedProjects h2 {
+  text-align: center;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.workExperiences {
+  text-align: center;
+}
+
+.workDescription {
+  margin: 0 calc(var(--spacer-xxl) * 2);
+  margin-bottom: var(--spacer-l);
+}
+
+.infoRectangleWrapper > * {
+  min-width: calc(var(--spacer-xxl) * 5);
+}
+
+.infoRectangle {
+  width: 100%;
+  height: 18rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: fuchsia;
+  border: calc(var(--spacer-xxs)/2) solid var(--color-neutral-900);
+}
+
+
+
+@media only screen and (max-width: 1024px) {
+.hiya div:first-child {
+    margin: 0 calc(var(--spacer-xxl));
   }
+
+    .workDescription {
+      margin: 0 calc(var(--spacer-xxl));
+    }
 
   img {
     margin: auto;

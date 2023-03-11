@@ -20,15 +20,22 @@
 .menuContent {
   display: none;
   position: absolute;
-  min-width: 200px;
-  background-color: #f1f1f1;
+  max-width: calc(var(--spacer-xxl)*3);
+  font-size: var(--font-size-body-small);
+  background-color: var(--color-neutral-100);
   z-index: var(--z-menu);
+  border-radius: var(--border-radius-s);
 }
 .menuContent a {
   color: var(--color-text);
-  padding: var(--spacer-s) var(--spacer-m);
+  padding: var(--spacer-xxs) var(--spacer-s);
   text-decoration: none;
   display: block;
+}
+
+.menuContent a:hover {
+  color: var(--color-neutral-100);  
+  background-color: var(--color-pink-500);
 }
 
 .menuHeaderList div:hover .menuContent{

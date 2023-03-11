@@ -35,7 +35,7 @@ export default function Post({ data }) {
     JSON.parse(description.raw),
     renderOptions(description)
   );
-  console.log(parsedHTML);
+
   return (
     <Layout isPadded className={styles.portfolioPost}>
       <h1>{title}</h1>

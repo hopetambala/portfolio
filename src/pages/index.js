@@ -3,13 +3,12 @@ import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
 import { Section } from "../components/section/section";
-import { SectionDivider } from "../components/section/section-divider/section-divider";
 import { Grid } from "../components/grid/grid";
 import { GridItem } from "../components/grid/grid-item/grid-item";
-
-import * as styles from "./index.module.css";
 import { Card } from "../components/card/card";
 import Layout from "../components/layout/layout";
+import { Tag } from "../components/tag/tag";
+import * as styles from "./index.module.css";
 
 const Home = ({ data }) => {
   const { landingPageTitle, landingPageSubtitle, intro } =
@@ -22,107 +21,71 @@ const Home = ({ data }) => {
         <h1>{landingPageTitle}</h1>
         <h2>{landingPageSubtitle}</h2>
       </Section>
-      <Section title="Hiya!">
-        <Grid>
-          <GridItem>{intro && renderRichText(intro)}</GridItem>
-        </Grid>
+      <Section title="Hiya" className={styles.hiya}>
+        <div>{intro && renderRichText(intro)}</div>
       </Section>
 
-      <SectionDivider />
-
-      <Section title="Selected Projects" isAltBG className={styles.details}>
-        <Grid position="center">
+      <Section
+        title="Selected Projects"
+        isAltBG
+        className={styles.selectedProjects}
+      >
+        <Grid spacing="small">
           {nodes
             .filter((node) => node.selectedProject)
             .map((node) => (
               <GridItem>
-                {/* <Image alt="Wedding Couple" source={wedding} size="ml" /> */}
-                <Card>
-                  <h3>{node.title}</h3>
-                  <strong>{node.role}</strong>
-                  {/* <p>4:30 pm @ Corona del Mar Community Church</p>
-              <p>611 Heliotrope Ave, Corona Del Mar, CA 92625</p>
-              <p>
-                We are honored to have friends and family witness our exchange
-                of vows as we officially become husband and wife!
-              </p>
-              <em>Attire: Cocktail</em> */}
+                <Card link={`${node.slug}`} className={styles.card}>
+                  {/* <Image alt="Wedding Couple" source={wedding} size="ml" /> */}
+
+                  <strong>{node.title}</strong>
+                  <Tag text={node.role} />
                 </Card>
               </GridItem>
             ))}
         </Grid>
       </Section>
 
-      {/*
+      <Section
+        title="Work Experiences"
+        isNoTitle
+        noPadding
+        className={styles.workExperiences}
+      >
+        <div className={styles.workDescription}>
+          <h2>I've worked at some cool places</h2>
+          <p>
+            And have built some serious engineering and design chops along the
+            way. Whether you're in need of a new design system or a new mobile
+            app front-to-back, I have the skills and know-how to make the rubber
+            meet the road with your ideas and bring delight to your users!
+          </p>
+          <a
+            href="https://www.linkedin.com/in/hope-tambala/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <strong>Check out my Linkedin →</strong>
+          </a>
+        </div>
 
-      <SectionDivider isTop />
-
-      <Section title="Getting Here">
-        <p>
-          Orange County, California is home to some of California’s most
-          beautiful beaches, and we hope that you will take some time to explore
-          a place that holds great meaning to both of us!
-        </p>
-        <h3>Flying</h3>
-        <Grid>
+        <Grid spacing="none" className={styles.infoRectangleWrapper}>
           <GridItem>
-            <p>
-              If you will be flying to Orange County for our wedding, please
-              consider the following options:
-            </p>
-            <p>
-              The closest airport to our wedding ceremony and reception is John
-              Wayne International Airport (SNA), which is just 2.5 miles (10
-              minutes) from our reception venue. Although it is a smaller
-              airport, there are regular flights to SNA from many major
-              metropolitan cities, including Chicago, Houston, and New York.
-            </p>
-            <p>
-              Long Beach Airport (LGB) is 20 miles (30 minutes depending on
-              traffic) from our reception venue. Although LGB is a smaller
-              airport, non-stop flights, particularly on Southwest, are
-              available to/from some cities.
-            </p>
-            <p>
-              Los Angeles International Airport (LAX) is 40 miles (45
-              minutes-1.5 hours depending on traffic) from our reception venue.
-              LAX is a large international hub with many affordable flights from
-              all major airlines. Los Angeles is also a fun and exciting city if
-              you would like to extend your travel plans! To get to Orange
-              County from LAX, consider any of the following options: 1) Rent a
-              car 2) take an Uber/Lyft ($60-70 one-way), or 3) take the FlyAway
-              bus from LAX to Union Station and connect to either the Metrolink
-              or Surfliner trains which both make stops in Orange County.
-            </p>
-            <p>
-              San Diego International Airport (SAN) is 86 miles (1.5 hours) from
-              our reception venue. Although this is a bit farther than the other
-              options, if you are interested in exploring San Diego while out on
-              the west coast, this could be a great option!
-            </p>
+            <div className={styles.infoRectangle}>hi</div>
           </GridItem>
           <GridItem>
-            <Image alt="Airplane Pic" source={flying} size="xl" isCentered />
-          </GridItem>
-        </Grid>
-        <h3>Getting around while you're here</h3>
-
-        <Grid>
-          <GridItem>
-            <p>
-              Please note that there is very limited public transportation in
-              Orange County. Depending on your plans, you may want to consider
-              renting a car. Uber/Lyft is also readily available, which may be a
-              good option for those guests who will only be in town for a short
-              visit.
-            </p>
+            <div className={styles.infoRectangle}>hi</div>
           </GridItem>
           <GridItem>
-            <Image alt="Uber Pic" source={uber} size="l" isCentered />
+            <div className={styles.infoRectangle}>hi</div>
+          </GridItem>
+          <GridItem>
+            <div className={styles.infoRectangle}>hi</div>
           </GridItem>
         </Grid>
       </Section>
 
+      {/*
       <Section title="Lodging">
         <h3>Hotels</h3>
         <p>

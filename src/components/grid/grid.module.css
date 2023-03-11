@@ -2,11 +2,17 @@
   display: flex;
   flex-wrap: wrap;
   column-gap: var(--spacer-xl);
+  row-gap: var(--spacer-m);
 }
 
 .group > * {
   flex: 1;
   min-width: 300px;
+}
+
+.spacingnone {
+  column-gap: 0;
+  row-gap: 0;
 }
 
 .spacingsmall > * {
