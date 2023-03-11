@@ -27,7 +27,7 @@
 
 .menuHeaderListActions >*:hover {
   color: var(--color-neutral-100);
-  background-color: var(--color-pink-700);
+  background-color: var(--color-pink-300);
 }
 
 .menuContent::before{
@@ -54,7 +54,7 @@
 
 .menuContent a:hover {
   color: var(--color-neutral-100);  
-  background-color: var(--color-pink-700);
+  background-color: var(--color-pink-300);
   border-radius: calc(var(--border-radius-xs)*.75);
 }
 

@@ -63,9 +63,25 @@ p {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: var(--color-pink-700);
+  background-color: var(--color-pink-300);
   border: calc(var(--spacer-xxs))  solid var(--color-neutral-900);
   border-top: calc(var(--spacer-xxs)/2) solid var(--color-neutral-900);
+}
+
+.infoRectangle .skillTags{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.infoRectangle .skillTags > * {
+  margin: 0 var(--spacer-s);
+  padding: var(--spacer-m)
+}
+
+.infoRectangle p {
+  font-size: calc(var(--font-size-body) * .8  5);
 }
 
 @media only screen and (max-width: 1024px) {

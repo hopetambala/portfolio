@@ -18,6 +18,8 @@ const Home = ({ data }) => {
     data.allContentfulLandingPage.nodes[0];
 
   const { nodes } = data.allContentfulPortfolioItem;
+
+  const { nodes: workExperiences } = data.allContentfulWorkExperience;
   return (
     <Layout>
       <Section title="landing" isNoTitle noHorizontalPadding noVerticalPadding>
@@ -87,18 +89,23 @@ const Home = ({ data }) => {
         </div>
 
         <Grid spacing="none" className={styles.infoRectangleWrapper}>
-          <GridItem>
-            <div className={styles.infoRectangle}>hi</div>
-          </GridItem>
-          <GridItem>
-            <div className={styles.infoRectangle}>hi</div>
-          </GridItem>
-          <GridItem>
-            <div className={styles.infoRectangle}>hi</div>
-          </GridItem>
-          <GridItem>
-            <div className={styles.infoRectangle}>hi</div>
-          </GridItem>
+          {workExperiences &&
+            workExperiences.map(
+              ({ company, role, skills, descriptionRich, time }) => (
+                <GridItem>
+                  <div className={styles.infoRectangle}>
+                    <h3>{company}</h3>
+                    <strong>{role}</strong>
+                    <div className={styles.skillTags}>
+                      {skills && skills.map((skill) => <Tag text={skill} />)}
+                    </div>
+                    {/* <p>{description.description}</p> */}
+                    {descriptionRich && renderRichText(descriptionRich)}
+                    <p>{time}</p>
+                  </div>
+                </GridItem>
+              )
+            )}
         </Grid>
       </Section>
     </Layout>
@@ -130,6 +137,17 @@ const Container = () => {
             selectedProject
             role
             date
+          }
+        }
+        allContentfulWorkExperience(sort: { updatedAt: ASC }) {
+          nodes {
+            company
+            role
+            descriptionRich {
+              raw
+            }
+            skills
+            time
           }
         }
       }
