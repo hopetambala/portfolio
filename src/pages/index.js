@@ -139,7 +139,7 @@ const Container = () => {
             date
           }
         }
-        allContentfulWorkExperience(sort: { updatedAt: ASC }) {
+        allContentfulWorkExperience(sort: { order: DESC }) {
           nodes {
             company
             role
@@ -148,6 +148,7 @@ const Container = () => {
             }
             skills
             time
+            order
           }
         }
       }
