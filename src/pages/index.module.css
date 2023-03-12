@@ -52,13 +52,11 @@ p {
 }
 
 .infoRectangleWrapper > * {
-  min-width: calc(var(--spacer-xxl) * 4);
   min-height: calc(var(--spacer-xxl) * 4);
   border-top: calc(var(--spacer-xxs)) solid var(--color-neutral-900);
 }
 
 .infoRectangle {
-  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -86,28 +84,46 @@ p {
   font-size: calc(var(--font-size-body) * .85);
 }
 
-@media only screen and (max-width: 1024px) {
-  .landingTextContainer {
-    padding: var(--spacer-l);
-  }
+/* Extra Small, and Small devices (phones, tablets and large phones, 320px and up) */
+@media only screen and (min-width: 320px) {
+    .landingTextContainer {
+      padding: var(--spacer-l);
+    }
 
-  .hiya div:first-child{
-    margin: 0 calc(var(--spacer-xl));
-  }
-
-  .workDescription {
-    margin: calc(var(--spacer-xl));
-  }
-
+    .hiya div:first-child {
+      margin: 0 calc(var(--spacer-xl));
+    }
   
-
-  img {
-    margin: auto;
-  }
-}
-
-@media only screen and (max-width: 425px) {
+    img {
+      margin: auto;
+    }
   .infoRectangleWrapper>* {
-    min-width: calc(var(--spacer-xxl) * 2);
-  }
+      min-width: calc(var(--spacer-xxl) * 3);
+    }
+    .workDescription {
+      margin: calc(var(--spacer-xl));
+    }
+    
 }
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .infoRectangleWrapper>* {
+      min-width: calc(var(--spacer-xxl) * 3);
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .infoRectangleWrapper>* {
+      min-width: calc(var(--spacer-xxl) * 3);
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .infoRectangleWrapper>* {
+      min-width: calc(var(--spacer-xxl) * 4);
+    }
+}
+
