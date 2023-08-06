@@ -35,7 +35,6 @@
 }
 
 .menuContent {
-  display: none;
   position: absolute;
   border: var(--spacer-xs) solid var(--color-neutral-900);
   margin: var(--spacer-m) calc(-8 * var(--spacer-m));

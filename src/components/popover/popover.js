@@ -4,7 +4,6 @@ import * as styles from "./popover.module.css";
 
 export const Popover = ({
   trigger,
-  position = "start",
   children,
   className,
 }) => {
@@ -22,10 +21,7 @@ export const Popover = ({
       const buttonEl = buttonRef.current;
       const coord = {
         top: buttonEl.offsetTop + buttonEl.offsetHeight,
-        left:
-          position === "start"
-            ? buttonEl.offsetLeft
-            : buttonEl.offsetLeft - buttonEl.offsetWidth,
+        left: buttonEl.offsetLeft + (buttonEl.offsetWidth / 2),
       };
       setMenuCoord(coord);
     } else {

@@ -1,6 +1,7 @@
 import { Link } from "gatsby";
 import React from "react";
 import * as styles from "./menu.module.css";
+import { Popover } from "../popover/popover";
 
 const MenuItem = ({ item, className }) => {
   const { title, slug } = item;
@@ -21,12 +22,13 @@ export const Menu = ({ menuItems, className }) => {
         <MenuItem className={styles.home} item={{ title: "Home", slug: "" }} />
         <div className={styles.menuHeaderListActions}>
           <div>
-            <div>All Projects</div>
-            <div className={styles.menuContent}>
-              {menuItems.map((menuItem) => (
-                <MenuItem item={menuItem} />
-              ))}
-            </div>
+            <Popover trigger={<div>All Projects</div>}>
+              <div className={styles.menuContent}>
+                {menuItems.map((menuItem) => (
+                  <MenuItem item={menuItem} />
+                ))}
+              </div>
+            </Popover>
           </div>
           <a
             href="https://drive.google.com/file/d/1qzyOJV0OklvxV6LniOSvQLjWld5lkJg2/view?usp=sharing"
