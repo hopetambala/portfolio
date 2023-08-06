@@ -21,7 +21,6 @@ export const Menu = ({ menuItems, className }) => {
       <div className={styles.menuHeaderList}>
         <MenuItem className={styles.home} item={{ title: "Home", slug: "" }} />
         <div className={styles.menuHeaderListActions}>
-          <div>
             <Popover trigger={<div>All Projects</div>}>
               <div className={styles.menuContent}>
                 {menuItems.map((menuItem) => (
@@ -29,7 +28,6 @@ export const Menu = ({ menuItems, className }) => {
                 ))}
               </div>
             </Popover>
-          </div>
           <a
             href="https://drive.google.com/file/d/1qzyOJV0OklvxV6LniOSvQLjWld5lkJg2/view?usp=sharing"
             target="_blank"

@@ -20,7 +20,7 @@ export const Popover = ({
     if (!isOpen) {
       const buttonEl = buttonRef.current;
       const coord = {
-        top: buttonEl.offsetTop + buttonEl.offsetHeight,
+        top: buttonEl.offsetTop + (buttonEl.offsetHeight / 1.33),
         left: buttonEl.offsetLeft + (buttonEl.offsetWidth / 2),
       };
       setMenuCoord(coord);
