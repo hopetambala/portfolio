@@ -12,7 +12,7 @@
 
 .card:hover {
   box-shadow: var(--spacer-s) var(--spacer-s) 0 0 var(--color-neutral-900);
-  transform: translate(calc(-1 * var(--spacer-s)), calc(-1 * var(--spacer-s))); 
+  transform: translate(calc(-1 * var(--spacer-s)), calc(-1 * var(--spacer-s)));
 }
 
 .card:hover div {

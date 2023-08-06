@@ -7,7 +7,8 @@ p {
   text-align: center;
 }
 
-.landingTextContainer, .landingImageContainer{
+.landingTextContainer,
+.landingImageContainer {
   height: 700px;
   width: 100%;
   background-color: var(--color-yellow-300);
@@ -17,14 +18,13 @@ p {
   padding: var(--spacer-xxl);
   text-align: left;
   border: var(--spacer-xxs) solid var(--color-neutral-900);
-  border-bottom: var(--spacer-xxs)/2 solid var(--color-neutral-900);
+  border-bottom: var(--spacer-xxs) / 2 solid var(--color-neutral-900);
 }
 
-.landingImageContainer{
+.landingImageContainer {
   padding: var(--spacer-xl);
   background-color: var(--color-teal-200);
 }
-
 
 .hiya {
   text-align: center;
@@ -62,12 +62,12 @@ p {
   flex-direction: column;
   align-items: center;
   background-color: var(--color-pink-300);
-  border: calc(var(--spacer-xxs))  solid var(--color-neutral-900);
-  border-top: calc(var(--spacer-xxs)/2) solid var(--color-neutral-900);
+  border: calc(var(--spacer-xxs)) solid var(--color-neutral-900);
+  border-top: calc(var(--spacer-xxs) / 2) solid var(--color-neutral-900);
   padding: var(--spacer-l);
 }
 
-.infoRectangle .skillTags{
+.infoRectangle .skillTags {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -77,53 +77,51 @@ p {
 
 .infoRectangle .skillTags > * {
   margin: 0 var(--spacer-s);
-  padding: var(--spacer-m)
+  padding: var(--spacer-m);
 }
 
 .infoRectangle p {
-  font-size: calc(var(--font-size-body) * .85);
+  font-size: calc(var(--font-size-body) * 0.85);
 }
 
 /* Extra Small, and Small devices (phones, tablets and large phones, 320px and up) */
 @media only screen and (min-width: 320px) {
-    .landingTextContainer {
-      padding: var(--spacer-l);
-    }
+  .landingTextContainer {
+    padding: var(--spacer-l);
+  }
 
-    .hiya div:first-child {
-      margin: 0 calc(var(--spacer-xl));
-    }
-  
-    img {
-      margin: auto;
-    }
-  .infoRectangleWrapper>* {
-      min-width: calc(var(--spacer-xxl) * 3);
-    }
-    .workDescription {
-      margin: calc(var(--spacer-xl));
-    }
-    
+  .hiya div:first-child {
+    margin: 0 calc(var(--spacer-xl));
+  }
+
+  img {
+    margin: auto;
+  }
+  .infoRectangleWrapper > * {
+    min-width: calc(var(--spacer-xxl) * 3);
+  }
+  .workDescription {
+    margin: calc(var(--spacer-xl));
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .infoRectangleWrapper>* {
-      min-width: calc(var(--spacer-xxl) * 3);
-    }
+  .infoRectangleWrapper > * {
+    min-width: calc(var(--spacer-xxl) * 3);
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    .infoRectangleWrapper>* {
-      min-width: calc(var(--spacer-xxl) * 3);
-    }
+  .infoRectangleWrapper > * {
+    min-width: calc(var(--spacer-xxl) * 3);
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-  .infoRectangleWrapper>* {
-      min-width: calc(var(--spacer-xxl) * 4);
-    }
+  .infoRectangleWrapper > * {
+    min-width: calc(var(--spacer-xxl) * 4);
+  }
 }
-

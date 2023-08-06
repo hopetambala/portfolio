@@ -1,45 +1,44 @@
 .portfolioPost {
-    padding: var(--spacer-xl) var(--spacer-xxxl);
-    border: var(--spacer-xxs) solid var(--color-neutral-900);
-    border-top: var(--spacer-xxs)/2 solid var(--color-neutral-900);
-    background-color: var(--color-yellow-100);
+  padding: var(--spacer-xl) var(--spacer-xxxl);
+  border: var(--spacer-xxs) solid var(--color-neutral-900);
+  border-top: var(--spacer-xxs) / 2 solid var(--color-neutral-900);
+  background-color: var(--color-yellow-100);
 }
 
-.portfolioPost div:has(img){
-    width: 100%;
+.portfolioPost div:has(img) {
+  width: 100%;
 }
 
-.portfolioPost p+p {
-    padding-bottom: var(--spacer-s);
+.portfolioPost p + p {
+  padding-bottom: var(--spacer-s);
 }
 
-.portfolioPost div:has(image){
-    padding: 0 var(--spacer-l);
+.portfolioPost div:has(image) {
+  padding: 0 var(--spacer-l);
 }
 
 .portfolioPost img {
-    margin:  auto ;
+  margin: auto;
 }
 
-
 @media only screen and (max-width: 1024px) {
-    .portfolioPost {
-        padding: var(--spacer-l);
-    }
+  .portfolioPost {
+    padding: var(--spacer-l);
+  }
 
-    .portfolioPost h1 {
-        font-size: calc(var(--font-size-h1) * .75);
-    }
+  .portfolioPost h1 {
+    font-size: calc(var(--font-size-h1) * 0.75);
+  }
 
-    .portfolioPost h2 {
-        font-size: calc(var(--font-size-h2) * .75);
-    }
+  .portfolioPost h2 {
+    font-size: calc(var(--font-size-h2) * 0.75);
+  }
 
-        .portfolioPost h3 {
-            font-size: calc(var(--font-size-h3) * .75);
-        }
+  .portfolioPost h3 {
+    font-size: calc(var(--font-size-h3) * 0.75);
+  }
 
-    img {
-        margin: auto;
-    }
+  img {
+    margin: auto;
+  }
 }

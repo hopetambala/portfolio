@@ -13,7 +13,6 @@
   padding: 0 var(--spacer-xxxl);
 }
 
-
 @media only screen and (max-width: 900px) {
   .isPadded {
     padding: 0 var(--spacer-xl);

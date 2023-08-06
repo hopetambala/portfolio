@@ -5,7 +5,8 @@
   border: var(--spacer-xxs) solid var(--color-neutral-900);
   background-color: var(--color-neutral-100);
 }
-.menuHeaderList,.menuHeaderListActions{
+.menuHeaderList,
+.menuHeaderListActions {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -15,22 +16,21 @@
   padding: var(--spacer-m) 3vw;
 }
 
- .menuHeaderListActions > * {
+.menuHeaderListActions > * {
   padding: var(--spacer-m) 3vw;
 }
-
 
 .menuHeaderListActions .primaryAction {
   color: var(--color-neutral-100);
   background-color: var(--color-neutral-900);
 }
 
-.menuHeaderListActions >*:hover {
+.menuHeaderListActions > *:hover {
   color: var(--color-neutral-100);
   background-color: var(--color-pink-300);
 }
 
-.menuContent::before{
+.menuContent::before {
   padding: 100px;
 }
 
@@ -38,8 +38,8 @@
   display: none;
   position: absolute;
   border: var(--spacer-xs) solid var(--color-neutral-900);
-  margin:  var(--spacer-m) calc(-8* var(--spacer-m));
-  max-width: calc(var(--spacer-xxl)*3);
+  margin: var(--spacer-m) calc(-8 * var(--spacer-m));
+  max-width: calc(var(--spacer-xxl) * 3);
   font-size: var(--font-size-body-small);
   background-color: var(--color-neutral-100);
   z-index: var(--z-menu);
@@ -53,11 +53,11 @@
 }
 
 .menuContent a:hover {
-  color: var(--color-neutral-100);  
+  color: var(--color-neutral-100);
   background-color: var(--color-pink-300);
-  border-radius: calc(var(--border-radius-xs)*.75);
+  border-radius: calc(var(--border-radius-xs) * 0.75);
 }
 
-.menuHeaderListActions div:hover .menuContent{
+.menuHeaderListActions div:hover .menuContent {
   display: block;
 }

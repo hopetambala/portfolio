@@ -33,7 +33,7 @@
     padding-left: var(--spacer-l);
     padding-right: var(--spacer-l);
   }
-  .noHorizontalPadding{
+  .noHorizontalPadding {
     padding-left: 0;
     padding-right: 0;
   }
