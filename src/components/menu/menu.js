@@ -29,7 +29,7 @@ export const Menu = ({ menuItems, className }) => {
               </div>
             </Popover>
           <a
-            href="https://drive.google.com/file/d/1qzyOJV0OklvxV6LniOSvQLjWld5lkJg2/view?usp=sharing"
+            href="https://drive.google.com/file/d/1iH8Yu5irK5jqEYz8NkCPPRHTGOabmDJ2/view?usp=sharing"
             target="_blank"
             rel="noreferrer"
           >
