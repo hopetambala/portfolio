@@ -1,14 +1,4 @@
 /**
- * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
- */
-
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-});
-
-/**
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
@@ -32,11 +22,34 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
+    `gatsby-transformer-remark`,
     {
-      resolve: `gatsby-source-contentful`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        name: `projects`,
+        path: `${__dirname}/src/data/projects`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `work-experience`,
+        path: `${__dirname}/src/data/work-experience`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pages-data`,
+        path: `${__dirname}/src/data`,
+        ignore: [`**/projects/**`, `**/work-experience/**`],
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/assets/images`,
       },
     },
     {

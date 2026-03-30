@@ -1,23 +1,50 @@
+const path = require("path");
+
 exports.createPages = async function ({ actions, graphql }) {
   const { data } = await graphql(`
     query {
-      allContentfulPortfolioItem {
+      allMarkdownRemark(
+        filter: { fileAbsolutePath: { regex: "/data/projects/" } }
+      ) {
         edges {
           node {
-            slug
+            frontmatter {
+              slug
+              category
+            }
           }
         }
       }
     }
   `);
-  data.allContentfulPortfolioItem.edges.forEach((edge) => {
-    const slug = edge.node.slug;
+
+  // Create individual project pages
+  data.allMarkdownRemark.edges.forEach((edge) => {
+    const slug = edge.node.frontmatter.slug;
     actions.createPage({
       path: slug,
-      component: require.resolve(
+      component: path.resolve(
         `./src/components/portfolio-post/portfolio-post.js`
       ),
       context: { slug: slug },
+    });
+  });
+
+  // Create category pages
+  const categories = [
+    ...new Set(
+      data.allMarkdownRemark.edges.map(
+        (edge) => edge.node.frontmatter.category
+      )
+    ),
+  ];
+  categories.forEach((category) => {
+    actions.createPage({
+      path: `projects/${category}`,
+      component: path.resolve(
+        `./src/components/category-page/category-page.js`
+      ),
+      context: { category: category },
     });
   });
 };

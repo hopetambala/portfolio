@@ -1,0 +1,26 @@
+.breadcrumbs {
+  font-size: var(--font-size-body-small);
+  margin-bottom: var(--spacer-l);
+}
+
+.breadcrumbs a {
+  color: var(--color-neutral-700);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbs span:last-child {
+  color: var(--color-neutral-900);
+  font-weight: var(--font-weight-emphasis);
+}
+
+.categoryDescription {
+  text-align: center;
+  margin-bottom: var(--spacer-l);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}

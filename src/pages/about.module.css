@@ -1,0 +1,57 @@
+.aboutSection {
+  text-align: center;
+}
+
+.bio {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.funFacts {
+  text-align: center;
+}
+
+.funFactsList {
+  list-style: none;
+  padding: 0;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.funFactsList li {
+  padding: var(--spacer-m) 0;
+  border-bottom: 1px solid var(--color-neutral-300);
+  font-size: calc(var(--font-size-body) * 0.9);
+}
+
+.funFactsList li:last-child {
+  border-bottom: none;
+}
+
+.highlights {
+  text-align: center;
+}
+
+.connect {
+  text-align: center;
+}
+
+.connectContent {
+  margin: 0 auto;
+}
+
+.primaryAction {
+  display: inline-block;
+  background-color: var(--color-neutral-900);
+  color: var(--color-neutral-100);
+  padding: var(--spacer-m) var(--spacer-l);
+  text-decoration: none;
+  border-radius: var(--border-radius-s);
+  font-weight: var(--font-weight-emphasis);
+}
+
+.primaryAction:hover {
+  opacity: 0.85;
+}

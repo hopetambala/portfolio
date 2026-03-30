@@ -1,33 +1,20 @@
 import { Link } from "gatsby";
 import React from "react";
 import * as styles from "./menu.module.css";
-import { Popover } from "../popover/popover";
 
-const MenuItem = ({ item, className }) => {
-  const { title, slug } = item;
-  return (
-    <Link className={className} to={`/${slug}`}>
-      {title}
-    </Link>
-  );
-};
-
-export const Menu = ({ menuItems, className }) => {
+export const Menu = ({ className }) => {
   const classNames = [`menu ${styles.menu}`];
   if (className) classNames.push(className);
 
   return (
     <div className={classNames.join(" ")}>
       <div className={styles.menuHeaderList}>
-        <MenuItem className={styles.home} item={{ title: "Home", slug: "" }} />
+        <Link className={styles.home} to="/">
+          Hope Tambala
+        </Link>
         <div className={styles.menuHeaderListActions}>
-            <Popover trigger={<div>All Projects</div>}>
-              <div className={styles.menuContent}>
-                {menuItems.map((menuItem) => (
-                  <MenuItem item={menuItem} />
-                ))}
-              </div>
-            </Popover>
+          <Link to="/about">About</Link>
+          <Link to="/#exploremywork">Projects</Link>
           <a
             href="https://drive.google.com/file/d/1iH8Yu5irK5jqEYz8NkCPPRHTGOabmDJ2/view?usp=sharing"
             target="_blank"
@@ -37,7 +24,7 @@ export const Menu = ({ menuItems, className }) => {
           </a>
           <a
             className={styles.primaryAction}
-            href="mailto: hopetambala@gmail.com"
+            href="mailto:hopetambala@gmail.com"
           >
             Hit me up!
           </a>

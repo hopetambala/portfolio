@@ -22,17 +22,24 @@ const LayoutContainer = ({ children, hasNoMenu, isPadded, className }) => {
   const data = useStaticQuery(
     graphql`
       query {
-        allContentfulPortfolioItem {
+        allMarkdownRemark(
+          filter: { fileAbsolutePath: { regex: "/data/projects/" } }
+        ) {
           nodes {
-            title
-            slug
+            frontmatter {
+              title
+              slug
+            }
           }
         }
       }
     `
   );
 
-  const menuItems = data.allContentfulPortfolioItem.nodes;
+  const menuItems = data.allMarkdownRemark.nodes.map((node) => ({
+    title: node.frontmatter.title,
+    slug: node.frontmatter.slug,
+  }));
 
   return (
     <Layout
