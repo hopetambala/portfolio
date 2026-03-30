@@ -1,28 +1,23 @@
 import React from "react";
 import * as styles from "./card.module.css";
-import { navigate } from "gatsby";
+import { Link } from "gatsby";
 
 export const Card = ({ children, link, className, style }) => {
   const clx = [`card ${styles.card}`];
   if (className) clx.push(className);
   const classNames = clx.join(" ");
 
-  const toNavigation = (location) => navigate(location);
-
-  const CardWapper = ({ children }) =>
-    link ? (
-      <div
-        className={classNames}
-        style={style}
-        onClick={() => toNavigation(link)}
-        onKeyDown={() => toNavigation(link)}
-        role="button"
-        tabIndex={0}
-      >
+  if (link) {
+    return (
+      <Link to={link} className={classNames} style={style}>
         {children}
-      </div>
-    ) : (
-      <div className={classNames} style={style}>{children}</div>
+      </Link>
     );
-  return <CardWapper>{children}</CardWapper>;
+  }
+
+  return (
+    <div className={classNames} style={style}>
+      {children}
+    </div>
+  );
 };

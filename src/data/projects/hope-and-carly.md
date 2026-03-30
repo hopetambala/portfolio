@@ -1,7 +1,7 @@
 ---
 title: "Hope & Carly"
 slug: "hope-and-carly"
-category: "prototypes"
+category: "personal"
 role: "Full-Stack Engineer"
 date: "2024-02-01"
 selectedProject: false

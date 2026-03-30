@@ -10,6 +10,8 @@
   border: var(--spacer-xs) solid var(--color-neutral-900);
   border-radius: var(--border-radius-s);
   transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out;
+  text-decoration: none;
+  color: inherit;
 }
 
 .card:hover {
