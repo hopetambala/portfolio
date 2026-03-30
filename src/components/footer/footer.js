@@ -74,7 +74,7 @@ const Footer = () => {
             </svg>
           </a>
         </div>
-        <div>Made with ❤️ in 700 sqft abode in Brooklyn</div>
+        <div>Made with ❤️ in Los Angeles (2026)</div>
       </div>
     </div>
   );
