@@ -2,7 +2,7 @@
 title: "Puente Collect"
 slug: "puente-collect"
 category: "nonprofit"
-role: "Lead Engineer"
+role: "Software Engineer"
 date: "2023-08-01"
 selectedProject: true
 links:

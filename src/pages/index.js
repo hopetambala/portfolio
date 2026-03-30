@@ -93,11 +93,9 @@ const Home = ({ data }) => {
               <Card
                 link={`/projects/${cat}`}
                 className={styles.categoryCard}
+                style={{ backgroundColor: CATEGORY_META[cat].color }}
               >
-                <div
-                  className={styles.categoryCardInner}
-                  style={{ backgroundColor: CATEGORY_META[cat].color }}
-                >
+                <div className={styles.categoryCardInner}>
                   <strong>{CATEGORY_META[cat].label}</strong>
                   <p className={styles.categoryDescription}>
                     {CATEGORY_META[cat].description}

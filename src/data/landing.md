@@ -2,7 +2,7 @@
 type: "landing"
 title: "Hello, I'm Hope"
 subtitle: "I build design systems, create beautifully simple and modern frontends, and love to teach others how to do the same"
-brandHook: "Design Engineer & Creative Technologist"
+brandHook: "Software Engineer & Design Technologist"
 profileImage: "https://images.ctfassets.net/zecv7vzxv093/5EUJB3ERkhLRrsGhMFqnyR/bc6af13b0c467cfe47e36047912cb131/grass-cut-transformed-neon-yellow.png"
 ---
 

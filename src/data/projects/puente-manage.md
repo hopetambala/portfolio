@@ -2,7 +2,7 @@
 title: "Puente Manage"
 slug: "puente-manage"
 category: "nonprofit"
-role: "Lead Engineer"
+role: "Software Engineer"
 date: "2023-09-01"
 selectedProject: true
 links:

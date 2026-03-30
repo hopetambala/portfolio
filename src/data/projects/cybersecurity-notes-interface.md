@@ -4,7 +4,7 @@ slug: "adding-a-notes-interface-to-cybersecurity-visualization-data"
 category: "professional"
 role: "Frontend Engineer"
 date: "2020-06-01"
-selectedProject: true
+selectedProject: false
 links: {}
 ---
 
