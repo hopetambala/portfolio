@@ -53,7 +53,7 @@ const Home = ({ data }) => {
   return (
     <Layout>
       {/* 1. Hero */}
-      <Section title="landing" isNoTitle noHorizontalPadding noVerticalPadding>
+      <Section title="landing" isNoTitle noHorizontalPadding noVerticalPadding hasBottomBorder>
         <Grid spacing="none">
           <GridItem>
             <div className={styles.landingTextContainer}>
@@ -86,7 +86,7 @@ const Home = ({ data }) => {
       </Section>
 
       {/* 3. Explore My Work — Category Cards */}
-      <Section title="Explore My Work" className={styles.explore}>
+      <Section title="Explore My Work" className={styles.explore} hasBottomBorder>
         <Grid spacing="small">
           {categories.map((cat) => (
             <GridItem key={cat}>
@@ -112,6 +112,7 @@ const Home = ({ data }) => {
         title="Selected Projects"
         isAltBG
         className={styles.selectedProjects}
+        hasBottomBorder
       >
         <Grid spacing="small">
           {selectedProjects.map((node) => (

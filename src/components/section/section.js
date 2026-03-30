@@ -8,11 +8,13 @@ export const Section = ({
   isAltBG,
   noHorizontalPadding,
   noVerticalPadding,
+  hasBottomBorder,
   className,
 }) => {
   const id = title.replaceAll(" ", "").toLowerCase();
   const altBg = isAltBG ? `altBg ${styles.altBG}` : "";
-  const clx = [`section ${styles.section} ${altBg}`];
+  const bottomBorder = hasBottomBorder ? `bottomBorder ${styles.bottomBorder}` : "";
+  const clx = [`section ${styles.section} ${altBg} ${bottomBorder}`];
   if (noVerticalPadding)
     clx.push(`noVerticalPadding ${styles.noVerticalPadding}`);
   if (className) clx.push(className);
