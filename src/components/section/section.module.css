@@ -8,8 +8,8 @@
   height: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--spacer-xxl);
-  padding-right: var(--spacer-xxl);
+  padding-left: var(--spacer-xl);
+  padding-right: var(--spacer-xl);
 }
 
 .noHorizontalPadding {
@@ -30,8 +30,8 @@
   .content {
     margin-left: auto;
     margin-right: auto;
-    padding-left: var(--spacer-l);
-    padding-right: var(--spacer-l);
+    padding-left: var(--spacer-m);
+    padding-right: var(--spacer-m);
   }
   .noHorizontalPadding {
     padding-left: 0;
