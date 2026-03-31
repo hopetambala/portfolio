@@ -1,0 +1,51 @@
+name: Validate Markdown
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'src/data/**/*.md'
+      - '__tests__/**'
+      - '.github/workflows/validate-markdown.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'src/data/**/*.md'
+      - '__tests__/**'
+      - '.github/workflows/validate-markdown.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 24.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run markdown validation tests
+        run: yarn test
+
+      - name: Comment on PR if tests fail
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ Markdown validation failed. Check the [workflow logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details.'
+            })

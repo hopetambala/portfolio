@@ -26,15 +26,102 @@ p {
   background-color: var(--color-teal-200);
 }
 
+.brandHook {
+  font-size: var(--font-size-body-small);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: var(--spacer-s);
+  opacity: 0.7;
+}
+
+
+
+.introContent {
+  margin-bottom: var(--spacer-l);
+  column-count: 1;
+  gap: 2rem;
+}
+
+.introContent a {
+  color: var(--color-blue-700);
+  text-decoration: underline dotted;
+  text-underline-offset: 4px; /* Adds 'air' between text and dots */
+  text-decoration-thickness: 2px; /* Makes the dots chunkier and cuter */
+  transition: all 0.2s ease;
+}
+
+.introContent a:hover {
+  text-decoration-style: solid; /* Switches to solid on hover for feedback */
+  color: var(--color-blue-900);
+}
+
+@media (min-width: 1024px) {
+  .introContent {
+    column-count: 2;
+    column-rule: var(--spacer-xxs) solid var(--color-neutral-900);
+    column-fill: balance;
+  }
+
+}
+
+.introContent h2,
+.introContent h3,
+.introContent img,
+.introContent blockquote {
+  break-inside: avoid-column;
+  display: inline-block;
+  width: 100%;
+}
+
+.ctaLink {
+  font-weight: var(--font-weight-emphasis);
+  text-decoration: none;
+  color: var(--color-neutral-900);
+}
+
+.ctaLink:hover {
+  text-decoration: underline;
+}
+
+/* Hiya Intro */
 .hiya {
   text-align: center;
 }
 
-.hiya div:first-child {
+.hiya .introContent {
   margin: 0 calc(var(--spacer-xxl) * 1.5);
   margin-bottom: var(--spacer-l);
 }
 
+/* Explore My Work */
+.explore {
+  text-align: center;
+}
+
+.categoryCard {
+  min-height: 200px;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.categoryCardInner {
+  padding: var(--spacer-l);
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.categoryDescription {
+  font-size: calc(var(--font-size-body) * 0.75);
+  margin-top: var(--spacer-s);
+  opacity: 0.8;
+}
+
+/* Selected Projects */
 .selectedProjects {
   padding-bottom: var(--spacer-xl);
 }
@@ -43,6 +130,7 @@ p {
   text-align: center;
 }
 
+/* Work Experiences */
 .workExperiences {
   text-align: center;
 }
@@ -84,22 +172,56 @@ p {
   font-size: calc(var(--font-size-body) * 0.85);
 }
 
+/* Contact CTA */
+.contactCta {
+  text-align: center;
+}
+
+.contactContent {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.contactActions {
+  display: flex;
+  gap: var(--spacer-l);
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--spacer-l);
+}
+
+.primaryAction {
+  background-color: var(--color-neutral-900);
+  color: var(--color-neutral-100);
+  padding: var(--spacer-m) var(--spacer-l);
+  text-decoration: none;
+  border-radius: var(--border-radius-s);
+  font-weight: var(--font-weight-emphasis);
+}
+
+.primaryAction:hover {
+  opacity: 0.85;
+}
+
 /* Extra Small, and Small devices (phones, tablets and large phones, 320px and up) */
 @media only screen and (min-width: 320px) {
   .landingTextContainer {
     padding: var(--spacer-l);
   }
 
-  .hiya div:first-child {
+  .hiya .introContent {
     margin: 0 calc(var(--spacer-xl));
+    margin-bottom: var(--spacer-l);
   }
 
   img {
     margin: auto;
   }
+
   .infoRectangleWrapper > * {
     min-width: calc(var(--spacer-xxl) * 3);
   }
+
   .workDescription {
     margin: calc(var(--spacer-xl));
   }
@@ -116,12 +238,5 @@ p {
 @media only screen and (min-width: 992px) {
   .infoRectangleWrapper > * {
     min-width: calc(var(--spacer-xxl) * 3);
-  }
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  .infoRectangleWrapper > * {
-    min-width: calc(var(--spacer-xxl) * 4);
   }
 }

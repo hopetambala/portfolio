@@ -1,7 +1,6 @@
 import "../css/_main.css";
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
-import { renderRichText } from "gatsby-source-contentful/rich-text";
+import { useStaticQuery, graphql, Link } from "gatsby";
 
 import { Image } from "../components/image/image";
 import { Section } from "../components/section/section";
@@ -13,58 +12,121 @@ import { Tag } from "../components/tag/tag";
 
 import * as styles from "./index.module.css";
 
+const CATEGORY_META = {
+  "design-systems": {
+    label: "Design Systems",
+    description: "Open-source design engineering — components, tokens, and tools",
+    color: "var(--color-teal-200)",
+  },
+  nonprofit: {
+    label: "Nonprofit Engineering",
+    description: "Technology for underserved communities",
+    color: "var(--color-yellow-300)",
+  },
+  personal: {
+    label: "Personal Projects",
+    description: "Photography, creative work, and exploration",
+    color: "var(--color-pink-300)",
+  },
+  prototypes: {
+    label: "Fun Prototypes",
+    description: "Weekend experiments and wild ideas",
+    color: "var(--color-purple-300)",
+  },
+  professional: {
+    label: "Professional Work",
+    description: "Case studies from industry roles",
+    color: "var(--color-blue-100)",
+  },
+};
+
 const Home = ({ data }) => {
-  const { landingPageTitle, landingPageSubtitle, intro, pictureOfMe } =
-    data.allContentfulLandingPage.nodes[0];
+  const landing = data.landing.nodes[0]?.frontmatter;
+  const landingBody = data.landing.nodes[0]?.html;
+  const projects = data.projects.nodes;
+  const selectedProjects = projects.filter(
+    (node) => node.frontmatter.selectedProject
+  );
+  const workExperiences = data.workExperiences.nodes;
+  const categories = Object.keys(CATEGORY_META);
 
-  const { nodes } = data.allContentfulPortfolioItem;
-
-  const { nodes: workExperiences } = data.allContentfulWorkExperience;
   return (
     <Layout>
-      <Section title="landing" isNoTitle noHorizontalPadding noVerticalPadding>
+      {/* 1. Hero */}
+      <Section title="landing" isNoTitle noHorizontalPadding noVerticalPadding hasBottomBorder>
         <Grid spacing="none">
           <GridItem>
             <div className={styles.landingTextContainer}>
-              <h2>{landingPageTitle}</h2>
-              <p>{landingPageSubtitle}</p>
+              <p className={styles.brandHook}>{landing?.brandHook}</p>
+              <h2>{landing?.title}</h2>
+              <p>{landing?.subtitle}</p>
             </div>
           </GridItem>
           <GridItem>
             <div className={styles.landingImageContainer}>
-              <Image
-                alt="Funny Profile Pic"
-                source={pictureOfMe.file.url}
-                size="xxl"
-                isCentered
-              />
+              {landing?.profileImage && (
+                <Image
+                  alt="Hope Tambala"
+                  source={landing.profileImage}
+                  size="xxl"
+                  isCentered
+                />
+              )}
             </div>
           </GridItem>
         </Grid>
       </Section>
+
+      {/* 2. Hiya — Intro */}
       <Section title="Hiya" className={styles.hiya}>
-        <div>{intro && renderRichText(intro)}</div>
+        <div
+          className={styles.introContent}
+          dangerouslySetInnerHTML={{ __html: landingBody }}
+        />
       </Section>
 
-      <Section
-        title="Selected Projects"
-        isAltBG
-        className={styles.selectedProjects}
-      >
+      {/* 3. Explore My Work — Category Cards */}
+      <Section title="Explore My Work" className={styles.explore} hasBottomBorder>
         <Grid spacing="small">
-          {nodes
-            .filter((node) => node.selectedProject)
-            .map((node) => (
-              <GridItem>
-                <Card link={`${node.slug}`}>
-                  <strong>{node.title}</strong>
-                  <Tag text={node.role} />
-                </Card>
-              </GridItem>
-            ))}
+          {categories.map((cat) => (
+            <GridItem key={cat}>
+              <Card
+                link={`/projects/${cat}`}
+                className={styles.categoryCard}
+                style={{ backgroundColor: CATEGORY_META[cat].color }}
+              >
+                <div className={styles.categoryCardInner}>
+                  <strong>{CATEGORY_META[cat].label}</strong>
+                  <p className={styles.categoryDescription}>
+                    {CATEGORY_META[cat].description}
+                  </p>
+                </div>
+              </Card>
+            </GridItem>
+          ))}
         </Grid>
       </Section>
 
+      {/* 3. Dive Deep — Selected Open-Source Projects */}
+      <Section
+        title="Selected Open-Source Projects"
+        isAltBG
+        className={styles.selectedProjects}
+        hasBottomBorder
+      >
+        <Grid spacing="small">
+          {selectedProjects.map((node) => (
+            <GridItem key={node.frontmatter.slug}>
+              <Card link={`/${node.frontmatter.slug}`}>
+                <strong>{node.frontmatter.title}</strong>
+                <Tag text={node.frontmatter.role} />
+              </Card>
+            </GridItem>
+          ))}
+        </Grid>
+      </Section>
+
+      {/* 4. Work Experiences */}
       <Section
         title="Work Experiences"
         isNoTitle
@@ -90,23 +152,51 @@ const Home = ({ data }) => {
         </div>
 
         <Grid spacing="none" className={styles.infoRectangleWrapper}>
-          {workExperiences &&
-            workExperiences.map(
-              ({ company, role, skills, descriptionRich, time }) => (
-                <GridItem>
-                  <div className={styles.infoRectangle}>
-                    <h3>{company}</h3>
-                    <strong>{role}</strong>
-                    <div className={styles.skillTags}>
-                      {skills && skills.map((skill) => <Tag text={skill} />)}
-                    </div>
-                    {descriptionRich && renderRichText(descriptionRich)}
-                    <p>{time}</p>
-                  </div>
-                </GridItem>
-              )
-            )}
+          {workExperiences.map(({ html, frontmatter }) => (
+            <GridItem key={frontmatter.company}>
+              <div className={styles.infoRectangle}>
+                <h3>{frontmatter.company}</h3>
+                <strong>{frontmatter.role}</strong>
+                <div className={styles.skillTags}>
+                  {frontmatter.skills &&
+                    frontmatter.skills.map((skill) => (
+                      <Tag key={skill} text={skill} />
+                    ))}
+                </div>
+                <div dangerouslySetInnerHTML={{ __html: html }} />
+                <p>{frontmatter.time}</p>
+              </div>
+            </GridItem>
+          ))}
         </Grid>
+      </Section>
+
+      {/* 5. Contact CTA */}
+      <Section
+        title="Let's Build Something"
+        className={styles.contactCta}
+      >
+        <div className={styles.contactContent}>
+          <p>
+            Whether you need a design system, a mobile app, or just want to
+            chat about building great experiences — I'd love to hear from you.
+          </p>
+          <div className={styles.contactActions}>
+            <a
+              className={styles.primaryAction}
+              href="mailto:hopetambala@gmail.com"
+            >
+              Hit me up
+            </a>
+            <a
+              href="https://drive.google.com/file/d/1iH8Yu5irK5jqEYz8NkCPPRHTGOabmDJ2/view?usp=sharing"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View Resume →
+            </a>
+          </div>
+        </div>
       </Section>
     </Layout>
   );
@@ -116,39 +206,47 @@ const Container = () => {
   const data = useStaticQuery(
     graphql`
       query {
-        allContentfulLandingPage {
+        landing: allMarkdownRemark(
+          filter: { frontmatter: { type: { eq: "landing" } } }
+        ) {
           nodes {
-            pictureOfMe {
-              file {
-                url
-              }
-            }
-            landingPageSubtitle
-            landingPageTitle
-            intro {
-              raw
+            html
+            frontmatter {
+              title
+              subtitle
+              brandHook
+              profileImage
             }
           }
         }
-        allContentfulPortfolioItem(sort: { date: DESC }) {
+        projects: allMarkdownRemark(
+          filter: { fileAbsolutePath: { regex: "/data/projects/" } }
+          sort: { frontmatter: { date: DESC } }
+        ) {
           nodes {
-            title
-            slug
-            selectedProject
-            role
-            date
+            frontmatter {
+              title
+              slug
+              selectedProject
+              role
+              category
+              date
+            }
           }
         }
-        allContentfulWorkExperience(sort: { order: DESC }) {
+        workExperiences: allMarkdownRemark(
+          filter: { frontmatter: { type: { eq: "work-experience" } } }
+          sort: { frontmatter: { order: DESC } }
+        ) {
           nodes {
-            company
-            role
-            descriptionRich {
-              raw
+            html
+            frontmatter {
+              company
+              role
+              skills
+              time
+              order
             }
-            skills
-            time
-            order
           }
         }
       }

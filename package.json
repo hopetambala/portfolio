@@ -11,17 +11,15 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "prettier": "prettier --write .",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "jest"
   },
   "dependencies": {
-    "@contentful/rich-text-react-renderer": "^15.16.2",
-    "contentful": "^9.3.0",
+    "@sanity/client": "^7.20.0",
     "gatsby": "^5.2.0",
     "gatsby-plugin-google-gtag": "^5.3.0",
     "gatsby-plugin-image": "^3.5.0",
     "gatsby-plugin-manifest": "^5.7.0",
     "gatsby-plugin-sharp": "^5.5.0",
-    "gatsby-source-contentful": "^8.5.0",
     "gatsby-source-filesystem": "^5.5.0",
     "gatsby-transformer-remark": "^6.5.0",
     "gatsby-transformer-sharp": "^5.5.0",
@@ -40,5 +38,9 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "devDependencies": {
+    "gray-matter": "^4.0.3",
+    "jest": "^30.3.0"
   }
 }

@@ -1,0 +1,144 @@
+.journalPost {
+  padding: var(--spacer-l) var(--spacer-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.breadcrumbs {
+  font-size: var(--font-size-body-small);
+  margin-bottom: var(--spacer-l);
+}
+
+.breadcrumbs a {
+  color: var(--color-neutral-700);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbs span:last-child {
+  color: var(--color-neutral-900);
+  font-weight: var(--font-weight-emphasis);
+}
+
+h1 {
+  margin-bottom: var(--spacer-l);
+}
+
+/* Main image */
+.mainImage {
+  margin-bottom: var(--spacer-xl);
+  cursor: pointer;
+}
+
+.mainImage img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-s);
+  border: var(--spacer-xs) solid var(--color-neutral-900);
+}
+
+/* Gallery — CSS-only masonry */
+.gallery {
+  column-count: 3;
+  column-gap: var(--spacer-m);
+}
+
+@media (max-width: 900px) {
+  .gallery {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 500px) {
+  .gallery {
+    column-count: 1;
+  }
+}
+
+.galleryItem {
+  break-inside: avoid;
+  margin-bottom: var(--spacer-m);
+  cursor: pointer;
+  border-radius: var(--border-radius-s);
+  overflow: hidden;
+  border: var(--spacer-xxs) solid var(--color-neutral-900);
+  transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+}
+
+.galleryItem:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--spacer-s) var(--spacer-s) 0 0 var(--color-neutral-900);
+}
+
+.galleryItem img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.lightboxImage {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: var(--border-radius-s);
+  cursor: default;
+}
+
+.lightboxClose {
+  position: absolute;
+  top: var(--spacer-l);
+  right: var(--spacer-l);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2.5rem;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 101;
+}
+
+.lightboxNav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 3rem;
+  cursor: pointer;
+  padding: var(--spacer-m);
+  z-index: 101;
+  line-height: 1;
+}
+
+.lightboxPrev {
+  left: var(--spacer-l);
+}
+
+.lightboxNext {
+  right: var(--spacer-l);
+}
+
+.lightboxCounter {
+  position: absolute;
+  bottom: var(--spacer-l);
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: var(--font-size-body-small);
+}

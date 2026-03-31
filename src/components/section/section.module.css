@@ -1,15 +1,14 @@
 .section {
   padding-top: var(--spacer-m);
   padding-bottom: var(--spacer-m);
-  border-bottom: var(--spacer-xs) solid var(--color-neutral-900);
 }
 
 .content {
   height: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--spacer-xxl);
-  padding-right: var(--spacer-xxl);
+  padding-left: var(--spacer-xl);
+  padding-right: var(--spacer-xl);
 }
 
 .noHorizontalPadding {
@@ -26,12 +25,16 @@
   background-color: var(--color-neutral-100);
 }
 
+.bottomBorder {
+    border-bottom: var(--spacer-xs) solid var(--color-neutral-900);
+}
+
 @media only screen and (max-width: 900px) {
   .content {
     margin-left: auto;
     margin-right: auto;
-    padding-left: var(--spacer-l);
-    padding-right: var(--spacer-l);
+    padding-left: var(--spacer-m);
+    padding-right: var(--spacer-m);
   }
   .noHorizontalPadding {
     padding-left: 0;
