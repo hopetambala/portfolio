@@ -107,9 +107,9 @@ const Home = ({ data }) => {
         </Grid>
       </Section>
 
-      {/* 3. Dive Deep — Selected Projects */}
+      {/* 3. Dive Deep — Selected Open-Source Projects */}
       <Section
-        title="Selected Projects"
+        title="Selected Open-Source Projects"
         isAltBG
         className={styles.selectedProjects}
         hasBottomBorder
