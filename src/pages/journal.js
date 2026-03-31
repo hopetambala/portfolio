@@ -28,7 +28,7 @@ const Journal = () => {
     <Layout>
       <Section title="Beyond the Code" className={styles.journalHeader}>
         <p className={styles.journalSubtitle}>
-          A photo journal — moments, places, and the world as I see it.
+          A photo journal of moments, places, and the world as I see it.
         </p>
       </Section>
       <div className={styles.masonry}>
