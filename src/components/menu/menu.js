@@ -14,7 +14,8 @@ export const Menu = ({ className }) => {
         </Link>
         <div className={styles.menuHeaderListActions}>
           <Link to="/about">About</Link>
-          <Link to="/#exploremywork">Projects</Link>
+          <Link to="/#exploremywork">Work</Link>
+          <Link to="/journal">Journal</Link>
           <a
             href="https://drive.google.com/file/d/1iH8Yu5irK5jqEYz8NkCPPRHTGOabmDJ2/view?usp=sharing"
             target="_blank"

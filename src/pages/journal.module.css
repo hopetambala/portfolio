@@ -1,0 +1,76 @@
+.journalHeader {
+  text-align: center;
+}
+
+.journalSubtitle {
+  font-size: var(--font-size-body);
+  color: var(--color-neutral-700);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* CSS-only masonry layout */
+.masonry {
+  column-count: 3;
+  column-gap: var(--spacer-m);
+  padding: 0 var(--spacer-xl);
+  padding-bottom: var(--spacer-xl);
+}
+
+@media (max-width: 900px) {
+  .masonry {
+    column-count: 2;
+    padding: 0 var(--spacer-l);
+    padding-bottom: var(--spacer-l);
+  }
+}
+
+@media (max-width: 500px) {
+  .masonry {
+    column-count: 1;
+    padding: 0 var(--spacer-m);
+    padding-bottom: var(--spacer-m);
+  }
+}
+
+.masonryItem {
+  break-inside: avoid;
+  display: block;
+  margin-bottom: var(--spacer-m);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius-s);
+  border: var(--spacer-xs) solid var(--color-neutral-900);
+  transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out;
+  text-decoration: none;
+  color: inherit;
+}
+
+.masonryItem:hover {
+  box-shadow: var(--spacer-s) var(--spacer-s) 0 0 var(--color-neutral-900);
+  transform: translate(-4px, -4px);
+}
+
+.masonryItem img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.masonryOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--spacer-m) var(--spacer-l);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  color: white;
+  font-weight: var(--font-weight-emphasis);
+  font-size: var(--font-size-body-small);
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+.masonryItem:hover .masonryOverlay {
+  opacity: 1;
+}

@@ -7,7 +7,7 @@ date: "2024-01-01"
 selectedProject: false
 links:
   github: "https://github.com/hopetambala/photo"
-  live: "https://photos.hopeandcarly.com/"
+  live: "/journal"
 ---
 
-A personal photography portfolio showcasing travel, nature, and portrait photography.
+A personal photography portfolio showcasing travel, nature, and portrait photography. Check out my [photo journal](/journal) for the full collection.

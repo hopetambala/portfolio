@@ -1,4 +1,38 @@
 const path = require("path");
+const { createClient } = require("@sanity/client");
+
+const sanityClient = createClient({
+  projectId: process.env.SANITY_PROJECT_ID,
+  dataset: process.env.SANITY_DATASET || "production",
+  token: process.env.SANITY_TOKEN,
+  useCdn: true,
+  apiVersion: "2024-12-26",
+});
+
+// Create custom Gatsby nodes from Sanity data
+exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
+  const posts = await sanityClient.fetch(
+    `*[_type == "post"] | order(publishedAt desc) {
+      _id,
+      title,
+      "slug": slug.current,
+      mainImage { alt, "url": asset->url },
+      gallery { images[] { "url": asset->url } },
+      publishedAt
+    }`
+  );
+
+  posts.forEach((post) => {
+    actions.createNode({
+      ...post,
+      id: createNodeId(`sanity-post-${post._id}`),
+      internal: {
+        type: "SanityPost",
+        contentDigest: createContentDigest(post),
+      },
+    });
+  });
+};
 
 exports.createPages = async function ({ actions, graphql }) {
   const { data } = await graphql(`
@@ -11,6 +45,21 @@ exports.createPages = async function ({ actions, graphql }) {
             frontmatter {
               slug
               category
+            }
+          }
+        }
+      }
+      allSanityPost {
+        nodes {
+          slug
+          title
+          mainImage {
+            alt
+            url
+          }
+          gallery {
+            images {
+              url
             }
           }
         }
@@ -46,5 +95,18 @@ exports.createPages = async function ({ actions, graphql }) {
       ),
       context: { category: category },
     });
+  });
+
+  // Create journal entry pages — pass full data via context
+  data.allSanityPost.nodes.forEach((post) => {
+    if (post.slug) {
+      actions.createPage({
+        path: `journal/${post.slug}`,
+        component: path.resolve(
+          `./src/components/journal-post/journal-post.js`
+        ),
+        context: { post },
+      });
+    }
   });
 };
