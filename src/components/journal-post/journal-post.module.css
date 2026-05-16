@@ -65,7 +65,8 @@ h1 {
   border-radius: var(--border-radius-s);
   overflow: hidden;
   border: var(--spacer-xxs) solid var(--color-neutral-900);
-  transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+  transition: transform var(--duration-default) var(--ease-default),
+              box-shadow var(--duration-default) var(--ease-default);
 }
 
 .galleryItem:hover {

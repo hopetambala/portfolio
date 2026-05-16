@@ -11,6 +11,7 @@ import Layout from "../components/layout/layout";
 import { Tag } from "../components/tag/tag";
 
 import * as styles from "./index.module.css";
+import { useScrollReveal } from "../motion";
 
 const CATEGORY_META = {
   "design-systems": {
@@ -50,6 +51,12 @@ const Home = ({ data }) => {
   const workExperiences = data.workExperiences.nodes;
   const categories = Object.keys(CATEGORY_META);
 
+  const hiyaRef = useScrollReveal();
+  const exploreRef = useScrollReveal();
+  const projectsRef = useScrollReveal();
+  const workRef = useScrollReveal();
+  const ctaRef = useScrollReveal();
+
   return (
     <Layout>
       {/* 1. Hero */}
@@ -57,13 +64,13 @@ const Home = ({ data }) => {
         <Grid spacing="none">
           <GridItem>
             <div className={styles.landingTextContainer}>
-              <p className={styles.brandHook}>{landing?.brandHook}</p>
-              <h2>{landing?.title}</h2>
-              <p>{landing?.subtitle}</p>
+              <p className={`${styles.brandHook} animate-fade-up delay-1`}>{landing?.brandHook}</p>
+              <h2 className="animate-fade-up delay-2">{landing?.title}</h2>
+              <p className="animate-fade-up delay-3">{landing?.subtitle}</p>
             </div>
           </GridItem>
           <GridItem>
-            <div className={styles.landingImageContainer}>
+            <div className={`${styles.landingImageContainer} animate-slide-right delay-2`}>
               {landing?.profileImage && (
                 <Image
                   alt="Hope Tambala"
@@ -80,53 +87,58 @@ const Home = ({ data }) => {
       {/* 2. Hiya — Intro */}
       <Section title="Hiya" className={styles.hiya}>
         <div
-          className={styles.introContent}
+          ref={hiyaRef}
+          className={`${styles.introContent} scroll-reveal`}
           dangerouslySetInnerHTML={{ __html: landingBody }}
         />
       </Section>
 
       {/* 3. Explore My Work — Category Cards */}
       <Section title="Explore My Work" className={styles.explore} hasBottomBorder>
-        <Grid spacing="small">
-          {categories.map((cat) => (
-            <GridItem key={cat}>
-              <Card
-                link={`/projects/${cat}`}
-                className={styles.categoryCard}
-                style={{ backgroundColor: CATEGORY_META[cat].color }}
-              >
-                <div className={styles.categoryCardInner}>
-                  <strong>{CATEGORY_META[cat].label}</strong>
-                  <p className={styles.categoryDescription}>
-                    {CATEGORY_META[cat].description}
-                  </p>
-                </div>
-              </Card>
-            </GridItem>
-          ))}
-        </Grid>
+        <div ref={exploreRef} className="scroll-reveal">
+          <Grid spacing="small">
+            {categories.map((cat) => (
+              <GridItem key={cat}>
+                <Card
+                  link={`/projects/${cat}`}
+                  className={styles.categoryCard}
+                  style={{ backgroundColor: CATEGORY_META[cat].color }}
+                >
+                  <div className={styles.categoryCardInner}>
+                    <strong>{CATEGORY_META[cat].label}</strong>
+                    <p className={styles.categoryDescription}>
+                      {CATEGORY_META[cat].description}
+                    </p>
+                  </div>
+                </Card>
+              </GridItem>
+            ))}
+          </Grid>
+        </div>
       </Section>
 
-      {/* 3. Dive Deep — Selected Open-Source Projects */}
+      {/* 4. Selected Open-Source Projects */}
       <Section
         title="Selected Open-Source Projects"
         isAltBG
         className={styles.selectedProjects}
         hasBottomBorder
       >
-        <Grid spacing="small">
-          {selectedProjects.map((node) => (
-            <GridItem key={node.frontmatter.slug}>
-              <Card link={`/${node.frontmatter.slug}`}>
-                <strong>{node.frontmatter.title}</strong>
-                <Tag text={node.frontmatter.role} />
-              </Card>
-            </GridItem>
-          ))}
-        </Grid>
+        <div ref={projectsRef} className="scroll-reveal">
+          <Grid spacing="small">
+            {selectedProjects.map((node) => (
+              <GridItem key={node.frontmatter.slug}>
+                <Card link={`/${node.frontmatter.slug}`}>
+                  <strong>{node.frontmatter.title}</strong>
+                  <Tag text={node.frontmatter.role} />
+                </Card>
+              </GridItem>
+            ))}
+          </Grid>
+        </div>
       </Section>
 
-      {/* 4. Work Experiences */}
+      {/* 5. Work Experiences */}
       <Section
         title="Work Experiences"
         isNoTitle
@@ -134,49 +146,51 @@ const Home = ({ data }) => {
         noVerticalPadding
         className={styles.workExperiences}
       >
-        <div className={styles.workDescription}>
-          <h2>I've worked at some cool places</h2>
-          <p>
-            And have built some serious engineering and design chops along the
-            way. Whether you're in need of a new design system or a new mobile
-            app front-to-back, I have the skills and know-how to make the rubber
-            meet the road with your ideas and bring delight to your users!
-          </p>
-          <a
-            href="https://www.linkedin.com/in/hope-tambala/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <strong>Check out my Linkedin →</strong>
-          </a>
-        </div>
+        <div ref={workRef} className="scroll-reveal">
+          <div className={styles.workDescription}>
+            <h2>I've worked at some cool places</h2>
+            <p>
+              And have built some serious engineering and design chops along the
+              way. Whether you're in need of a new design system or a new mobile
+              app front-to-back, I have the skills and know-how to make the rubber
+              meet the road with your ideas and bring delight to your users!
+            </p>
+            <a
+              href="https://www.linkedin.com/in/hope-tambala/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <strong>Check out my Linkedin →</strong>
+            </a>
+          </div>
 
-        <Grid spacing="none" className={styles.infoRectangleWrapper}>
-          {workExperiences.map(({ html, frontmatter }) => (
-            <GridItem key={frontmatter.company}>
-              <div className={styles.infoRectangle}>
-                <h3>{frontmatter.company}</h3>
-                <strong>{frontmatter.role}</strong>
-                <div className={styles.skillTags}>
-                  {frontmatter.skills &&
-                    frontmatter.skills.map((skill) => (
-                      <Tag key={skill} text={skill} />
-                    ))}
+          <Grid spacing="none" className={styles.infoRectangleWrapper}>
+            {workExperiences.map(({ html, frontmatter }) => (
+              <GridItem key={frontmatter.company}>
+                <div className={styles.infoRectangle}>
+                  <h3>{frontmatter.company}</h3>
+                  <strong>{frontmatter.role}</strong>
+                  <div className={styles.skillTags}>
+                    {frontmatter.skills &&
+                      frontmatter.skills.map((skill) => (
+                        <Tag key={skill} text={skill} />
+                      ))}
+                  </div>
+                  <div dangerouslySetInnerHTML={{ __html: html }} />
+                  <p>{frontmatter.time}</p>
                 </div>
-                <div dangerouslySetInnerHTML={{ __html: html }} />
-                <p>{frontmatter.time}</p>
-              </div>
-            </GridItem>
-          ))}
-        </Grid>
+              </GridItem>
+            ))}
+          </Grid>
+        </div>
       </Section>
 
-      {/* 5. Contact CTA */}
+      {/* 6. Contact CTA */}
       <Section
         title="Let's Build Something"
         className={styles.contactCta}
       >
-        <div className={styles.contactContent}>
+        <div ref={ctaRef} className={`${styles.contactContent} scroll-reveal`}>
           <p>
             Whether you need a design system, a mobile app, or just want to
             chat about building great experiences — I'd love to hear from you.

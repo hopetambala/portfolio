@@ -6,6 +6,7 @@ import { Section } from "../components/section/section";
 import { Grid } from "../components/grid/grid";
 import { GridItem } from "../components/grid/grid-item/grid-item";
 import { Card } from "../components/card/card";
+import { useScrollReveal, useStaggerReveal } from "../motion";
 import * as styles from "./about.module.css";
 
 const AboutPage = () => {
@@ -42,18 +43,24 @@ const AboutPage = () => {
   const about = data.markdownRemark;
   const highlights = data.selectedProjects.nodes;
 
+  const bioRef = useScrollReveal();
+  const funFactsListRef = useStaggerReveal();
+  const highlightsGridRef = useStaggerReveal();
+  const connectRef = useScrollReveal();
+
   return (
     <Layout>
       <Section title={about.frontmatter.title} className={styles.aboutSection}>
         <div
-          className={styles.bio}
+          ref={bioRef}
+          className={`scroll-reveal ${styles.bio}`}
           dangerouslySetInnerHTML={{ __html: about.html }}
         />
       </Section>
 
       {about.frontmatter.funFacts && (
         <Section title="Get to Know Me" isAltBG className={styles.funFacts}>
-          <ol className={styles.funFactsList}>
+          <ol ref={funFactsListRef} className={styles.funFactsList}>
             {about.frontmatter.funFacts.map((fact, i) => (
               <li key={i}>{fact}</li>
             ))}
@@ -63,7 +70,7 @@ const AboutPage = () => {
 
       {highlights.length > 0 && (
         <Section title="Highlights" className={styles.highlights}>
-          <Grid spacing="small">
+          <Grid ref={highlightsGridRef} spacing="small">
             {highlights.map((node) => (
               <GridItem key={node.frontmatter.slug}>
                 <Card link={`/${node.frontmatter.slug}`}>
@@ -76,7 +83,7 @@ const AboutPage = () => {
       )}
 
       <Section title="Let's Connect" className={styles.connect}>
-        <div className={styles.connectContent}>
+        <div ref={connectRef} className={`scroll-reveal ${styles.connectContent}`}>
           <a
             className={styles.primaryAction}
             href="mailto:hopetambala@gmail.com"

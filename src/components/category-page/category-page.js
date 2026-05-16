@@ -6,6 +6,7 @@ import { Grid } from "../grid/grid";
 import { GridItem } from "../grid/grid-item/grid-item";
 import { Card } from "../card/card";
 import { Tag } from "../tag/tag";
+import { useScrollReveal, useStaggerReveal } from "../../motion";
 import * as styles from "./category-page.module.css";
 
 const CATEGORY_LABELS = {
@@ -35,6 +36,9 @@ export default function CategoryPage({ data, pageContext }) {
   const label = CATEGORY_LABELS[category] || category;
   const description = CATEGORY_DESCRIPTIONS[category] || "";
 
+  const descriptionRef = useScrollReveal();
+  const gridRef = useStaggerReveal();
+
   return (
     <Layout isPadded>
       <nav className={styles.breadcrumbs}>
@@ -43,8 +47,10 @@ export default function CategoryPage({ data, pageContext }) {
         <span>{label}</span>
       </nav>
       <Section title={label}>
-        <p className={styles.categoryDescription}>{description}</p>
-        <Grid spacing="small">
+        <p ref={descriptionRef} className={`scroll-reveal ${styles.categoryDescription}`}>
+          {description}
+        </p>
+        <Grid ref={gridRef} spacing="small">
           {projects.map((node) => (
             <GridItem key={node.frontmatter.slug}>
               <Card link={`/${node.frontmatter.slug}`}>

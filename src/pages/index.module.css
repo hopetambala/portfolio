@@ -47,7 +47,7 @@ p {
   text-decoration: underline dotted;
   text-underline-offset: 4px; /* Adds 'air' between text and dots */
   text-decoration-thickness: 2px; /* Makes the dots chunkier and cuter */
-  transition: all 0.2s ease;
+  transition: all var(--duration-default) var(--ease-default);
 }
 
 .introContent a:hover {

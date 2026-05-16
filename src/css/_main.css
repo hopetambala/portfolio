@@ -1,8 +1,10 @@
 @import "./reset.css";
 @import "./fonts.css";
 @import "./variables.css";
+@import "../motion/animations.css";
 
 html {
+  scroll-behavior: smooth;
   margin: 0;
   box-sizing: border-box;
   -webkit-text-size-adjust: 100%;
@@ -71,6 +73,6 @@ a {
 
 a:hover {
   color: var(--color-link-hover);
-  transition: color 0.3s;
+  transition: color var(--duration-slow) var(--ease-default);
   text-decoration: none;
 }

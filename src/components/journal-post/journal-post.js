@@ -88,7 +88,7 @@ export default function JournalPost({ pageContext }) {
         {/* Lightbox */}
         {lightboxIndex !== null && (
           <div
-            className={styles.lightbox}
+            className={`${styles.lightbox} lightbox-enter`}
             onClick={closeLightbox}
             role="dialog"
             aria-modal="true"

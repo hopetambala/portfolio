@@ -3,6 +3,7 @@ import React from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
 import Layout from "../components/layout/layout";
 import { Section } from "../components/section/section";
+import { useStaggerReveal } from "../motion";
 import * as styles from "./journal.module.css";
 
 const Journal = () => {
@@ -23,6 +24,7 @@ const Journal = () => {
   `);
 
   const posts = data.allSanityPost.nodes;
+  const masonryRef = useStaggerReveal(0.05, 60);
 
   return (
     <Layout>
@@ -31,7 +33,7 @@ const Journal = () => {
           A photo journal of moments, places, and the world as I see it.
         </p>
       </Section>
-      <div className={styles.masonry}>
+      <div ref={masonryRef} className={styles.masonry}>
         {posts.map((post) => {
           const imageUrl = post.mainImage?.url;
           if (!imageUrl) return null;

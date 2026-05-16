@@ -2,6 +2,7 @@ import React from "react";
 import { graphql, Link } from "gatsby";
 import Layout from "../layout/layout";
 import { Tag } from "../tag/tag";
+import { useScrollReveal } from "../../motion";
 import * as styles from "./portfolio-post.module.css";
 
 const CATEGORY_LABELS = {
@@ -17,6 +18,9 @@ export default function Post({ data }) {
   const { title, role, category, links } = frontmatter;
   const categoryLabel = CATEGORY_LABELS[category] || category;
 
+  const linksRef = useScrollReveal();
+  const contentRef = useScrollReveal();
+
   return (
     <Layout isPadded className={styles.portfolioPost}>
       <nav className={styles.breadcrumbs}>
@@ -29,7 +33,7 @@ export default function Post({ data }) {
       <h1>{title}</h1>
       {role && <Tag text={role} />}
       {links && (
-        <div className={styles.externalLinks}>
+        <div ref={linksRef} className={`scroll-reveal ${styles.externalLinks}`}>
           {links.github && (
             <a href={links.github} target="_blank" rel="noreferrer">
               GitHub →
@@ -48,7 +52,8 @@ export default function Post({ data }) {
         </div>
       )}
       <div
-        className={styles.content}
+        ref={contentRef}
+        className={`scroll-reveal ${styles.content}`}
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </Layout>

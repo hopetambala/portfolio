@@ -9,7 +9,8 @@
   padding: var(--spacer-m) var(--spacer-l);
   border: var(--spacer-xs) solid var(--color-neutral-900);
   border-radius: var(--border-radius-s);
-  transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out;
+  transition: box-shadow var(--duration-default) var(--ease-default),
+              transform var(--duration-default) var(--ease-default);
   text-decoration: none;
   color: inherit;
 }
