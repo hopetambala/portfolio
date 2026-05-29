@@ -11,7 +11,8 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "prettier": "prettier --write .",
-    "test": "jest"
+    "test": "jest",
+    "screenshot:projects": "node scripts/screenshot-projects.js"
   },
   "dependencies": {
     "@sanity/client": "^7.20.0",
@@ -40,7 +41,10 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "devDependencies": {
+    "gif-encoder-2": "^1.0.5",
     "gray-matter": "^4.0.3",
-    "jest": "^30.3.0"
+    "jest": "^30.3.0",
+    "playwright": "^1.60.0",
+    "pngjs": "^7.0.0"
   }
 }

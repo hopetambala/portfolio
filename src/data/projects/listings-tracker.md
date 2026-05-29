@@ -1,14 +1,15 @@
 ---
-title: "Listings Tracker"
-slug: "listings-tracker"
-category: "prototypes"
-role: "Full-Stack Engineer"
-date: "2026-04-01"
+title: Listings Tracker
+slug: listings-tracker
+category: prototypes
+role: Full-Stack Engineer
+date: '2026-04-01'
 selectedProject: false
 links:
-  live: "https://listings-tracker-three.vercel.app/"
-  github: "https://github.com/hopetambala/listings-tracker"
-  repo: "https://github.com/hopetambala/listings-tracker"
+  live: 'https://listings-tracker-three.vercel.app/'
+  github: 'https://github.com/hopetambala/listings-tracker'
+  repo: 'https://github.com/hopetambala/listings-tracker'
+image: /images/projects/listings-tracker.gif
 ---
 
 A house price tracking application built with Next.js, TypeScript, and Supabase. Track property listings, prices, and upload photos with an intuitive admin interface and secure user access codes.
