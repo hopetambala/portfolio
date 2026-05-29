@@ -11,23 +11,23 @@ p {
 .landingImageContainer {
   height: 700px;
   width: 100%;
-  background-color: var(--color-yellow-300);
+  background-color: var(--tk-dlite-semantic-color-secondary);
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: var(--spacer-xxl);
   text-align: left;
-  border: var(--spacer-xxs) solid var(--color-neutral-900);
-  border-bottom: var(--spacer-xxs) / 2 solid var(--color-neutral-900);
+  border: var(--spacer-xxs) solid var(--tk-dlite-semantic-color-text-primary);
+  border-bottom: var(--spacer-xxs) / 2 solid var(--tk-dlite-semantic-color-text-primary);
 }
 
 .landingImageContainer {
   padding: var(--spacer-xl);
-  background-color: var(--color-teal-200);
+  background-color: var(--tk-dlite-semantic-color-background);
 }
 
 .brandHook {
-  font-size: var(--font-size-body-small);
+  font-size: var(--tk-dlite-semantic-typography-size-200);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   margin-bottom: var(--spacer-s);
@@ -43,22 +43,22 @@ p {
 }
 
 .introContent a {
-  color: var(--color-blue-700);
+  color: var(--tk-dlite-semantic-color-action-primary);
   text-decoration: underline dotted;
-  text-underline-offset: 4px; /* Adds 'air' between text and dots */
-  text-decoration-thickness: 2px; /* Makes the dots chunkier and cuter */
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
   transition: all var(--duration-default) var(--ease-default);
 }
 
 .introContent a:hover {
-  text-decoration-style: solid; /* Switches to solid on hover for feedback */
-  color: var(--color-blue-900);
+  text-decoration-style: solid;
+  color: var(--tk-dlite-semantic-color-action-primary);
 }
 
 @media (min-width: 1024px) {
   .introContent {
     column-count: 2;
-    column-rule: var(--spacer-xxs) solid var(--color-neutral-900);
+    column-rule: var(--spacer-xxs) solid var(--tk-dlite-semantic-color-text-primary);
     column-fill: balance;
   }
 
@@ -74,9 +74,9 @@ p {
 }
 
 .ctaLink {
-  font-weight: var(--font-weight-emphasis);
+  font-weight: var(--tk-dlite-primitive-fontWeight-medium);
   text-decoration: none;
-  color: var(--color-neutral-900);
+  color: var(--tk-dlite-semantic-color-text-primary);
 }
 
 .ctaLink:hover {
@@ -141,7 +141,7 @@ p {
 
 .infoRectangleWrapper > * {
   min-height: calc(var(--spacer-xxl) * 4);
-  border-top: calc(var(--spacer-xxs)) solid var(--color-neutral-900);
+  border-top: calc(var(--spacer-xxs)) solid var(--tk-dlite-semantic-color-text-primary);
 }
 
 .infoRectangle {
@@ -149,9 +149,9 @@ p {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: var(--color-pink-300);
-  border: calc(var(--spacer-xxs)) solid var(--color-neutral-900);
-  border-top: calc(var(--spacer-xxs) / 2) solid var(--color-neutral-900);
+  background-color: var(--tk-dlite-semantic-color-action-secondary);
+  border: calc(var(--spacer-xxs)) solid var(--tk-dlite-semantic-color-text-primary);
+  border-top: calc(var(--spacer-xxs) / 2) solid var(--tk-dlite-semantic-color-text-primary);
   padding: var(--spacer-l);
 }
 
@@ -191,12 +191,12 @@ p {
 }
 
 .primaryAction {
-  background-color: var(--color-neutral-900);
-  color: var(--color-neutral-100);
+  background-color: var(--tk-dlite-semantic-color-text-primary);
+  color: var(--tk-dlite-semantic-color-surface-base);
   padding: var(--spacer-m) var(--spacer-l);
   text-decoration: none;
   border-radius: var(--border-radius-s);
-  font-weight: var(--font-weight-emphasis);
+  font-weight: var(--tk-dlite-primitive-fontWeight-medium);
 }
 
 .primaryAction:hover {

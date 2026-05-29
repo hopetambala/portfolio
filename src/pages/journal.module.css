@@ -4,7 +4,7 @@
 
 .journalSubtitle {
   font-size: var(--font-size-body);
-  color: var(--color-neutral-700);
+  color: var(--tk-dlite-semantic-color-text-secondary);
   max-width: 500px;
   margin: 0 auto;
 }
@@ -40,7 +40,7 @@
   position: relative;
   overflow: hidden;
   border-radius: var(--border-radius-s);
-  border: var(--spacer-xs) solid var(--color-neutral-900);
+  border: var(--spacer-xs) solid var(--tk-dlite-semantic-color-text-primary);
   transition: box-shadow var(--duration-default) var(--ease-default),
               transform var(--duration-default) var(--ease-default);
   text-decoration: none;
@@ -48,7 +48,7 @@
 }
 
 .masonryItem:hover {
-  box-shadow: var(--spacer-s) var(--spacer-s) 0 0 var(--color-neutral-900);
+  box-shadow: var(--spacer-s) var(--spacer-s) 0 0 var(--tk-dlite-semantic-color-text-primary);
   transform: translate(-4px, -4px);
 }
 
@@ -66,8 +66,8 @@
   padding: var(--spacer-m) var(--spacer-l);
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
   color: white;
-  font-weight: var(--font-weight-emphasis);
-  font-size: var(--font-size-body-small);
+  font-weight: var(--tk-dlite-primitive-fontWeight-medium);
+  font-size: var(--tk-dlite-semantic-typography-size-200);
   opacity: 0;
   transition: opacity var(--duration-default) var(--ease-default);
 }

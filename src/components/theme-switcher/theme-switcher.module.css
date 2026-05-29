@@ -1,0 +1,39 @@
+.switcher {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacer-s);
+}
+
+.select {
+  background-color: transparent;
+  color: var(--tk-dlite-semantic-color-surface-base);
+  border: 1px solid var(--tk-dlite-semantic-color-surface-base);
+  border-radius: var(--border-radius-xs);
+  padding: var(--spacer-xxs) var(--spacer-s);
+  font-size: var(--tk-dlite-semantic-typography-size-200);
+  font-family: inherit;
+  cursor: pointer;
+  appearance: none;
+  padding-right: var(--spacer-m);
+}
+
+.select option {
+  background-color: var(--tk-dlite-semantic-color-text-primary);
+  color: var(--tk-dlite-semantic-color-surface-base);
+}
+
+.modeToggle {
+  background: none;
+  border: 1px solid var(--tk-dlite-semantic-color-surface-base);
+  border-radius: var(--border-radius-xs);
+  color: var(--tk-dlite-semantic-color-surface-base);
+  cursor: pointer;
+  padding: var(--spacer-xxs) var(--spacer-s);
+  font-size: var(--tk-dlite-semantic-typography-size-200);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+}

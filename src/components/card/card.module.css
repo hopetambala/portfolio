@@ -7,7 +7,7 @@
   min-width: calc(var(--spacer-xxl) * 2);
   max-width: calc(var(--spacer-xxl) * 4);
   padding: var(--spacer-m) var(--spacer-l);
-  border: var(--spacer-xs) solid var(--color-neutral-900);
+  border: var(--spacer-xs) solid var(--tk-dlite-semantic-color-text-primary);
   border-radius: var(--border-radius-s);
   transition: box-shadow var(--duration-default) var(--ease-default),
               transform var(--duration-default) var(--ease-default);
@@ -16,10 +16,10 @@
 }
 
 .card:hover {
-  box-shadow: var(--spacer-s) var(--spacer-s) 0 0 var(--color-neutral-900);
+  box-shadow: var(--spacer-s) var(--spacer-s) 0 0 var(--tk-dlite-semantic-color-text-primary);
   transform: translate(calc(-1 * var(--spacer-s)), calc(-1 * var(--spacer-s)));
 }
 
 .card:hover div {
-  background-color: var(--color-yellow-300);
+  background-color: var(--tk-dlite-semantic-color-secondary);
 }

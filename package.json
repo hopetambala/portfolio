@@ -11,7 +11,8 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "prettier": "prettier --write .",
-    "test": "jest"
+    "test": "jest",
+    "generate:themes": "node scripts/generate-theme-css.js"
   },
   "dependencies": {
     "@sanity/client": "^7.20.0",
@@ -27,6 +28,7 @@
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "style-dictionary-dlite-tokens": "^0.2.8",
     "swiper": "^8.4.5"
   },
   "engines": {
@@ -41,6 +43,7 @@
   },
   "devDependencies": {
     "gray-matter": "^4.0.3",
-    "jest": "^30.3.0"
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.4.1"
   }
 }

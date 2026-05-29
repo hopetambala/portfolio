@@ -22,11 +22,11 @@
 }
 
 .altBG {
-  background-color: var(--color-neutral-100);
+  background-color: var(--tk-dlite-semantic-color-surface-base);
 }
 
 .bottomBorder {
-    border-bottom: var(--spacer-xs) solid var(--color-neutral-900);
+  border-bottom: var(--spacer-xs) solid var(--tk-dlite-semantic-color-text-primary);
 }
 
 @media only screen and (max-width: 900px) {

@@ -1,17 +1,17 @@
 .portfolioPost {
   padding: var(--spacer-l) var(--spacer-xl);
-  border: var(--spacer-xxs) solid var(--color-neutral-900);
-  border-top: var(--spacer-xxs) / 2 solid var(--color-neutral-900);
-  background-color: var(--color-yellow-100);
+  border: var(--spacer-xxs) solid var(--tk-dlite-semantic-color-text-primary);
+  border-top: var(--spacer-xxs) / 2 solid var(--tk-dlite-semantic-color-text-primary);
+  background-color: var(--tk-dlite-semantic-color-surface-sunken);
 }
 
 .breadcrumbs {
-  font-size: var(--font-size-body-small);
+  font-size: var(--tk-dlite-semantic-typography-size-200);
   margin-bottom: var(--spacer-l);
 }
 
 .breadcrumbs a {
-  color: var(--color-neutral-700);
+  color: var(--tk-dlite-semantic-color-text-secondary);
   text-decoration: none;
 }
 
@@ -20,8 +20,8 @@
 }
 
 .breadcrumbs span:last-child {
-  color: var(--color-neutral-900);
-  font-weight: var(--font-weight-emphasis);
+  color: var(--tk-dlite-semantic-color-text-primary);
+  font-weight: var(--tk-dlite-primitive-fontWeight-medium);
 }
 
 .externalLinks {
@@ -31,9 +31,9 @@
 }
 
 .externalLinks a {
-  font-weight: var(--font-weight-emphasis);
+  font-weight: var(--tk-dlite-primitive-fontWeight-medium);
   text-decoration: none;
-  color: var(--color-neutral-900);
+  color: var(--tk-dlite-semantic-color-text-primary);
 }
 
 .externalLinks a:hover {

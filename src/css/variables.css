@@ -1,137 +1,43 @@
 :root {
-  /* TYPOGRAPHY
+  /* TYPOGRAPHY SCALE (portfolio-specific sizes — dlite drives font-family/colors)
   /* =============================================================== */
-
-  --font-family: "Recoleta", helvetica, sans-serif;
-  --font-weight-regular: 400;
-  --font-weight-emphasis: 500;
-
-  --font-size-h1: 3rem;
-  --line-height-h1: 1;
-  --font-size-h2: 2rem;
-  --line-height-h2: 1;
-  --font-size-h3: 1.5rem;
-  --line-height-h3: 1;
-
-  --font-size-body: 24px;
-  --line-height-body: 1.5rem;
-
+  --font-size-body:       24px;
+  --line-height-body:     1.5rem;
   --font-size-body-small: 0.75rem;
   --line-height-body-small: 1rem;
+  --font-size-h1:         3rem;
+  --font-size-h2:         2rem;
+  --font-size-h3:         1.5rem;
 
-  /* SPACING
+  /* SPACING (large values not in dlite's scale)
   /* =============================================================== */
-  --spacer-xxs: 2px;
-  --spacer-xs: 4px;
-  --spacer-s: 8px;
-  --spacer-m: 16px;
-  --spacer-l: 32px;
-  --spacer-xl: 64px;
-  --spacer-xxl: 128px;
-  --spacer-xxxl: calc(var(--spacer-xxl) * 2);
+  --spacer-xxs: 0.125rem;   /* 2px  = --tk-dlite-semantic-spacing-xxs */
+  --spacer-xs:  0.25rem;    /* 4px  = --tk-dlite-semantic-spacing-xs  */
+  --spacer-s:   0.5rem;     /* 8px  = --tk-dlite-semantic-spacing-sm  */
+  --spacer-m:   1rem;       /* 16px = --tk-dlite-semantic-spacing-md  */
+  --spacer-l:   2rem;       /* 32px = --tk-dlite-semantic-spacing-xl  */
+  --spacer-xl:  4rem;       /* 64px  — no dlite equivalent            */
+  --spacer-xxl: 8rem;       /* 128px — no dlite equivalent            */
+  --spacer-xxxl: calc(var(--spacer-xxl) * 2); /* 256px */
 
-  /* BORDER
+  /* BORDER RADIUS
   /* =============================================================== */
-
   --border-radius-xs: 4px;
-  --border-radius-s: 8px;
-  --border-radius-m: 16px;
-  --border-radius-l: 32px;
-
-  /* Circles */
+  --border-radius-s:  8px;
+  --border-radius-m:  16px;
+  --border-radius-l:  32px;
   --border-radius-full: 50%;
 
   /* STACKING ORDER
   /* =============================================================== */
-
   --z-notifications: 1;
-  --z-focused: 2;
-  --z-header: 7;
-  --z-sidebar: 8;
-  --z-dropdown: 9;
-  --z-fullpage: 11;
-  --z-note: 12;
-  --z-modal: 99;
+  --z-focused:       2;
+  --z-header:        7;
+  --z-sidebar:       8;
+  --z-dropdown:      9;
+  --z-fullpage:      11;
+  --z-note:          12;
+  --z-modal:         99;
   --z-modal-dropdown: 100;
-  --z-menu: 101;
-
-  /* Colors
-  /* ===============================================================
-
-  /* Neutral */
-  --color-neutral-100: #f3f3f3;
-  --color-neutral-300: #d4d4d4;
-  --color-neutral-500: #a5a5a5;
-  --color-neutral-700: #464646;
-  --color-neutral-750: #292929;
-  --color-neutral-900: #161616;
-
-  /* Blue */
-  --color-blue-100: hsl(197, 100%, 88%);
-  --color-blue-300: hsl(197, 100%, 60%);
-  --color-blue-500: hsl(197, 100%, 50%);
-  --color-blue-700: hsl(218, 100%, 50%);
-  --color-blue-900: hsl(240, 100%, 40%);
-
-  /* Teal */
-  --color-teal-100: hsl(167, 100%, 88%);
-  --color-teal-200: hsl(167, 100%, 75%);
-  --color-teal-300: hsl(167, 100%, 60%);
-  --color-teal-500: hsl(167, 100%, 50%);
-  --color-teal-700: hsl(190, 100%, 50%);
-  --color-teal-900: hsl(213, 100%, 40%);
-
-  /* Green */
-  --color-green-100: hsl(90, 100%, 85%);
-  --color-green-300: hsl(90, 100%, 60%);
-  --color-green-500: hsl(90, 100%, 50%);
-  --color-green-700: hsl(105, 100%, 50%);
-  --color-green-900: hsl(120, 100%, 40%);
-
-  /* Yellow */
-  --color-yellow-100: hsl(61, 100%, 90%);
-  --color-yellow-300: hsl(61, 89%, 58%);
-  --color-yellow-500: hsl(61, 100%, 50%);
-  --color-yellow-700: hsl(61, 100%, 40%);
-  --color-yellow-900: hsl(61, 100%, 30%);
-
-  /* Orange */
-  --color-orange-100: hsl(30, 100%, 85%);
-  --color-orange-300: hsl(30, 100%, 60%);
-  --color-orange-500: hsl(30, 100%, 50%);
-  --color-orange-700: hsl(20, 100%, 50%);
-  --color-orange-900: hsl(10, 100%, 40%);
-
-  /* Red */
-  --color-red-100: hsl(357, 100%, 85%);
-  --color-red-300: hsl(357, 100%, 60%);
-  --color-red-500: hsl(357, 100%, 50%);
-  --color-red-700: hsl(342, 100%, 50%);
-  --color-red-900: hsl(327, 100%, 40%);
-
-  /* Purple */
-  --color-purple-100: hsl(300, 100%, 85%);
-  --color-purple-300: hsl(300, 100%, 75%);
-  --color-purple-500: hsl(300, 100%, 60%);
-  --color-purple-700: hsl(300, 100%, 50%);
-  --color-purple-900: hsl(300, 100%, 40%);
-
-  /* Pink */
-  --color-pink-100: hsl(340, 100%, 85%);
-  --color-pink-300: hsl(340, 100%, 75%);
-  --color-pink-500: hsl(340, 100%, 60%);
-  --color-pink-700: hsl(340, 100%, 50%);
-  --color-pink-900: hsl(340, 100%, 40%);
-
-  /* Backgrounds */
-  --color-bg-light: var(--color-white);
-  --color-bg: var(--color-teal-100);
-
-  /* Text */
-  --color-text: var(--color-neutral-900);
-  --color-text-light: var(--color-neutral-700);
-
-  /* Borders */
-  --color-border: rgba(0, 0, 0, 0.1);
-  --color-border-light: rgba(0, 0, 0, 0.07);
+  --z-menu:          101;
 }

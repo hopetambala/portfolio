@@ -23,7 +23,7 @@
 
 .funFactsList li {
   padding: var(--spacer-s) 0;
-  border-bottom: 1px solid var(--color-neutral-300);
+  border-bottom: 1px solid var(--tk-dlite-semantic-color-border);
   font-size: calc(var(--font-size-body) * 0.9);
 }
 
@@ -45,12 +45,12 @@
 
 .primaryAction {
   display: inline-block;
-  background-color: var(--color-neutral-900);
-  color: var(--color-neutral-100);
+  background-color: var(--tk-dlite-semantic-color-text-primary);
+  color: var(--tk-dlite-semantic-color-surface-base);
   padding: var(--spacer-m) var(--spacer-l);
   text-decoration: none;
   border-radius: var(--border-radius-s);
-  font-weight: var(--font-weight-emphasis);
+  font-weight: var(--tk-dlite-primitive-fontWeight-medium);
 }
 
 .primaryAction:hover {

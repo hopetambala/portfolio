@@ -18,5 +18,5 @@
 }
 
 .wavey .shapeFill {
-  fill: var(--color-neutral-100);
+  fill: var(--tk-dlite-semantic-color-surface-base);
 }

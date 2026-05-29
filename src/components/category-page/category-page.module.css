@@ -1,10 +1,10 @@
 .breadcrumbs {
-  font-size: var(--font-size-body-small);
+  font-size: var(--tk-dlite-semantic-typography-size-200);
   margin-bottom: var(--spacer-l);
 }
 
 .breadcrumbs a {
-  color: var(--color-neutral-700);
+  color: var(--tk-dlite-semantic-color-text-secondary);
   text-decoration: none;
 }
 
@@ -13,8 +13,8 @@
 }
 
 .breadcrumbs span:last-child {
-  color: var(--color-neutral-900);
-  font-weight: var(--font-weight-emphasis);
+  color: var(--tk-dlite-semantic-color-text-primary);
+  font-weight: var(--tk-dlite-primitive-fontWeight-medium);
 }
 
 .categoryDescription {

@@ -2,13 +2,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: var(--spacer-xxs) solid var(--color-neutral-900);
+  border: var(--spacer-xxs) solid var(--tk-dlite-semantic-color-text-primary);
   border-radius: var(--border-radius-m);
-  background-color: var(--color-neutral-100);
+  background-color: var(--tk-dlite-semantic-color-surface-base);
   transition: all var(--duration-fast) var(--ease-default);
-  color: var(--color-neutral-900);
-  font-size: var(--font-size-body-small);
-  line-height: var(--line-height-body-small);
+  color: var(--tk-dlite-semantic-color-text-primary);
+  font-size: var(--tk-dlite-semantic-typography-size-200);
+  line-height: var(--tk-dlite-primitive-number-line-height-normal);
   height: calc(var(--spacer-l));
   max-width: calc(var(--spacer-xl) * 4);
   text-align: center;

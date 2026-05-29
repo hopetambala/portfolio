@@ -5,12 +5,12 @@
 }
 
 .breadcrumbs {
-  font-size: var(--font-size-body-small);
+  font-size: var(--tk-dlite-semantic-typography-size-200);
   margin-bottom: var(--spacer-l);
 }
 
 .breadcrumbs a {
-  color: var(--color-neutral-700);
+  color: var(--tk-dlite-semantic-color-text-secondary);
   text-decoration: none;
 }
 
@@ -19,8 +19,8 @@
 }
 
 .breadcrumbs span:last-child {
-  color: var(--color-neutral-900);
-  font-weight: var(--font-weight-emphasis);
+  color: var(--tk-dlite-semantic-color-text-primary);
+  font-weight: var(--tk-dlite-primitive-fontWeight-medium);
 }
 
 h1 {
@@ -37,7 +37,7 @@ h1 {
   width: 100%;
   height: auto;
   border-radius: var(--border-radius-s);
-  border: var(--spacer-xs) solid var(--color-neutral-900);
+  border: var(--spacer-xs) solid var(--tk-dlite-semantic-color-text-primary);
 }
 
 /* Gallery — CSS-only masonry */
@@ -64,14 +64,14 @@ h1 {
   cursor: pointer;
   border-radius: var(--border-radius-s);
   overflow: hidden;
-  border: var(--spacer-xxs) solid var(--color-neutral-900);
+  border: var(--spacer-xxs) solid var(--tk-dlite-semantic-color-text-primary);
   transition: transform var(--duration-default) var(--ease-default),
               box-shadow var(--duration-default) var(--ease-default);
 }
 
 .galleryItem:hover {
   transform: translateY(-4px);
-  box-shadow: var(--spacer-s) var(--spacer-s) 0 0 var(--color-neutral-900);
+  box-shadow: var(--spacer-s) var(--spacer-s) 0 0 var(--tk-dlite-semantic-color-text-primary);
 }
 
 .galleryItem img {
@@ -141,5 +141,5 @@ h1 {
   left: 50%;
   transform: translateX(-50%);
   color: white;
-  font-size: var(--font-size-body-small);
+  font-size: var(--tk-dlite-semantic-typography-size-200);
 }
