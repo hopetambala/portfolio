@@ -130,6 +130,122 @@ async function captureGif(page, slug) {
   return outFile;
 }
 
+// ─── Custom captures ────────────────────────────────────────────────────────
+//
+// For projects where the interesting content requires specific interactions
+// (not just scroll). Each handler receives the already-navigated `page` and
+// the destination `outFile` path. Must return `outFile`.
+//
+// To add a new project: add a key matching the markdown slug.
+
+function makeEncoder(width, height, fps) {
+  const encoder = new GIFEncoder(width, height, "neuquant", true, 256);
+  encoder.setRepeat(0);
+  encoder.setDelay(Math.round(1000 / fps));
+  encoder.setQuality(25);
+  encoder.start();
+  return encoder;
+}
+
+async function addFrames(page, encoder, count, intervalMs) {
+  for (let i = 0; i < count; i++) {
+    const buf = await page.screenshot({ type: "png" });
+    encoder.addFrame(PNG.sync.read(buf).data);
+    if (i < count - 1) await page.waitForTimeout(intervalMs);
+  }
+}
+
+const CUSTOM_CAPTURES = {
+  /**
+   * stakeout — https://stakeout.vercel.app/
+   *
+   * Shows: landing → editor → sample property → fence drag → 3D toggle
+   * Re-run: npm run screenshot:projects -- --only=stakeout
+   */
+  stakeout: async (page, outFile) => {
+    const W = VIEWPORT.width;
+    const H = VIEWPORT.height;
+    const encoder = makeEncoder(W, H, FPS);
+
+    // 1. Landing (~1 s)
+    await addFrames(page, encoder, 6, 160);
+
+    // 2. Navigate to editor
+    const ctaSelectors = [
+      'a[href*="editor"]',
+      'button:has-text("Start designing")',
+      'button:has-text("Try it")',
+      'button:has-text("Open")',
+      'a:has-text("Start designing")',
+    ];
+    let navigated = false;
+    for (const sel of ctaSelectors) {
+      const el = page.locator(sel).first();
+      if (await el.isVisible().catch(() => false)) {
+        await el.click();
+        navigated = true;
+        break;
+      }
+    }
+    if (!navigated) {
+      await page.goto(page.url().replace(/\/?$/, "") + "?p=editor", {
+        waitUntil: "networkidle",
+        timeout: 20000,
+      });
+    }
+    await page.waitForTimeout(1800);
+    await addFrames(page, encoder, 4, 160);
+
+    // 3. Load sample property
+    const sampleBtn = page.locator(
+      'button.btn--sample, button:has-text("sample"), button:has-text("Sample")'
+    );
+    if (await sampleBtn.first().isVisible().catch(() => false)) {
+      await sampleBtn.first().click();
+      await page.waitForTimeout(2200);
+    }
+    await addFrames(page, encoder, 6, 160);
+
+    // 4. Drag a fence element onto the canvas
+    const fenceEl = page
+      .locator('[data-def-id*="fence"], .element-tile:has-text("Fence")')
+      .first();
+    const canvas = page.locator("canvas").first();
+    if (
+      (await fenceEl.isVisible().catch(() => false)) &&
+      (await canvas.isVisible().catch(() => false))
+    ) {
+      const fb = await fenceEl.boundingBox();
+      const cb = await canvas.boundingBox();
+      if (fb && cb) {
+        await page.mouse.move(fb.x + fb.width / 2, fb.y + fb.height / 2);
+        await page.mouse.down();
+        await page.waitForTimeout(250);
+        const tx = cb.x + cb.width * 0.55;
+        const ty = cb.y + cb.height * 0.45;
+        await page.mouse.move(tx, ty, { steps: 18 });
+        await page.mouse.up();
+        await page.waitForTimeout(1000);
+      }
+    }
+    await addFrames(page, encoder, 6, 160);
+
+    // 5. Toggle 3D view
+    const threeDBtn = page
+      .locator('button:has-text("3D"), button:has-text("Live 3D"), [title*="3D"]')
+      .first();
+    if (await threeDBtn.isVisible().catch(() => false)) {
+      await threeDBtn.click();
+      await page.waitForTimeout(2200);
+    }
+    await addFrames(page, encoder, 10, 160);
+
+    encoder.finish();
+    fs.writeFileSync(outFile, encoder.out.getData());
+    return outFile;
+  },
+};
+
 // ─── Frontmatter updater ────────────────────────────────────────────────────
 
 function updateImageField(filePath, slug) {
@@ -195,7 +311,10 @@ async function run() {
       // Authenticate silently before recording starts
       await handleAuth(page, slug);
 
-      const outFile = await captureGif(page, slug);
+      const customCapture = CUSTOM_CAPTURES[slug];
+      const outFile = customCapture
+        ? await customCapture(page, path.join(OUTPUT_DIR, `${slug}.gif`))
+        : await captureGif(page, slug);
 
       updateImageField(filePath, slug);
 
