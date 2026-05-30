@@ -12,31 +12,18 @@ links:
 image: /images/projects/listings-tracker.gif
 ---
 
-A house price tracking application built with Next.js, TypeScript, and Supabase. Track property listings, prices, and upload photos with an intuitive admin interface and secure user access codes.
+We were house hunting and I couldn't find a simple way to track everything in one place — not just favorites, but actual price history. When did this listing drop $20k? Is that "reduced" badge new or has it been sitting there for months? Most tools answer one of those questions. None answered all of them in a way that felt like mine.
 
-## Features
+So I built one. Listings Tracker is a full-stack property tracking app with two tiers: an admin side for managing the full listing database, and a user side for people I share access codes with — family, my wife, the people actually in the car with me at open houses.
 
-- **Admin Dashboard**: Create properties, view market analysis, manage access codes
-- **Bulk Upload**: Import multiple properties via CSV with auto-generated access codes
-- **Price Tracking**: Record listing price, current price, and sold price with historical data visualization
-- **Photo Gallery**: Upload and organize property photos by listing
-- **Secure Access**: 4-digit access codes for users to view properties (localStorage + 24-hour expiry)
-- **User Listings**: Users can add their own listings to the admin's property list
-- **Visual Price Badges**: Dynamic badges showing recent price changes (increased/reduced) with color coding
-- **Design System**: Modern UI built with dlite web components and design tokens
+## The Access Model
 
-## Tech Stack
+I didn't want to build full OAuth for something this small, but I also didn't want the whole thing to be public. The compromise: 4-digit access codes. Admins get email/password auth. Everyone else gets a code that unlocks their view for 24 hours. Simple, doesn't require anyone to create an account, still keeps the data private. Row-level security in Supabase handles the data isolation.
 
-- **Frontend**: Next.js 15 (App Router), React 19, TypeScript
-- **Database**: Supabase with PostgreSQL
-- **Auth**: Supabase Auth (email/password for admins, 4-digit codes for users)
-- **Storage**: Supabase Storage for photo uploads
-- **Design**: Custom web components + style-dictionary tokens
-- **Styling**: CSS custom properties (no Tailwind)
+## The Part That Made It Useful
 
-## Key Capabilities
+Price history with visual badges. Every listing shows whether the price went up, down, or held since the last update — color coded, immediately visible. You can record listing price, current price, and sold price separately, so the whole arc of a property's market life is in one place. Bulk CSV import meant I could seed it with a dozen listings at once without clicking through a form twelve times.
 
-- **Admin Features**: Create properties, generate access codes, view analytics, bulk upload CSV
-- **User Features**: View properties, add listings, track prices, upload photos, edit property details
-- **Access Control**: Row-level security (RLS) for data isolation, secure session management
-- **Real-time Updates**: Immediate property list refresh after adding new listings or prices
+## Stack
+
+Next.js 15 (App Router), React 19, TypeScript, Supabase for database/auth/storage, custom dlite web components for UI, CSS custom properties throughout. No Tailwind.
