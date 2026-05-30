@@ -6,7 +6,7 @@ role: Full-Stack Engineer
 date: '2026-05-01'
 selectedProject: false
 links:
-  live: 'https://stakeout.app'
+  live: 'https://stakeout.vercel.app/'
   github: 'https://github.com/hopetambala/stakeout'
 image: /images/projects/stakeout.gif
 ---
