@@ -111,6 +111,39 @@ The `/journal` page pulls photo entries from Sanity CMS. Content is managed thro
 
 Or manage content directly at [https://www.sanity.io/manage](https://www.sanity.io/manage).
 
+## Project GIF Capture
+
+Project demo GIFs are generated with Playwright and stored in `static/images/projects/`.
+
+```bash
+# Capture GIFs for all projects with a live URL
+npm run screenshot:projects
+
+# Capture a single project
+npm run screenshot:projects -- --only=stakeout
+```
+
+**How it works** (`scripts/screenshot-projects.js`):
+- Auto-discovers any `src/data/projects/*.md` file that has a `links.live` field
+- **Default**: 6-second scroll-based capture
+- **Custom captures**: projects needing specific interactions (editor flows, drag-and-drop, etc.) define their own sequence in the `CUSTOM_CAPTURES` map, keyed by slug
+
+**Adding a custom capture for a new project:**
+1. Add the project markdown with `links: { live: "https://..." }`
+2. Add a handler in `CUSTOM_CAPTURES` inside `screenshot-projects.js`
+3. Run `npm run screenshot:projects -- --only=<slug>`
+
+### Existing custom captures
+
+| Slug | Interaction sequence |
+|------|----------------------|
+| `stakeout` | Landing → editor → load sample property → drag fence element → toggle 3D view |
+
+### Prerequisites
+
+- `playwright` chromium installed: `npx playwright install chromium`
+- `gif-encoder-2` and `pngjs` (already in `devDependencies`)
+
 ## Testing
 
 ```bash

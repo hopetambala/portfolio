@@ -15,7 +15,7 @@ const CATEGORY_LABELS = {
 
 export default function Post({ data }) {
   const { frontmatter, html } = data.markdownRemark;
-  const { title, role, category, links } = frontmatter;
+  const { title, role, category, links, image } = frontmatter;
   const categoryLabel = CATEGORY_LABELS[category] || category;
 
   const linksRef = useScrollReveal();
@@ -32,6 +32,13 @@ export default function Post({ data }) {
       </nav>
       <h1>{title}</h1>
       {role && <Tag text={role} />}
+      {image && (
+        <img
+          src={image}
+          alt={`${title} screenshot`}
+          className={styles.projectImage}
+        />
+      )}
       {links && (
         <div ref={linksRef} className={`scroll-reveal ${styles.externalLinks}`}>
           {links.github && (
@@ -75,6 +82,7 @@ export const query = graphql`
           npm
           live
         }
+        image
       }
     }
   }
