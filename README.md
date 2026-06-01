@@ -104,12 +104,21 @@ Description of your work.
 
 ### Photo Journal
 
-The `/journal` page pulls photo entries from Sanity CMS. Content is managed through Sanity Studio in the [photo project](https://github.com/hopetambala/photo):
+The `/journal` page pulls photo entries from Sanity CMS (`projectId: mesj4ezg`, `dataset: production`).
 
-1. Navigate to the photo project: `cd ../photo`
-2. Run `yarn dev` and open `http://localhost:3000/studio`
+Use the hosted Studio to add or edit images:
 
-Or manage content directly at [https://www.sanity.io/manage](https://www.sanity.io/manage).
+1. Open [https://mesj4ezg.sanity.studio/](https://mesj4ezg.sanity.studio/)
+2. Go to **Post**
+3. Open an existing post or create a new one
+4. Upload images in **Main image** and/or **Gallery**
+5. Publish the document
+
+Run Studio locally if needed:
+
+1. `cd ../portfolio-studio`
+2. `npm run dev`
+3. Open `http://localhost:3333`
 
 ## Project GIF Capture
 
