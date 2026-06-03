@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "./src/theme/theme-provider";
-import { STORAGE_KEY, DEFAULT_BRAND, DEFAULT_MODE } from "./src/theme/brands";
+import { BRANDS, STORAGE_KEY, DEFAULT_BRAND, DEFAULT_MODE } from "./src/theme/brands";
 
 // Wrap every page (SSR side) so useTheme() works during build/render.
 export const wrapRootElement = ({ element }) => (
@@ -46,7 +46,7 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyC
     var brand = ${JSON.stringify(DEFAULT_BRAND)};
     var mode = ${JSON.stringify(DEFAULT_MODE)};
     var raw = localStorage.getItem(KEY);
-    if (raw) { var p = JSON.parse(raw); if (p && p.brand) { brand = p.brand; mode = p.mode || mode; } }
+    if (raw) { var p = JSON.parse(raw); var VALID = ${JSON.stringify(BRANDS.map((b) => b.path))}; if (p && p.brand && VALID.indexOf(p.brand) !== -1) { brand = p.brand; mode = (["light","dark","system"].indexOf(p.mode) !== -1 ? p.mode : mode); } }
     var resolved = mode;
     if (mode === 'system') {
       resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';

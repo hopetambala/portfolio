@@ -55,13 +55,26 @@ function headingFontFor(brandPath) {
   return `${family}, Georgia, "Times New Roman", serif`;
 }
 
-/** Pull the declarations out of a `:root { ... }` token file. */
+/** Pull the declarations out of a `:root { ... }` token file, uniformly indented. */
 function readVars(file) {
   const css = fs.readFileSync(file, "utf8");
   const open = css.indexOf("{");
   const close = css.lastIndexOf("}");
   if (open === -1 || close === -1) return "";
-  return css.slice(open + 1, close).trim();
+  // Normalise every declaration to two-space indent so the generated file is
+  // consistent regardless of what the source token file uses.
+  const lines = css
+    .slice(open + 1, close)
+    .split("\n")
+    .map((line) => {
+      const trimmed = line.trim();
+      return trimmed ? `  ${trimmed}` : "";
+    })
+    .filter((line, i, arr) => !(line === "" && (i === 0 || arr[i - 1] === "")));
+  // Drop leading/trailing blank lines but keep the indented declarations intact.
+  while (lines.length && lines[0] === "") lines.shift();
+  while (lines.length && lines[lines.length - 1] === "") lines.pop();
+  return lines.join("\n");
 }
 
 function block(selector, body) {

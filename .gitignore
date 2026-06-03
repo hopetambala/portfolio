@@ -71,3 +71,7 @@ yarn-error.log
 
 #AI
 design_handoff_portfolio_redesign/
+
+# Generated — rebuilt automatically by `npm run tokens` before every build/develop
+src/css/dlite-theme.css
+yarn.lock
