@@ -1,89 +1,79 @@
 import { Link } from "gatsby";
 import React, { useState, useEffect } from "react";
+import { ThemeSwitcher } from "../theme-switcher/theme-switcher";
 import * as styles from "./menu.module.css";
+
+const RESUME_URL =
+  "https://drive.google.com/file/d/1iH8Yu5irK5jqEYz8NkCPPRHTGOabmDJ2/view?usp=sharing";
 
 export const Menu = ({ className }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const classNames = [`menu ${styles.menu}`];
   if (className) classNames.push(className);
 
-  const handleLinkClick = () => {
-    setMobileMenuOpen(false);
-  };
+  const handleLinkClick = () => setMobileMenuOpen(false);
 
-  // Handle escape key to close menu
+  // Escape closes the mobile menu.
   useEffect(() => {
+    if (!mobileMenuOpen) return;
     const handleEscapeKey = (e) => {
-      if (e.key === "Escape") {
-        setMobileMenuOpen(false);
-      }
+      if (e.key === "Escape") setMobileMenuOpen(false);
     };
-
-    if (mobileMenuOpen) {
-      document.addEventListener("keydown", handleEscapeKey);
-      return () => {
-        document.removeEventListener("keydown", handleEscapeKey);
-      };
-    }
-  }, [mobileMenuOpen]);
-
-  // Close menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      const menu = document.querySelector(`.${styles.menu}`);
-      if (menu && !menu.contains(e.target)) {
-        setMobileMenuOpen(false);
-      }
-    };
-
-    if (mobileMenuOpen) {
-      document.addEventListener("click", handleClickOutside);
-      return () => {
-        document.removeEventListener("click", handleClickOutside);
-      };
-    }
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => document.removeEventListener("keydown", handleEscapeKey);
   }, [mobileMenuOpen]);
 
   return (
-    <div className={classNames.join(" ")}>
-      <div className={styles.menuHeaderList}>
+    <header className={classNames.join(" ")}>
+      <div className={styles.inner}>
         <Link className={styles.home} to="/">
+          <span className={styles.dot} aria-hidden="true" />
           Hope Tambala
         </Link>
-        
-        {/* Hamburger toggle button */}
-        <button 
-          className={`${styles.hamburger} ${mobileMenuOpen ? styles.hamburgerOpen : ''}`}
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-          aria-expanded={mobileMenuOpen}
-        >
-          <span className={styles.hamburgerLine}></span>
-          <span className={styles.hamburgerLine}></span>
-          <span className={styles.hamburgerLine}></span>
-        </button>
 
-        <div className={`${styles.menuHeaderListActions} ${mobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
-          <Link to="/about" onClick={handleLinkClick}>About</Link>
-          <Link to="/#exploremywork" onClick={handleLinkClick}>Work</Link>
-          <Link to="/journal" onClick={handleLinkClick}>Journal</Link>
-          <a
-            href="https://drive.google.com/file/d/1iH8Yu5irK5jqEYz8NkCPPRHTGOabmDJ2/view?usp=sharing"
-            target="_blank"
-            rel="noreferrer"
-            onClick={handleLinkClick}
+        <div className={styles.right}>
+          <nav
+            className={`${styles.links} ${
+              mobileMenuOpen ? styles.mobileMenuOpen : ""
+            }`}
           >
-            Resume
-          </a>
-          <a
-            className={styles.primaryAction}
-            href="mailto:hopetambala@gmail.com"
-            onClick={handleLinkClick}
+            <Link to="/about" onClick={handleLinkClick}>
+              About
+            </Link>
+            <Link to="/work" onClick={handleLinkClick}>
+              Work
+            </Link>
+            <Link to="/journal" onClick={handleLinkClick}>
+              Journal
+            </Link>
+            <a href={RESUME_URL} target="_blank" rel="noreferrer" onClick={handleLinkClick}>
+              Résumé
+            </a>
+            <a
+              className={styles.primaryAction}
+              href="mailto:hopetambala@gmail.com"
+              onClick={handleLinkClick}
+            >
+              Hit me up!
+            </a>
+          </nav>
+
+          <ThemeSwitcher />
+
+          <button
+            className={`${styles.hamburger} ${
+              mobileMenuOpen ? styles.hamburgerOpen : ""
+            }`}
+            onClick={() => setMobileMenuOpen((o) => !o)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
           >
-            Hit me up!
-          </a>
+            <span className={styles.hamburgerLine}></span>
+            <span className={styles.hamburgerLine}></span>
+            <span className={styles.hamburgerLine}></span>
+          </button>
         </div>
       </div>
-    </div>
+    </header>
   );
 };

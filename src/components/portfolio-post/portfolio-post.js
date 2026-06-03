@@ -1,68 +1,83 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import Layout from "../layout/layout";
-import { Tag } from "../tag/tag";
 import { useScrollReveal } from "../../motion";
-import * as styles from "./portfolio-post.module.css";
 
 const CATEGORY_LABELS = {
   "design-systems": "Design Systems",
   nonprofit: "Nonprofit Engineering",
-  personal: "Personal Projects",
-  prototypes: "Fun Prototypes",
+  personal: "Personal Websites",
+  prototypes: "App Prototypes",
   professional: "Professional Work",
 };
 
+const LINK_LABELS = { github: "GitHub", npm: "npm", live: "Live demo" };
+
 export default function Post({ data }) {
   const { frontmatter, html } = data.markdownRemark;
-  const { title, role, category, links, image } = frontmatter;
+  const { title, role, category, links, image, date, tech } = frontmatter;
   const categoryLabel = CATEGORY_LABELS[category] || category;
+  const year = date ? new Date(date).getFullYear() : null;
 
-  const linksRef = useScrollReveal();
+  const heroRef = useScrollReveal();
   const contentRef = useScrollReveal();
 
   return (
-    <Layout isPadded className={styles.portfolioPost}>
-      <nav className={styles.breadcrumbs}>
-        <Link to="/">Home</Link>
-        <span> / </span>
-        <Link to={`/projects/${category}`}>{categoryLabel}</Link>
-        <span> / </span>
-        <span>{title}</span>
-      </nav>
-      <h1>{title}</h1>
-      {role && <Tag text={role} />}
-      {image && (
-        <img
-          src={image}
-          alt={`${title} screenshot`}
-          className={styles.projectImage}
+    <Layout>
+      <article className="wrap ed" style={{ paddingBottom: "clamp(4rem, 9vw, 9rem)" }}>
+        <nav className="postcrumbs" aria-label="Breadcrumb">
+          <Link to="/">Home</Link>
+          <span aria-hidden="true"> / </span>
+          <Link to="/work">Work</Link>
+          <span aria-hidden="true"> / </span>
+          <span>{title}</span>
+        </nav>
+
+        <header className="pagehead" style={{ paddingTop: "clamp(1.5rem, 4vw, 3rem)" }}>
+          <span className="kicker">{categoryLabel}</span>
+          <h1 className="h-xl" style={{ marginTop: "0.8rem" }}>
+            {title}
+          </h1>
+          <div className="postmeta">
+            {role && <span className="mono">{role}</span>}
+            {year && <span className="mono">{year}</span>}
+            {(tech || []).map((t) => (
+              <span className="stk" key={t}>
+                {t}
+              </span>
+            ))}
+          </div>
+          {links && (
+            <div className="btn-row" style={{ marginTop: "1.5rem" }}>
+              {["live", "github", "npm"].map((k) =>
+                links[k] ? (
+                  <a
+                    key={k}
+                    className={`btn ${k === "live" ? "btn-primary" : "btn-ghost"}`}
+                    href={links[k]}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {LINK_LABELS[k]} <span className="arr">→</span>
+                  </a>
+                ) : null
+              )}
+            </div>
+          )}
+        </header>
+
+        {image && (
+          <div ref={heroRef} className="scroll-reveal posthero">
+            <img src={image} alt={`${title} screenshot`} loading="lazy" />
+          </div>
+        )}
+
+        <div
+          ref={contentRef}
+          className="scroll-reveal postbody body"
+          dangerouslySetInnerHTML={{ __html: html }}
         />
-      )}
-      {links && (
-        <div ref={linksRef} className={`scroll-reveal ${styles.externalLinks}`}>
-          {links.github && (
-            <a href={links.github} target="_blank" rel="noreferrer">
-              GitHub →
-            </a>
-          )}
-          {links.npm && (
-            <a href={links.npm} target="_blank" rel="noreferrer">
-              npm →
-            </a>
-          )}
-          {links.live && (
-            <a href={links.live} target="_blank" rel="noreferrer">
-              Live Demo →
-            </a>
-          )}
-        </div>
-      )}
-      <div
-        ref={contentRef}
-        className={`scroll-reveal ${styles.content}`}
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      </article>
     </Layout>
   );
 }
@@ -77,6 +92,7 @@ export const query = graphql`
         role
         category
         date
+        tech
         links {
           github
           npm

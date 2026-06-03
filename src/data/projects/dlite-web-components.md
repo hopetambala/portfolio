@@ -12,6 +12,13 @@ links:
   live: >-
     https://hopetambala.github.io/web-components-dlite/?path=/story/actions-button--primary
 image: /images/projects/dlite-web-components.gif
+description: >-
+  Framework-agnostic UI primitives that consume the tokens — accessible,
+  themeable, and portable across any stack.
+tech:
+  - Lit
+  - Web Components
+  - a11y
 ---
 
 A lightweight web component library built with open standards. dLite Web Components provides a set of reusable, framework-agnostic UI components that can be used in any web project.

@@ -1,30 +1,46 @@
 .footer {
-  display: flex;
-  flex-direction: column;
-  padding: var(--spacer-xl);
-  row-gap: var(--spacer-xl);
-  color: var(--color-neutral-100);
-  background-color: var(--color-neutral-900);
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  padding-block: clamp(3.5rem, 8vw, 7rem);
 }
 
-.contactBar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  font-size: var(--font-size-body-small);
+.cta {
+  margin-top: 1rem;
+  font-size: clamp(2.6rem, 9vw, 7rem);
+  line-height: 0.95;
 }
 
-.contactBar > * {
+.actions {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  width: 400px;
-  color: var(--color-neutral-100);
+  flex-wrap: wrap;
+  gap: 1.5rem 2rem;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
 }
 
 .social {
-  flex-direction: row;
+  display: inline-flex;
   align-items: center;
-  column-gap: var(--spacer-m);
+  gap: 1.2rem;
+}
+.social a {
+  color: var(--fg-2);
+  display: inline-flex;
+}
+.social a:hover {
+  color: var(--brand);
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fg-3);
 }

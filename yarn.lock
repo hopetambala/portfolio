@@ -11115,6 +11115,11 @@ strtok3@^6.2.4:
     "@tokenizer/token" "^0.3.0"
     peek-readable "^4.1.0"
 
+style-dictionary-dlite-tokens@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.npmjs.org/style-dictionary-dlite-tokens/-/style-dictionary-dlite-tokens-0.3.1.tgz"
+  integrity sha512-IuoL3BpQcNyFmfoy9q3rKVrsYHtVEbFLheSYNiu7RpI9ict+NKfMgnMOQtyzqWShuvMadbgol9awMx4xq4ddPA==
+
 style-loader@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/style-loader/-/style-loader-2.0.0.tgz"

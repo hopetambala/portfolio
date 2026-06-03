@@ -68,3 +68,6 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 .vercel
+
+#AI
+design_handoff_portfolio_redesign/

@@ -14,3 +14,19 @@
   font-style: normal;
   src: url("../assets/fonts/Recoleta-Regular.woff2") format("woff2");
 }
+
+@font-face {
+  font-family: "Recoleta";
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+  src: url("../assets/fonts/Recoleta-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Recoleta";
+  font-weight: 800;
+  font-display: swap;
+  font-style: normal;
+  src: url("../assets/fonts/Recoleta-Black.woff2") format("woff2");
+}
