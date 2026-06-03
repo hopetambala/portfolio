@@ -18,7 +18,7 @@ const SELECTED = [
 
 const STATS = [
   { n: "10+", l: "Years shipping" },
-  { n: "5", l: "Design systems" },
+  { n: "3", l: "Design systems" },
   { n: "1", l: "Nonprofit co-founded" },
 ];
 
@@ -180,13 +180,11 @@ const Home = () => {
             <p>
               Serving in the Peace Corps, I found the spark for the
               transformative power of technology — through candlelit nights over
-              paper health records, I learned what it feels like to{" "}
-              <strong>not</strong> have the internet at your fingertips.
+              paper health records, I learned what it feels like to <strong>not</strong> have the internet at your fingertips.
             </p>
             <p>
               Today I'm a senior engineer building design systems at Etsy, and a
-              co-founder of <strong>Puente</strong>, a nonprofit shipping
-              real-time tools for health work in the field.
+              co-founder of <a href="https://puente.org" target="_blank" rel="noreferrer">Puente</a>, a nonprofit shipping real-time tools for health work in the field.
             </p>
             <p>
               <Link to="/about" className="wcard-go" style={{ marginTop: "0.5rem" }}>
