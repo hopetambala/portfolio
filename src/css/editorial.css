@@ -361,8 +361,9 @@ hr.rule { border: none; border-top: 1px solid var(--line); margin: 0; }
 @media (max-width: 780px) { .workgrid { grid-template-columns: 1fr; } }
 .wcard { display: flex; flex-direction: column; }
 .wcard.is-hidden { display: none; }
-.wcard-media { aspect-ratio: 16 / 10; margin-bottom: 1rem; }
-.wcard-media .media { width: 100%; height: 100%; transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.5s ease; }
+.wcard-media { aspect-ratio: 16 / 10; margin-bottom: 1rem; overflow: hidden; border-radius: var(--tk-dlite-semantic-border-radius-lg); }
+.wcard-media .media { width: 100%; height: 100%; border-radius: 0; overflow: hidden; transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.5s ease; }
+.wcard-media .media img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 .wcard:hover .wcard-media .media { transform: translateY(-5px); box-shadow: var(--tk-dlite-semantic-elevation-high); }
 .wcard-cat { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.5rem; }
 .wcard h3 { font-family: var(--font-head); font-weight: 700; font-size: clamp(1.4rem, 2.4vw, 2rem); letter-spacing: -0.025em; line-height: 1.05; }
@@ -412,11 +413,21 @@ hr.rule { border: none; border-top: 1px solid var(--line); margin: 0; }
   overflow: hidden;
   border: 1px solid var(--line);
   background: var(--sunken);
+  /* Constrain portrait images (e.g. mobile screenshots) so they don't fill
+     the full 1320px content width and become enormous. Landscape images
+     hit their natural width before this height limit. */
+  max-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .posthero img {
-  width: 100%;
-  height: auto;
   display: block;
+  max-width: 100%;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 .postbody {
   max-width: 72ch;
