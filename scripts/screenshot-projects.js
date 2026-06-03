@@ -157,6 +157,154 @@ async function addFrames(page, encoder, count, intervalMs) {
 
 const CUSTOM_CAPTURES = {
   /**
+   * collage-etsy — https://www.etsy.com
+   *
+   * Shows Etsy's marketplace (Collage design system in production).
+   * Visits homepage, scrolls to product listing area, then a search results
+   * page to show the grid components at scale.
+   * Re-run: npm run screenshot:projects -- --only=collage-etsy
+   */
+  // browser is passed as the third arg so we can open a stealth context.
+  "collage-etsy": async (_defaultPage, outFile, browser) => {
+    // Etsy's bot detection blocks stock headless Chromium. Open a dedicated
+    // context with a real Mac/Chrome UA and the `AutomationControlled` feature
+    // disabled, then spoof `navigator.webdriver` via init script.
+    const ctx = await browser.newContext({
+      viewport: VIEWPORT,
+      userAgent:
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) " +
+        "AppleWebKit/537.36 (KHTML, like Gecko) " +
+        "Chrome/124.0.0.0 Safari/537.36",
+      locale: "en-US",
+      timezoneId: "America/New_York",
+      extraHTTPHeaders: {
+        "Accept-Language": "en-US,en;q=0.9",
+      },
+    });
+    // Hide the `navigator.webdriver` flag that headless browsers expose.
+    await ctx.addInitScript(
+      "Object.defineProperty(navigator,'webdriver',{get:()=>undefined})"
+    );
+    const p = await ctx.newPage();
+
+    const encoder = makeEncoder(VIEWPORT.width, VIEWPORT.height, FPS);
+
+    const scroll = async (target, steps) => {
+      for (let i = 1; i <= steps; i++) {
+        await target.evaluate(
+          (y) => window.scrollTo({ top: y, behavior: "instant" }),
+          Math.round((800 * i) / steps)
+        );
+        await addFrames(p, encoder, 1, 0);
+        await p.waitForTimeout(95);
+      }
+    };
+
+    // ── 1. Homepage ──────────────────────────────────────────────────────────
+    try {
+      await p.goto("https://www.etsy.com", { waitUntil: "load", timeout: 35000 });
+    } catch {
+      await p.goto("https://www.etsy.com", { waitUntil: "domcontentloaded", timeout: 20000 });
+    }
+    await p.waitForTimeout(2000);
+
+    // Dismiss any cookie / location banner so it doesn't block the UI.
+    for (const sel of [
+      'button[data-gdpr-single-choice-accept]',
+      'button:has-text("Accept")',
+      'button:has-text("Decline")',
+      '[aria-label="Close"]',
+    ]) {
+      const btn = p.locator(sel).first();
+      if (await btn.isVisible({ timeout: 1500 }).catch(() => false)) {
+        await btn.click().catch(() => {});
+        await p.waitForTimeout(500);
+        break;
+      }
+    }
+
+    await addFrames(p, encoder, 5, 160);
+    await scroll(p, 9);
+    await addFrames(p, encoder, 5, 160);
+
+    // ── 2. Search results — product card grid ────────────────────────────────
+    try {
+      await p.goto(
+        "https://www.etsy.com/search?q=handmade+ceramic+mug",
+        { waitUntil: "load", timeout: 30000 }
+      );
+    } catch {
+      await p.goto(
+        "https://www.etsy.com/search?q=handmade+ceramic+mug",
+        { waitUntil: "domcontentloaded", timeout: 20000 }
+      );
+    }
+    await p.waitForTimeout(2000);
+    await addFrames(p, encoder, 5, 160);
+    await scroll(p, 9);
+    await addFrames(p, encoder, 5, 160);
+
+    encoder.finish();
+    fs.writeFileSync(outFile, encoder.out.getData());
+    await ctx.close();
+    return outFile;
+  },
+
+  /**
+   * commonplace-cityblock — https://commonplace.design (Storybook)
+   *
+   * Walks three component/foundation docs pages, scrolling a little in each.
+   * Scrolls the Storybook PREVIEW IFRAME (the manager chrome doesn't scroll).
+   * Re-run: npm run screenshot:projects -- --only=commonplace-cityblock
+   */
+  "commonplace-cityblock": async (page, outFile) => {
+    const encoder = makeEncoder(VIEWPORT.width, VIEWPORT.height, FPS);
+
+    const stops = [
+      "https://commonplace.design/?path=/docs/tables-table-v2--overview",
+      "https://commonplace.design/?path=/docs/inputs-checkboxgroup--overview",
+      "https://commonplace.design/?path=/docs/foundations-accessibility-email--overview",
+    ];
+
+    for (const url of stops) {
+      await navigate(page, url);
+      await page.waitForTimeout(3000); // let Storybook + preview iframe render
+
+      // The docs render inside #storybook-preview-iframe; scroll THAT frame.
+      const frame =
+        page.frames().find((f) => /iframe\.html/.test(f.url())) || null;
+      const target = frame || page;
+
+      // Hold at the top of the page for a beat.
+      await addFrames(page, encoder, 5, 160);
+
+      // Scroll "a little" — up to ~650px (or less if the doc is short).
+      const maxScroll = await target
+        .evaluate(() =>
+          Math.max(document.body.scrollHeight - window.innerHeight, 0)
+        )
+        .catch(() => 0);
+      const distance = Math.min(maxScroll, 650);
+      const steps = 7;
+      for (let s = 1; s <= steps; s++) {
+        const y = Math.round((distance * s) / steps);
+        await target
+          .evaluate((yy) => window.scrollTo({ top: yy, behavior: "instant" }), y)
+          .catch(() => {});
+        await addFrames(page, encoder, 1, 0);
+        await page.waitForTimeout(110);
+      }
+
+      // Settle on the scrolled view.
+      await addFrames(page, encoder, 3, 160);
+    }
+
+    encoder.finish();
+    fs.writeFileSync(outFile, encoder.out.getData());
+    return outFile;
+  },
+
+  /**
    * stakeout — https://stakeout.vercel.app/
    *
    * Shows: landing → editor → sample property → fence drag → 3D toggle
@@ -313,7 +461,7 @@ async function run() {
 
       const customCapture = CUSTOM_CAPTURES[slug];
       const outFile = customCapture
-        ? await customCapture(page, path.join(OUTPUT_DIR, `${slug}.gif`))
+        ? await customCapture(page, path.join(OUTPUT_DIR, `${slug}.gif`), browser)
         : await captureGif(page, slug);
 
       updateImageField(filePath, slug);

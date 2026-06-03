@@ -9,6 +9,11 @@ links:
   live: 'https://stakeout.vercel.app/'
   github: 'https://github.com/hopetambala/stakeout'
 image: /images/projects/stakeout.gif
+description: 'A full-stack weekend build, taken from idea to shipped app end to end.'
+tech:
+  - React
+  - Three.js
+  - Supabase
 ---
 
 Imagine a situation where a rookie/independent is losing jobs. Not because his was bad but rather that their clients couldn't picture what the finished project would look like. He'd say "I'm thinking a 6-foot cedar privacy fence along the back" and they'd nod politely and then ghost him. The whole proposal lived entirely in their imagination, and imagination is unreliable.

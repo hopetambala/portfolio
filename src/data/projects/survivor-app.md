@@ -8,6 +8,11 @@ selectedProject: false
 links:
   live: 'https://survivor-app-zeta.vercel.app/'
 image: /images/projects/survivor-app.gif
+description: >-
+  A fan app for Survivor — fittingly, the namesake of this site's default dLite
+  theme.
+tech:
+  - Full-stack
 ---
 
 I watch Survivor with my wife and at some point just keeping score in our heads stopped working. We needed a real tracker — one that could handle alliance predictions, tribal council outcomes, and who we each thought was going home next.

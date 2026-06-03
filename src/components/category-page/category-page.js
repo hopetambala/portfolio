@@ -1,33 +1,18 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import Layout from "../layout/layout";
-import { Section } from "../section/section";
-import { Grid } from "../grid/grid";
-import { GridItem } from "../grid/grid-item/grid-item";
-import { Card } from "../card/card";
-import { Tag } from "../tag/tag";
-import { useScrollReveal, useStaggerReveal } from "../../motion";
-import * as styles from "./category-page.module.css";
-
-const CATEGORY_LABELS = {
-  "design-systems": "Design Systems",
-  nonprofit: "Nonprofit Engineering",
-  personal: "Personal Projects",
-  prototypes: "Fun Prototypes",
-  professional: "Professional Work",
-};
+import { WorkCard, CATEGORY_LABELS } from "../work-card/work-card";
+import { useStaggerReveal } from "../../motion";
 
 const CATEGORY_DESCRIPTIONS = {
   "design-systems":
     "Open-source design engineering — components, tokens, and tools for building consistent interfaces.",
   nonprofit:
     "Technology built for underserved communities — mobile apps and platforms for real-world impact.",
-  personal:
-    "Photography, creative work, and personal exploration.",
+  personal: "Personal websites and small builds, made for the love of it.",
   prototypes:
     "Weekend experiments, side projects, and fun ideas brought to life.",
-  professional:
-    "Case studies and projects from industry roles.",
+  professional: "Case studies and projects from industry roles.",
 };
 
 export default function CategoryPage({ data, pageContext }) {
@@ -36,31 +21,35 @@ export default function CategoryPage({ data, pageContext }) {
   const label = CATEGORY_LABELS[category] || category;
   const description = CATEGORY_DESCRIPTIONS[category] || "";
 
-  const descriptionRef = useScrollReveal();
   const gridRef = useStaggerReveal();
 
   return (
-    <Layout isPadded>
-      <nav className={styles.breadcrumbs}>
-        <Link to="/">Home</Link>
-        <span> / </span>
-        <span>{label}</span>
-      </nav>
-      <Section title={label}>
-        <p ref={descriptionRef} className={`scroll-reveal ${styles.categoryDescription}`}>
-          {description}
-        </p>
-        <Grid ref={gridRef} spacing="small">
+    <Layout>
+      <div className="wrap pagehead ed">
+        <nav className="postcrumbs" style={{ paddingTop: 0 }} aria-label="Breadcrumb">
+          <Link to="/">Home</Link>
+          <span aria-hidden="true"> / </span>
+          <Link to="/work">Work</Link>
+          <span aria-hidden="true"> / </span>
+          <span>{label}</span>
+        </nav>
+        <h1 className="display" style={{ marginTop: "0.5rem" }}>
+          {label}
+        </h1>
+        {description && (
+          <div className="lead-row">
+            <p className="lede">{description}</p>
+          </div>
+        )}
+      </div>
+
+      <div className="wrap" style={{ paddingBottom: "clamp(4rem, 9vw, 9rem)" }}>
+        <div className="workgrid" ref={gridRef}>
           {projects.map((node) => (
-            <GridItem key={node.frontmatter.slug}>
-              <Card link={`/${node.frontmatter.slug}`}>
-                <strong>{node.frontmatter.title}</strong>
-                <Tag text={node.frontmatter.role} />
-              </Card>
-            </GridItem>
+            <WorkCard key={node.frontmatter.slug} node={node} />
           ))}
-        </Grid>
-      </Section>
+        </div>
+      </div>
     </Layout>
   );
 }
@@ -78,8 +67,16 @@ export const query = graphql`
         frontmatter {
           title
           slug
+          category
           role
           date
+          description
+          tech
+          image
+          links {
+            live
+            github
+          }
         }
       }
     }

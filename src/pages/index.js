@@ -1,273 +1,208 @@
 import "../css/_main.css";
-import React from "react";
-import { useStaticQuery, graphql, Link } from "gatsby";
-
-import { Image } from "../components/image/image";
-import { Section } from "../components/section/section";
-import { Grid } from "../components/grid/grid";
-import { GridItem } from "../components/grid/grid-item/grid-item";
-import { Card } from "../components/card/card";
+import React, { useRef, useState, useCallback, useEffect } from "react";
+import { createPortal } from "react-dom";
+import { Link } from "gatsby";
 import Layout from "../components/layout/layout";
-import { Tag } from "../components/tag/tag";
-
-import * as styles from "./index.module.css";
 import { useScrollReveal } from "../motion";
+import { useTheme } from "../theme/theme-provider";
 
-const CATEGORY_META = {
-  "design-systems": {
-    label: "Design Systems",
-    description: "Open-source design engineering — components, tokens, and tools",
-    color: "var(--color-teal-200)",
-  },
-  nonprofit: {
-    label: "Nonprofit Engineering",
-    description: "Technology for underserved communities",
-    color: "var(--color-yellow-300)",
-  },
-  personal: {
-    label: "Personal Projects",
-    description: "Photography, creative work, and exploration",
-    color: "var(--color-pink-300)",
-  },
-  prototypes: {
-    label: "Fun Prototypes",
-    description: "Weekend experiments and wild ideas",
-    color: "var(--color-purple-300)",
-  },
-  professional: {
-    label: "Professional Work",
-    description: "Case studies from industry roles",
-    color: "var(--color-blue-100)",
-  },
-};
+// Curated "Selected work" list for Home (text-only, hover-driven). Order per
+// the redesign spec: Collage → dLite → Puente → Commonplace → dLite WC.
+const SELECTED = [
+  { slug: "collage-etsy", title: "Collage @ Etsy", role: "Sr. SWE · Design Systems", tags: "React/TS · Storybook", image: "/images/projects/collage-etsy.gif" },
+  { slug: "commonplace-cityblock", title: "Commonplace @ Cityblock", role: "Sr. UX Engineer", tags: "React/TS · Figma", image: "/images/projects/commonplace-cityblock.gif" },
+  { slug: "puente-collect", title: "Puente Collect & Manage", role: "Nonprofit", tags: "React Native · GraphQL" },
+  { slug: "dlite-tokens", title: "dLite Design System", role: "Open source", tags: "Tokens · DTCG", image: "/images/projects/dlite-tokens.gif" },
+  { slug: "dlite-web-components", title: "dLite Web Components", role: "Open source", tags: "Lit · a11y", image: "/images/projects/dlite-web-components.gif" },
+];
 
-const Home = ({ data }) => {
-  const landing = data.landing.nodes[0]?.frontmatter;
-  const landingBody = data.landing.nodes[0]?.html;
-  const projects = data.projects.nodes;
-  const selectedProjects = projects.filter(
-    (node) => node.frontmatter.selectedProject
+const STATS = [
+  { n: "10+", l: "Years shipping" },
+  { n: "3", l: "Design systems" },
+  { n: "1", l: "Nonprofit co-founded" },
+];
+
+function SelectedWork() {
+  const peekRef = useRef(null);
+  const [caption, setCaption] = useState("");
+  const [image, setImage] = useState(null);
+  const [show, setShow] = useState(false);
+  // Portal the preview to <body> so its `position: fixed` is viewport-relative
+  // — the surrounding `.scroll-reveal` ancestor has `will-change: transform`,
+  // which would otherwise make "fixed" relative to that element.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const onMove = useCallback((e) => {
+    const el = peekRef.current;
+    if (!el) return;
+    el.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%) scale(1)`;
+  }, []);
+
+  return (
+    <div
+      role="presentation"
+      onMouseMove={onMove}
+      onMouseLeave={() => setShow(false)}
+    >
+      <div className="listC">
+        {SELECTED.map((p, i) => (
+          <Link
+            to={`/${p.slug}`}
+            className="litem"
+            key={p.slug}
+            onMouseEnter={() => {
+              setCaption(p.title);
+              setImage(p.image || null);
+              setShow(true);
+            }}
+          >
+            <span className="idx">{String(i + 1).padStart(2, "0")}</span>
+            <span className="tt">{p.title}</span>
+            <span className="meta">
+              <span className="role">{p.role}</span>
+              <span className="tags">{p.tags}</span>
+            </span>
+          </Link>
+        ))}
+      </div>
+
+      {mounted &&
+        createPortal(
+          <div ref={peekRef} className={`peek ${show ? "show" : ""}`} aria-hidden="true">
+            <div className="media">
+              {image && <img src={image} alt="" />}
+              <span className="media-cap">{caption}</span>
+            </div>
+          </div>,
+          document.body
+        )}
+    </div>
   );
-  const workExperiences = data.workExperiences.nodes;
-  const categories = Object.keys(CATEGORY_META);
+}
 
-  const hiyaRef = useScrollReveal();
-  const exploreRef = useScrollReveal();
-  const projectsRef = useScrollReveal();
-  const workRef = useScrollReveal();
-  const ctaRef = useScrollReveal();
+function Showcase() {
+  const { brand, brands, setBrand } = useTheme();
+  return (
+    <div className="showcaseC">
+      <span className="kicker" style={{ justifyContent: "center" }}>
+        Powered by my design system
+      </span>
+      <h2 className="h-lg" style={{ marginTop: "1rem", maxWidth: "20ch", marginInline: "auto" }}>
+        This whole site re-skins with my open-source tokens.
+      </h2>
+      <p className="body" style={{ maxWidth: "52ch", margin: "1rem auto 0" }}>
+        Every color, radius, and shadow is a live{" "}
+        <code className="mono">style-dictionary-dlite-tokens</code> token. Tap a brand
+        to watch it switch — the same engine ships in the npm package.
+      </p>
+      <div className="chips">
+        {brands.map((b) => (
+          <button
+            key={b.path}
+            className={`chip ${b.path === brand ? "is-active" : ""}`}
+            onClick={() => setBrand(b.path)}
+          >
+            <span className="sw">
+              <i style={{ background: b.primary }} />
+              <i style={{ background: b.secondary }} />
+            </span>
+            {b.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const Home = () => {
+  const listRef = useScrollReveal();
+  const aboutRef = useScrollReveal();
+  const showcaseRef = useScrollReveal();
 
   return (
     <Layout>
       {/* 1. Hero */}
-      <Section title="landing" isNoTitle noHorizontalPadding noVerticalPadding hasBottomBorder>
-        <Grid spacing="none">
-          <GridItem>
-            <div className={styles.landingTextContainer}>
-              <p className={`${styles.brandHook} animate-fade-up delay-1`}>{landing?.brandHook}</p>
-              <h2 className="animate-fade-up delay-2">{landing?.title}</h2>
-              <p className="animate-fade-up delay-3">{landing?.subtitle}</p>
-            </div>
-          </GridItem>
-          <GridItem>
-            <div className={`${styles.landingImageContainer} animate-slide-right delay-2`}>
-              {landing?.profileImage && (
-                <Image
-                  alt="Hope Tambala"
-                  source={landing.profileImage}
-                  size="xxl"
-                  isCentered
-                />
-              )}
-            </div>
-          </GridItem>
-        </Grid>
-      </Section>
-
-      {/* 2. Hiya — Intro */}
-      <Section title="Hiya" className={styles.hiya}>
-        <div
-          ref={hiyaRef}
-          className={`${styles.introContent} scroll-reveal`}
-          dangerouslySetInnerHTML={{ __html: landingBody }}
-        />
-      </Section>
-
-      {/* 3. Explore My Work — Category Cards */}
-      <Section title="Explore My Work" className={styles.explore} hasBottomBorder>
-        <div ref={exploreRef} className="scroll-reveal">
-          <Grid spacing="small">
-            {categories.map((cat) => (
-              <GridItem key={cat}>
-                <Card
-                  link={`/projects/${cat}`}
-                  className={styles.categoryCard}
-                  style={{ backgroundColor: CATEGORY_META[cat].color }}
-                >
-                  <div className={styles.categoryCardInner}>
-                    <strong>{CATEGORY_META[cat].label}</strong>
-                    <p className={styles.categoryDescription}>
-                      {CATEGORY_META[cat].description}
-                    </p>
-                  </div>
-                </Card>
-              </GridItem>
-            ))}
-          </Grid>
-        </div>
-      </Section>
-
-      {/* 4. Selected Open-Source Projects */}
-      <Section
-        title="Selected Open-Source Projects"
-        isAltBG
-        className={styles.selectedProjects}
-        hasBottomBorder
-      >
-        <div ref={projectsRef} className="scroll-reveal">
-          <Grid spacing="small">
-            {selectedProjects.map((node) => (
-              <GridItem key={node.frontmatter.slug}>
-                <Card link={`/${node.frontmatter.slug}`}>
-                  <strong>{node.frontmatter.title}</strong>
-                  <Tag text={node.frontmatter.role} />
-                </Card>
-              </GridItem>
-            ))}
-          </Grid>
-        </div>
-      </Section>
-
-      {/* 5. Work Experiences */}
-      <Section
-        title="Work Experiences"
-        isNoTitle
-        noHorizontalPadding
-        noVerticalPadding
-        className={styles.workExperiences}
-      >
-        <div ref={workRef} className="scroll-reveal">
-          <div className={styles.workDescription}>
-            <h2>I've worked at some cool places</h2>
-            <p>
-              And have built some serious engineering and design chops along the
-              way. Whether you're in need of a new design system or a new mobile
-              app front-to-back, I have the skills and know-how to make the rubber
-              meet the road with your ideas and bring delight to your users!
-            </p>
-            <a
-              href="https://www.linkedin.com/in/hope-tambala/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <strong>Check out my Linkedin →</strong>
-            </a>
-          </div>
-
-          <Grid spacing="none" className={styles.infoRectangleWrapper}>
-            {workExperiences.map(({ html, frontmatter }) => (
-              <GridItem key={frontmatter.company}>
-                <div className={styles.infoRectangle}>
-                  <h3>{frontmatter.company}</h3>
-                  <strong>{frontmatter.role}</strong>
-                  <div className={styles.skillTags}>
-                    {frontmatter.skills &&
-                      frontmatter.skills.map((skill) => (
-                        <Tag key={skill} text={skill} />
-                      ))}
-                  </div>
-                  <div dangerouslySetInnerHTML={{ __html: html }} />
-                  <p>{frontmatter.time}</p>
-                </div>
-              </GridItem>
-            ))}
-          </Grid>
-        </div>
-      </Section>
-
-      {/* 6. Contact CTA */}
-      <Section
-        title="Let's Build Something"
-        className={styles.contactCta}
-      >
-        <div ref={ctaRef} className={`${styles.contactContent} scroll-reveal`}>
-          <p>
-            Whether you need a design system, a mobile app, or just want to
-            chat about building great experiences — I'd love to hear from you.
+      <section className="wrap heroC ed">
+        <span className="kicker">Software engineer · Design technologist</span>
+        <h1 className="display" style={{ marginTop: "1.2rem" }}>
+          I build design systems for{" "}
+          <span className="brandword">beautifully simple</span> products.
+        </h1>
+        <div className="heroC-sub">
+          <p className="lede">
+            A decade of skin in the game across cross-platform mobile and web —
+            turning fuzzy ideas into systems teams can actually build on.
           </p>
-          <div className={styles.contactActions}>
-            <a
-              className={styles.primaryAction}
-              href="mailto:hopetambala@gmail.com"
-            >
-              Hit me up
-            </a>
-            <a
-              href="https://drive.google.com/file/d/1iH8Yu5irK5jqEYz8NkCPPRHTGOabmDJ2/view?usp=sharing"
-              target="_blank"
-              rel="noreferrer"
-            >
-              View Resume →
+          <div className="btn-row">
+            <Link className="btn btn-primary" to="/work">
+              View work <span className="arr">→</span>
+            </Link>
+            <a className="btn btn-ghost" href="mailto:hopetambala@gmail.com">
+              Contact
             </a>
           </div>
         </div>
-      </Section>
+        <span className="scrollcue">
+          <span className="ln" /> Scroll to explore
+        </span>
+      </section>
+
+      {/* 2. Selected work */}
+      <section className="wrap ed-section ed-section--border ed">
+        <span className="kicker">Selected work</span>
+        <h2 className="h-lg" style={{ margin: "1rem 0 clamp(1.5rem, 4vw, 2.5rem)" }}>
+          A few things I'm proud of.
+        </h2>
+        <div ref={listRef} className="scroll-reveal">
+          <SelectedWork />
+        </div>
+      </section>
+
+      {/* 3. About teaser + stats */}
+      <section className="wrap ed-section ed-section--border ed">
+        <div ref={aboutRef} className="scroll-reveal splitC">
+          <div>
+            <span className="kicker">About</span>
+            <h2 className="h-lg" style={{ marginTop: "1rem" }}>
+              From candlelight to design systems.
+            </h2>
+            <div className="statline">
+              {STATS.map((s) => (
+                <div className="stat" key={s.l}>
+                  <span className="n">{s.n}</span>
+                  <span className="l">{s.l}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="body">
+            <p>
+              Serving in the Peace Corps, I found the spark for the
+              transformative power of technology — through candlelit nights over
+              paper health records, I learned what it feels like to <strong>not</strong> have the internet at your fingertips.
+            </p>
+            <p>
+              Today I'm a senior engineer building design systems at Etsy, and a
+              co-founder of <a href="https://puente.org" target="_blank" rel="noreferrer">Puente</a>, a nonprofit shipping real-time tools for health work in the field.
+            </p>
+            <p>
+              <Link to="/about" className="wcard-go" style={{ marginTop: "0.5rem" }}>
+                Read the full story <span className="arr">→</span>
+              </Link>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Showcase */}
+      <section className="wrap ed-section ed-section--border ed">
+        <div ref={showcaseRef} className="scroll-reveal">
+          <Showcase />
+        </div>
+      </section>
     </Layout>
   );
 };
 
-const Container = () => {
-  const data = useStaticQuery(
-    graphql`
-      query {
-        landing: allMarkdownRemark(
-          filter: { frontmatter: { type: { eq: "landing" } } }
-        ) {
-          nodes {
-            html
-            frontmatter {
-              title
-              subtitle
-              brandHook
-              profileImage
-            }
-          }
-        }
-        projects: allMarkdownRemark(
-          filter: { fileAbsolutePath: { regex: "/data/projects/" } }
-          sort: { frontmatter: { date: DESC } }
-        ) {
-          nodes {
-            frontmatter {
-              title
-              slug
-              selectedProject
-              role
-              category
-              date
-            }
-          }
-        }
-        workExperiences: allMarkdownRemark(
-          filter: { frontmatter: { type: { eq: "work-experience" } } }
-          sort: { frontmatter: { order: DESC } }
-        ) {
-          nodes {
-            html
-            frontmatter {
-              company
-              role
-              skills
-              time
-              order
-            }
-          }
-        }
-      }
-    `
-  );
-
-  return <Home data={data} />;
-};
-
-export default Container;
+export default Home;

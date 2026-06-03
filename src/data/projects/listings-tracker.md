@@ -10,6 +10,13 @@ links:
   github: 'https://github.com/hopetambala/listings-tracker'
   repo: 'https://github.com/hopetambala/listings-tracker'
 image: /images/projects/listings-tracker.gif
+description: >-
+  A scrappy full-stack tool built to track listings — the kind of itch you
+  scratch on a weekend.
+tech:
+  - Next.js
+  - Supabase
+  - TypeScript
 ---
 
 We were house hunting and I couldn't find a simple way to track everything in one place — not just favorites, but actual price history. When did this listing drop $20k? Is that "reduced" badge new or has it been sitting there for months? Most tools answer one of those questions. None answered all of them in a way that felt like mine.
