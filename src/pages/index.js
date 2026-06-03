@@ -41,6 +41,7 @@ function SelectedWork() {
 
   return (
     <div
+      role="presentation"
       onMouseMove={onMove}
       onMouseLeave={() => setShow(false)}
     >
@@ -92,7 +93,7 @@ function Showcase() {
       </h2>
       <p className="body" style={{ maxWidth: "52ch", margin: "1rem auto 0" }}>
         Every color, radius, and shadow is a live{" "}
-        <code className="mono">style-dictionary-dlite</code> token. Tap a brand
+        <code className="mono">style-dictionary-dlite-tokens</code> token. Tap a brand
         to watch it switch — the same engine ships in the npm package.
       </p>
       <div className="chips">

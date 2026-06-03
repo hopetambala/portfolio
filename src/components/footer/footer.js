@@ -49,7 +49,7 @@ const Footer = () => {
         </div>
         <div className={styles.meta}>
           <span>© {new Date().getFullYear()} Hope Tambala</span>
-          <span>Made with ❤️ — themed live by style-dictionary-dlite</span>
+          <span>Made with ❤️ — themed live by style-dictionary-dlite-tokens</span>
         </div>
       </div>
     </footer>

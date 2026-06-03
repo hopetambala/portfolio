@@ -1,9 +1,8 @@
 import "../css/_main.css";
 import React, { useMemo, useState } from "react";
-import { useStaticQuery, graphql, Link, navigate } from "gatsby";
+import { useStaticQuery, graphql, navigate } from "gatsby";
 import Layout from "../components/layout/layout";
 import { WorkCard } from "../components/work-card/work-card";
-import { useStaggerReveal } from "../motion";
 
 // Display order for the Work archive. "professional" is intentionally out of
 // scope (dropped per the redesign brief).

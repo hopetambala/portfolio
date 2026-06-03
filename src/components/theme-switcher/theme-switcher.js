@@ -86,7 +86,7 @@ export const ThemeSwitcher = () => {
           </div>
 
           <div className={styles.foot}>
-            Live tokens from <code>style-dictionary-dlite</code>
+            Live tokens from <code>style-dictionary-dlite-tokens</code>
           </div>
         </div>
       )}

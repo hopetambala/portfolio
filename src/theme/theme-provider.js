@@ -15,7 +15,15 @@ function load() {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const p = JSON.parse(raw);
-      if (p && p.brand) return { brand: p.brand, mode: p.mode || DEFAULT_MODE };
+      const brand =
+        p && typeof p.brand === "string" && BRANDS.some((b) => b.path === p.brand)
+          ? p.brand
+          : DEFAULT_BRAND;
+      const mode =
+        p && typeof p.mode === "string" && ["light", "dark", "system"].includes(p.mode)
+          ? p.mode
+          : DEFAULT_MODE;
+      return { brand, mode };
     }
   } catch (e) {}
   return { brand: DEFAULT_BRAND, mode: DEFAULT_MODE };
