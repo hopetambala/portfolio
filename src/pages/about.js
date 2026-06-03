@@ -83,7 +83,7 @@ const AboutPage = () => {
       <section className="wrap ed-section ed-section--border ed">
         <div ref={storyRef} className="scroll-reveal splitC">
           <div className="media" style={{ aspectRatio: "4 / 5" }}>
-            <span className="media-cap">Hope Tambala</span>
+            <img src="/images/about/personal.jpeg" alt="Hope Tambala" />
           </div>
           <div>
             <h2 className="h-lg">From candlelight to design systems.</h2>
