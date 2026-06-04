@@ -1,5 +1,6 @@
 .switcher {
   position: relative;
+  z-index: 1001; /* above mobile menu overlay */
 }
 
 .trigger {
