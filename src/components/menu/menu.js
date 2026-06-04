@@ -20,11 +20,12 @@ export const Menu = ({ className }) => {
   useEffect(() => {
     if (!mobileMenuOpen) return;
     const onKey = (e) => { if (e.key === "Escape") setMobileMenuOpen(false); };
+    const prevOverflow = document.body.style.overflow;
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      document.body.style.overflow = prevOverflow;
     };
   }, [mobileMenuOpen]);
 
