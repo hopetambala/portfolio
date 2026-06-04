@@ -8,7 +8,7 @@ selectedProject: false
 links:
   live: 'https://baby.hopeandcarly.com/'
 image: /images/projects/baby-t.gif
-description: 'A personal website — a labor of love, built just because.'
+description: 'A personal website, a labor of love, built just because.'
 tech:
   - Next.js
   - Supabase

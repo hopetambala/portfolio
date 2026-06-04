@@ -6,9 +6,9 @@ import { useStaggerReveal } from "../../motion";
 
 const CATEGORY_DESCRIPTIONS = {
   "design-systems":
-    "Open-source design engineering — components, tokens, and tools for building consistent interfaces.",
+    "Open-source design engineering: components, tokens, and tools for building consistent interfaces.",
   nonprofit:
-    "Technology built for underserved communities — mobile apps and platforms for real-world impact.",
+    "Technology built for underserved communities: mobile apps and platforms for real-world impact.",
   personal: "Personal websites and small builds, made for the love of it.",
   prototypes:
     "Weekend experiments, side projects, and fun ideas brought to life.",

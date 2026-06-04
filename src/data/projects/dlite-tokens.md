@@ -12,13 +12,13 @@ links:
 image: /images/projects/dlite-tokens.gif
 description: >-
   A multi-brand, multi-theme token foundation built on Style Dictionary & the
-  W3C DTCG spec — the exact system powering this site, re-skinning live.
+  W3C DTCG spec. The exact system powering this site, re-skinning live.
 tech:
   - Style Dictionary
   - DTCG
   - CSS
 ---
 
-A design token library built with Style Dictionary. dLite Tokens provides a consistent set of design decisions — colors, spacing, typography, and more — that power the dLite component ecosystem.
+A design token library built with Style Dictionary. dLite Tokens provides a consistent set of design decisions (colors, spacing, typography, and more) that power the dLite component ecosystem.
 
 Published on npm for easy consumption across projects and platforms.

@@ -9,7 +9,7 @@ links:
   github: 'https://github.com/hopetambala/puente-reactnative-collect'
 description: >-
   Offline-first mobile data collection that lets community health workers
-  capture needs in the field — born from candlelit nights over paper records.
+  capture needs in the field, born from candlelit nights over paper records.
 tech:
   - React Native
   - Offline-first

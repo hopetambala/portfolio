@@ -20,7 +20,7 @@ const SKILLS = [
   },
   {
     title: "Craft & Creative",
-    blurb: "The details that make products feel considered — and a camera on the side.",
+    blurb: "The details that make products feel considered, and a camera on the side.",
     items: ["Motion & interaction", "CSS architecture", "Prototyping", "Photography", "Figma"],
   },
 ];

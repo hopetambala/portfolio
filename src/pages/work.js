@@ -93,7 +93,7 @@ const WorkPage = ({ pageContext = {} }) => {
         </h1>
         <div className="lead-row">
           <p className="lede">
-            Design systems, nonprofit tools, and weekend prototypes — a working
+            Design systems, nonprofit tools, and weekend prototypes. A working
             archive of the things I've built.
           </p>
         </div>
@@ -127,7 +127,7 @@ const WorkPage = ({ pageContext = {} }) => {
             ))}
           </div>
         ) : (
-          <p className="emptynote">Nothing here yet — check back soon.</p>
+          <p className="emptynote">Nothing here yet. Check back soon.</p>
         )}
       </div>
     </Layout>

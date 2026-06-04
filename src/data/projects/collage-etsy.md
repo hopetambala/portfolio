@@ -9,7 +9,7 @@ links:
   live: 'https://www.etsy.com'
 description: >-
   Cross-platform components, utility CSS & codemods that keep a two-sided
-  marketplace consistent at scale — systems thinking where the rubber meets the
+  marketplace consistent at scale. Systems thinking where the rubber meets the
   road.
 tech:
   - React/TS

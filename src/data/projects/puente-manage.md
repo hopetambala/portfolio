@@ -8,8 +8,8 @@ selectedProject: true
 links:
   github: 'https://github.com/hopetambala/puente-react-nextjs-platform'
 description: >-
-  The real-time response platform that turns field data into coordinated action
-  — the web & API half of the Puente toolkit.
+  The real-time response platform that turns field data into coordinated
+  action, the web & API half of the Puente toolkit.
 tech:
   - React
   - GraphQL

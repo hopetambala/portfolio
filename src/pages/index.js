@@ -94,7 +94,7 @@ function Showcase() {
       <p className="body" style={{ maxWidth: "52ch", margin: "1rem auto 0" }}>
         Every color, radius, and shadow is a live{" "}
         <code className="mono">style-dictionary-dlite-tokens</code> token. Tap a brand
-        to watch it switch — the same engine ships in the npm package.
+        to watch it switch. The same engine ships in the npm package.
       </p>
       <div className="chips">
         {brands.map((b) => (
@@ -131,7 +131,7 @@ const Home = () => {
         </h1>
         <div className="heroC-sub">
           <p className="lede">
-            A decade of skin in the game across cross-platform mobile and web —
+            A decade of skin in the game across cross-platform mobile and web,
             turning fuzzy ideas into systems teams can actually build on.
           </p>
           <div className="btn-row">
@@ -179,7 +179,7 @@ const Home = () => {
           <div className="body">
             <p>
               Serving in the Peace Corps, I found the spark for the
-              transformative power of technology — through candlelit nights over
+              transformative power of technology. Through candlelit nights over
               paper health records, I learned what it feels like to <strong>not</strong> have the internet at your fingertips.
             </p>
             <p>

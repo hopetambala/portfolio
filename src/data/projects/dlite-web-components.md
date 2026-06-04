@@ -13,7 +13,7 @@ links:
     https://hopetambala.github.io/web-components-dlite/?path=/story/actions-button--primary
 image: /images/projects/dlite-web-components.gif
 description: >-
-  Framework-agnostic UI primitives that consume the tokens — accessible,
+  Framework-agnostic UI primitives that consume the tokens. Accessible,
   themeable, and portable across any stack.
 tech:
   - Lit
