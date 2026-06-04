@@ -2,12 +2,10 @@ import React from "react";
 import { ThemeProvider } from "./src/theme/theme-provider";
 import { BRANDS, STORAGE_KEY, DEFAULT_BRAND, DEFAULT_MODE } from "./src/theme/brands";
 
-// Wrap every page (SSR side) so useTheme() works during build/render.
 export const wrapRootElement = ({ element }) => (
   <ThemeProvider>{element}</ThemeProvider>
 );
 
-// Seed the SSR markup with the default combo so first paint is themed.
 export const onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyComponents }) => {
   setHtmlAttributes({
     lang: "en",
@@ -37,8 +35,6 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyC
     />,
   ]);
 
-  // No-flash script: read the persisted choice and set the data-* attributes
-  // BEFORE first paint, so the correct brand/mode is applied with no FOUC.
   const noFlash = `
 (function(){
   try {

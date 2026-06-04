@@ -1,11 +1,3 @@
-/**
- * dLite brand/theme catalog — the single source of truth shared by the
- * ThemeProvider, the no-flash SSR script, and the switcher UI.
- *
- * Swatch colors are lifted from each combo's variables.css (light) for the
- * switcher chips. `path` matches the folder structure in the
- * style-dictionary-dlite-tokens package and the [data-brand] CSS scope.
- */
 export const BRANDS = [
   { path: "survivor/default", label: "Survivor", sub: "Warm / earthy", primary: "#de6f1b", secondary: "#006210" },
   { path: "survivor/jungle", label: "Survivor Jungle", sub: "Deep green", primary: "#0b5223", secondary: "#42a383" },
@@ -26,7 +18,6 @@ export function brandFor(path) {
   return BRANDS.find((b) => b.path === path) || BRANDS[0];
 }
 
-/** Resolve a stored mode ("system") to a concrete "light" | "dark". */
 export function resolveMode(mode) {
   if (mode === "system") {
     if (typeof window === "undefined") return "light";
