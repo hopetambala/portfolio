@@ -6,8 +6,6 @@ import Layout from "../components/layout/layout";
 import { useScrollReveal } from "../motion";
 import { useTheme } from "../theme/theme-provider";
 
-// Curated "Selected work" list for Home (text-only, hover-driven). Order per
-// the redesign spec: Collage → dLite → Puente → Commonplace → dLite WC.
 const SELECTED = [
   // { slug: "collage-etsy", title: "Collage @ Etsy", role: "Sr. SWE · Design Systems", tags: "React/TS · Storybook", image: "/images/projects/collage-etsy.gif" },
   { slug: "dlite-tokens", title: "dLite Design System", role: "Open source", tags: "Tokens · DTCG", image: "/images/projects/dlite-tokens.gif" },
@@ -27,9 +25,6 @@ function SelectedWork() {
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState(null);
   const [show, setShow] = useState(false);
-  // Portal the preview to <body> so its `position: fixed` is viewport-relative
-  // — the surrounding `.scroll-reveal` ancestor has `will-change: transform`,
-  // which would otherwise make "fixed" relative to that element.
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 

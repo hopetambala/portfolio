@@ -33,8 +33,6 @@ body {
   margin: 0;
   height: 100%;
   min-height: 100%;
-  /* Body color / background / font-family / size are owned by editorial.css
-     (dLite-token-driven) so the live theme switcher can re-skin them. */
 }
 
 body {

@@ -41,7 +41,6 @@ function applyToDocument(brand, mode) {
 export function ThemeProvider({ children }) {
   const [{ brand, mode }, setState] = useState(load);
 
-  // Apply on mount + whenever brand/mode changes; persist the user's choice.
   useEffect(() => {
     applyToDocument(brand, mode);
     try {
@@ -49,7 +48,6 @@ export function ThemeProvider({ children }) {
     } catch (e) {}
   }, [brand, mode]);
 
-  // Re-resolve when the OS theme flips and the user is on "Auto".
   useEffect(() => {
     if (mode !== "system") return;
     const mql = window.matchMedia("(prefers-color-scheme: dark)");

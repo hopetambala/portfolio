@@ -1,16 +1,6 @@
 #!/usr/bin/env node
-/**
- * screenshot-projects.js
- *
- * Uses Playwright to capture 6-second animated GIFs of each project's live URL.
- * For projects with access codes (listings-tracker, survivor-app) auth happens
- * silently before recording so the GIF shows only the authenticated app content.
- *
- * Output: static/images/projects/<slug>.gif
- * Frontmatter: each project's `image` field is updated to /images/projects/<slug>.gif
- *
- * Usage: npm run screenshot:projects
- */
+// Captures animated GIFs of project live URLs → static/images/projects/<slug>.gif
+// Usage: npm run screenshot:projects [--only=slug1,slug2]
 
 const { chromium } = require("playwright");
 const GIFEncoder = require("gif-encoder-2");
@@ -131,12 +121,7 @@ async function captureGif(page, slug) {
 }
 
 // ─── Custom captures ────────────────────────────────────────────────────────
-//
-// For projects where the interesting content requires specific interactions
-// (not just scroll). Each handler receives the already-navigated `page` and
-// the destination `outFile` path. Must return `outFile`.
-//
-// To add a new project: add a key matching the markdown slug.
+// Key = markdown slug. Add a new entry to override default scroll capture.
 
 function makeEncoder(width, height, fps) {
   const encoder = new GIFEncoder(width, height, "neuquant", true, 256);
@@ -156,19 +141,9 @@ async function addFrames(page, encoder, count, intervalMs) {
 }
 
 const CUSTOM_CAPTURES = {
-  /**
-   * collage-etsy — https://www.etsy.com
-   *
-   * Shows Etsy's marketplace (Collage design system in production).
-   * Visits homepage, scrolls to product listing area, then a search results
-   * page to show the grid components at scale.
-   * Re-run: npm run screenshot:projects -- --only=collage-etsy
-   */
-  // browser is passed as the third arg so we can open a stealth context.
+  // Re-run: npm run screenshot:projects -- --only=collage-etsy
+  // Uses a stealth browser context — etsy.com blocks stock headless Chromium.
   "collage-etsy": async (_defaultPage, outFile, browser) => {
-    // Etsy's bot detection blocks stock headless Chromium. Open a dedicated
-    // context with a real Mac/Chrome UA and the `AutomationControlled` feature
-    // disabled, then spoof `navigator.webdriver` via init script.
     const ctx = await browser.newContext({
       viewport: VIEWPORT,
       userAgent:
@@ -250,13 +225,7 @@ const CUSTOM_CAPTURES = {
     return outFile;
   },
 
-  /**
-   * commonplace-cityblock — https://commonplace.design (Storybook)
-   *
-   * Walks three component/foundation docs pages, scrolling a little in each.
-   * Scrolls the Storybook PREVIEW IFRAME (the manager chrome doesn't scroll).
-   * Re-run: npm run screenshot:projects -- --only=commonplace-cityblock
-   */
+  // Re-run: npm run screenshot:projects -- --only=commonplace-cityblock
   "commonplace-cityblock": async (page, outFile) => {
     const encoder = makeEncoder(VIEWPORT.width, VIEWPORT.height, FPS);
 
@@ -268,17 +237,15 @@ const CUSTOM_CAPTURES = {
 
     for (const url of stops) {
       await navigate(page, url);
-      await page.waitForTimeout(3000); // let Storybook + preview iframe render
+      await page.waitForTimeout(3000);
 
-      // The docs render inside #storybook-preview-iframe; scroll THAT frame.
+      // Storybook docs render inside the preview iframe — scroll that, not the manager.
       const frame =
         page.frames().find((f) => /iframe\.html/.test(f.url())) || null;
       const target = frame || page;
 
-      // Hold at the top of the page for a beat.
       await addFrames(page, encoder, 5, 160);
 
-      // Scroll "a little" — up to ~650px (or less if the doc is short).
       const maxScroll = await target
         .evaluate(() =>
           Math.max(document.body.scrollHeight - window.innerHeight, 0)
@@ -295,7 +262,6 @@ const CUSTOM_CAPTURES = {
         await page.waitForTimeout(110);
       }
 
-      // Settle on the scrolled view.
       await addFrames(page, encoder, 3, 160);
     }
 
@@ -304,21 +270,15 @@ const CUSTOM_CAPTURES = {
     return outFile;
   },
 
-  /**
-   * stakeout — https://stakeout.vercel.app/
-   *
-   * Shows: landing → editor → sample property → fence drag → 3D toggle
-   * Re-run: npm run screenshot:projects -- --only=stakeout
-   */
+  // Re-run: npm run screenshot:projects -- --only=stakeout
   stakeout: async (page, outFile) => {
     const W = VIEWPORT.width;
     const H = VIEWPORT.height;
     const encoder = makeEncoder(W, H, FPS);
 
-    // 1. Landing (~1 s)
     await addFrames(page, encoder, 6, 160);
 
-    // 2. Navigate to editor
+    // Navigate to editor
     const ctaSelectors = [
       'a[href*="editor"]',
       'button:has-text("Start designing")',
@@ -344,7 +304,7 @@ const CUSTOM_CAPTURES = {
     await page.waitForTimeout(1800);
     await addFrames(page, encoder, 4, 160);
 
-    // 3. Load sample property
+    // Load sample property
     const sampleBtn = page.locator(
       'button.btn--sample, button:has-text("sample"), button:has-text("Sample")'
     );
@@ -354,7 +314,7 @@ const CUSTOM_CAPTURES = {
     }
     await addFrames(page, encoder, 6, 160);
 
-    // 4. Drag a fence element onto the canvas
+    // Drag a fence element onto the canvas
     const fenceEl = page
       .locator('[data-def-id*="fence"], .element-tile:has-text("Fence")')
       .first();
@@ -378,7 +338,7 @@ const CUSTOM_CAPTURES = {
     }
     await addFrames(page, encoder, 6, 160);
 
-    // 5. Toggle 3D view
+    // Toggle 3D view
     const threeDBtn = page
       .locator('button:has-text("3D"), button:has-text("Live 3D"), [title*="3D"]')
       .first();
@@ -405,7 +365,6 @@ function updateImageField(filePath, slug) {
 
 // ─── Main ───────────────────────────────────────────────────────────────────
 
-// Optional: npm run screenshot:projects -- --only=listings-tracker,survivor-app
 const onlyFilter = (() => {
   const flag = process.argv.find((a) => a.startsWith("--only="));
   return flag ? flag.replace("--only=", "").split(",").map((s) => s.trim()) : null;
@@ -415,9 +374,8 @@ async function navigate(page, url) {
   try {
     await page.goto(url, { waitUntil: "load", timeout: 30000 });
   } catch {
-    // Fallback for sites with persistent background network activity
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 15000 });
-    await page.waitForTimeout(2000); // brief settle time
+    await page.waitForTimeout(2000);
   }
 }
 
@@ -456,7 +414,6 @@ async function run() {
     try {
       await navigate(page, url);
 
-      // Authenticate silently before recording starts
       await handleAuth(page, slug);
 
       const customCapture = CUSTOM_CAPTURES[slug];

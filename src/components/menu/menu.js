@@ -21,7 +21,6 @@ export const Menu = ({ className }) => {
     if (!mobileMenuOpen) return;
     const onKey = (e) => { if (e.key === "Escape") setMobileMenuOpen(false); };
     document.addEventListener("keydown", onKey);
-    // Prevent body scroll while overlay is open
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
@@ -65,7 +64,6 @@ export const Menu = ({ className }) => {
           </Link>
 
           <div className={styles.right}>
-            {/* Desktop nav — hidden on mobile via CSS */}
             <nav className={styles.links}>
               <Link to="/about">About</Link>
               <Link to="/work">Work</Link>
@@ -92,9 +90,6 @@ export const Menu = ({ className }) => {
         </div>
       </header>
 
-      {/* Portal backdrop + drawer to <body> so they're outside the sticky header's
-          stacking context. Drawer z-index (190) is BELOW the nav (200), keeping
-          the nav bar and × button always interactive above the drawer. */}
       {mounted && createPortal(drawer, document.body)}
     </>
   );

@@ -1,33 +1,10 @@
 #!/usr/bin/env node
-/**
- * generate-dlite-theme.js
- *
- * Consumes the published `style-dictionary-dlite-tokens` package and emits ONE scoped stylesheet, `src/css/dlite-theme.css`,
- * containing every brand/theme × light/dark combo as a selector-scoped block:
- *
- *     :root { ...survivor/default light (default)... }
- *     [data-brand="survivor/default"][data-mode="light"] { ... }
- *     [data-brand="survivor/default"][data-mode="dark"]  { ... }
- *     ...
- *
- * Because all combos ship in a single bundled file, switching the live theme is
- * just flipping the `data-brand` / `data-mode` attributes on <html> — no runtime
- * stylesheet fetching, no FOUC. The non-color class layers (reset/utilities/
- * semantics/components) only reference these variables, so they stay brand-agnostic.
- *
- * The DISPLAY (heading) face is keyed off the brand:
- *   - kooky/*    -> Recoleta   (the dLite Kooky display face, bundled in-repo)
- *   - puente/*   -> Plus Jakarta Sans
- *   - survivor/* -> Fraunces   (expressive editorial serif; warm/earthy match)
- *
- * Run via `npm run tokens` (also wired into prebuild/predevelop).
- */
+// Generates src/css/dlite-theme.css from style-dictionary-dlite-tokens.
+// Run: npm run tokens  (also auto-runs before build/develop/start)
 const fs = require("fs");
 const path = require("path");
 
 const PKG = "style-dictionary-dlite-tokens";
-// The package restricts `exports`, so resolve its root by walking node_modules
-// from this script upward rather than require.resolve-ing a subpath.
 function findPkgRoot() {
   let dir = __dirname;
   for (let i = 0; i < 8; i++) {
@@ -42,10 +19,8 @@ function findPkgRoot() {
 const WEB_DIR = path.join(findPkgRoot(), "dist", "web");
 const OUT_FILE = path.join(__dirname, "..", "src", "css", "dlite-theme.css");
 
-// Default combo used for :root (matches the prototype default: Survivor · light).
 const DEFAULT_BRAND = "survivor/default";
 
-// Per-brand display/heading font override (brand prefix -> CSS font stack).
 function headingFontFor(brandPath) {
   const family = brandPath.startsWith("kooky/")
     ? '"Recoleta"'
@@ -55,14 +30,11 @@ function headingFontFor(brandPath) {
   return `${family}, Georgia, "Times New Roman", serif`;
 }
 
-/** Pull the declarations out of a `:root { ... }` token file, uniformly indented. */
 function readVars(file) {
   const css = fs.readFileSync(file, "utf8");
   const open = css.indexOf("{");
   const close = css.lastIndexOf("}");
   if (open === -1 || close === -1) return "";
-  // Normalise every declaration to two-space indent so the generated file is
-  // consistent regardless of what the source token file uses.
   const lines = css
     .slice(open + 1, close)
     .split("\n")
@@ -71,7 +43,6 @@ function readVars(file) {
       return trimmed ? `  ${trimmed}` : "";
     })
     .filter((line, i, arr) => !(line === "" && (i === 0 || arr[i - 1] === "")));
-  // Drop leading/trailing blank lines but keep the indented declarations intact.
   while (lines.length && lines[0] === "") lines.shift();
   while (lines.length && lines[lines.length - 1] === "") lines.pop();
   return lines.join("\n");
@@ -89,8 +60,6 @@ function buildCombo(brandPath, mode) {
   );
   if (!fs.existsSync(file)) return null;
   const vars = readVars(file);
-  // Override the heading font token so every consumer (--font-head alias and the
-  // raw token) reflects the per-brand display face Hope chose.
   const fontOverride = `  --tk-dlite-semantic-typography-font-heading: ${headingFontFor(
     brandPath
   )};`;
@@ -112,7 +81,6 @@ function main() {
     "",
   ];
 
-  // :root default (Survivor · light) so first paint is themed even pre-hydration.
   const def = buildCombo(DEFAULT_BRAND, "light");
   out.push(block(":root", def));
   out.push("");
