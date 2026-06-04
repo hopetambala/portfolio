@@ -12,9 +12,6 @@ const sanityClient = hasSanity
     })
   : null;
 
-// Define the SanityPost shape up front so `allSanityPost` queries resolve even
-// when Sanity isn't configured (e.g. a prod build with no SANITY_* env). With
-// creds present, sourced nodes simply conform to this type.
 exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
     type SanityImageRef { alt: String, url: String }
@@ -31,7 +28,6 @@ exports.createSchemaCustomization = ({ actions }) => {
   `);
 };
 
-// Create custom Gatsby nodes from Sanity data
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
   if (!hasSanity) {
     console.warn(
@@ -95,7 +91,6 @@ exports.createPages = async function ({ actions, graphql }) {
     }
   `);
 
-  // Create individual project pages
   data.allMarkdownRemark.edges.forEach((edge) => {
     const slug = edge.node.frontmatter.slug;
     actions.createPage({
@@ -107,8 +102,6 @@ exports.createPages = async function ({ actions, graphql }) {
     });
   });
 
-  // Legacy per-category pages (/projects/{category}) — keep building so old
-  // links don't 404, but the canonical filter UI now lives at /work/{category}.
   const categories = [
     ...new Set(
       data.allMarkdownRemark.edges.map(
@@ -126,8 +119,6 @@ exports.createPages = async function ({ actions, graphql }) {
     });
   });
 
-  // Filtered work pages — /work/{category} deep-links into the Work archive.
-  // Uses the same work.js page component; `initialCategory` seeds the filter.
   const WORK_CATEGORIES = [
     "design-systems",
     "nonprofit",
@@ -142,7 +133,6 @@ exports.createPages = async function ({ actions, graphql }) {
     });
   });
 
-  // Create journal entry pages — pass full data via context
   const sanityNodes = data.allSanityPost ? data.allSanityPost.nodes : [];
   sanityNodes.forEach((post) => {
     if (post.slug) {

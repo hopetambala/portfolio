@@ -139,10 +139,8 @@ img, svg { display: block; max-width: 100%; }
 .btn:hover .arr, a:hover > .arr { transform: translateX(3px); }
 
 /* ---------- scroll reveal (transform-only; never blank) ---------- */
-/* The repo's useScrollReveal toggles `.is-visible` on `.scroll-reveal`, and
-   useStaggerReveal toggles `.stagger-visible` on `.stagger-item`. We keep the
-   RESTING state fully visible (opacity:1) and only animate a transform, so a
-   renderer that freezes the animation clock still shows opaque content. */
+/* Resting state is opacity:1 — only the transform animates, so content is
+   never blank if the animation clock is frozen (e.g. SSR screenshots). */
 @media (prefers-reduced-motion: no-preference) {
   .scroll-reveal { transform: translateY(24px); transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); will-change: transform; }
   .scroll-reveal.is-visible { transform: none; }
@@ -413,9 +411,7 @@ hr.rule { border: none; border-top: 1px solid var(--line); margin: 0; }
   overflow: hidden;
   border: 1px solid var(--line);
   background: var(--sunken);
-  /* Constrain portrait images (e.g. mobile screenshots) so they don't fill
-     the full 1320px content width and become enormous. Landscape images
-     hit their natural width before this height limit. */
+  /* Constrain portrait images so they don't fill the full content width. */
   max-height: 80vh;
   display: flex;
   align-items: center;

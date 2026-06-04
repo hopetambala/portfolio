@@ -4,8 +4,6 @@ import { useStaticQuery, graphql, navigate } from "gatsby";
 import Layout from "../components/layout/layout";
 import { WorkCard } from "../components/work-card/work-card";
 
-// Display order for the Work archive. "professional" is intentionally out of
-// scope (dropped per the redesign brief).
 const CATEGORIES = [
   { key: "design-systems", label: "Design Systems", slug: "design-systems" },
   { key: "nonprofit",       label: "Nonprofit",       slug: "nonprofit"       },
@@ -14,8 +12,6 @@ const CATEGORIES = [
 ];
 const IN_SCOPE = CATEGORIES.map((c) => c.key);
 
-// This page is used both for /work (all projects) and for /work/{category}
-// (gatsby-node creates those static pages and passes initialCategory via context).
 const WorkPage = ({ pageContext = {} }) => {
   const { initialCategory = "all" } = pageContext;
 
@@ -58,7 +54,6 @@ const WorkPage = ({ pageContext = {} }) => {
     return c;
   }, [projects]);
 
-  // Ordered DS → Nonprofit → Prototypes → Personal for the "All" view.
   const ordered = useMemo(() => {
     const out = [];
     for (const cat of IN_SCOPE) {
@@ -74,15 +69,10 @@ const WorkPage = ({ pageContext = {} }) => {
 
   const pad2 = (n) => String(n).padStart(2, "0");
 
-  // Navigate to the canonical URL for the selected filter.
   const handleFilter = (key) => {
     setActive(key);
     navigate(key === "all" ? "/work/" : `/work/${key}/`, { replace: true });
   };
-
-  // Re-sync if the page is reached via direct URL (e.g. browser back/forward).
-  // pageContext only changes on a full page load, so we don't need an effect —
-  // the useState initializer already reads initialCategory on mount.
 
   return (
     <Layout>
