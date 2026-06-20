@@ -6,13 +6,13 @@ import * as styles from "./journal-post.module.css";
 export default function JournalPost({ pageContext }) {
   const post = pageContext.post;
   const mainImageUrl = post.mainImage?.url;
-  const galleryImages = post.gallery?.images || [];
+  const galleryImages = (post.gallery?.images || []).filter((img) => img.url);
   const [lightboxIndex, setLightboxIndex] = useState(null);
 
   const allImages = [
     ...(mainImageUrl ? [{ url: mainImageUrl, alt: post.mainImage?.alt || post.title }] : []),
     ...galleryImages.map((img) => ({ url: img.url, alt: post.title })),
-  ].filter((img) => img.url);
+  ];
 
   const openLightbox = (index) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);

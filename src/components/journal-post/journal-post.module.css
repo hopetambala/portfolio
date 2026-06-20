@@ -40,7 +40,7 @@ h1 {
   border: var(--spacer-xs) solid var(--color-neutral-900);
 }
 
-/* Gallery — CSS-only masonry */
+/* Gallery — CSS masonry */
 .gallery {
   column-count: 3;
   column-gap: var(--spacer-m);
