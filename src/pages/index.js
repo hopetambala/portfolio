@@ -9,9 +9,9 @@ import { useTheme } from "../theme/theme-provider";
 const SELECTED = [
   // { slug: "collage-etsy", title: "Collage @ Etsy", role: "Sr. SWE · Design Systems", tags: "React/TS · Storybook", image: "/images/projects/collage-etsy.gif" },
   { slug: "dlite-tokens", title: "dLite Design System", role: "Open source", tags: "Tokens · DTCG", image: "/images/projects/dlite-tokens.gif" },
-  { slug: "dlite-web-components", title: "dLite Web Components", role: "Open source", tags: "Lit · a11y", image: "/images/projects/dlite-web-components.gif" },
-  { slug: "commonplace-cityblock", title: "Commonplace @ Cityblock", role: "Sr. UX Engineer", tags: "React/TS · Figma", image: "/images/projects/commonplace-cityblock.gif" },
+  // { slug: "dlite-web-components", title: "dLite Web Components", role: "Open source", tags: "Lit · a11y", image: "/images/projects/dlite-web-components.gif" },
   { slug: "puente-collect", title: "Puente Collect & Manage", role: "Nonprofit", tags: "React Native · GraphQL" },
+  { slug: "commonplace-cityblock", title: "Commonplace @ Cityblock", role: "Sr. UX Engineer", tags: "React/TS · Figma", image: "/images/projects/commonplace-cityblock.gif" },
 ];
 
 const STATS = [

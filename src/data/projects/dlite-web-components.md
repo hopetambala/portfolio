@@ -4,7 +4,7 @@ slug: dlite-web-components
 category: design-systems
 role: Design Engineer
 date: '2024-06-15'
-selectedProject: true
+selectedProject: false
 links:
   github: 'https://github.com/hopetambala/web-components-dlite'
   npm: >-

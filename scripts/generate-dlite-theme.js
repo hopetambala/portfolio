@@ -26,6 +26,8 @@ function headingFontFor(brandPath) {
     ? '"Recoleta"'
     : brandPath.startsWith("puente/")
     ? '"Plus Jakarta Sans"'
+    : brandPath.startsWith("sneaks/")
+    ? '"Space Grotesk"'
     : '"Fraunces"'; // survivor/* and any future brand
   return `${family}, Georgia, "Times New Roman", serif`;
 }
@@ -52,6 +54,30 @@ function block(selector, body) {
   return `${selector} {\n${body}\n}\n`;
 }
 
+// Sneaks intentionally keeps its "primary"/"brand" tokens near-black/near-white
+// (its real product uses that as a splash/ink color, with action-primary as the
+// only red) — see style-dictionary-dlite/tokens/brands/sneaks.tokens.json. This
+// site's editorial.css only has a single --brand accent variable (sourced from
+// semantic-color-primary) driving every visible brand moment, so representing
+// Sneaks with the neutral color would make it look unthemed here. Re-point
+// primary/brand at this combo's own action-primary (and fix the paired "on"
+// text color for contrast) — scoped to this generated file only, never touching
+// the published token package other apps depend on.
+function sneaksActionOverride(brandPath, vars) {
+  if (!brandPath.startsWith("sneaks/")) return "";
+  const match = vars.match(
+    /--tk-dlite-semantic-color-action-primary:\s*(#[0-9a-fA-F]{3,8})\s*;/
+  );
+  if (!match) return "";
+  const actionHex = match[1];
+  return [
+    `  --tk-dlite-semantic-color-primary: ${actionHex};`,
+    `  --tk-dlite-semantic-color-brand: ${actionHex};`,
+    `  --tk-dlite-semantic-color-text-on-primary: #ffffff;`,
+    `  --tk-dlite-semantic-color-text-on-brand: #ffffff;`,
+  ].join("\n");
+}
+
 function buildCombo(brandPath, mode) {
   const file = path.join(
     WEB_DIR,
@@ -63,7 +89,8 @@ function buildCombo(brandPath, mode) {
   const fontOverride = `  --tk-dlite-semantic-typography-font-heading: ${headingFontFor(
     brandPath
   )};`;
-  return `${vars}\n${fontOverride}`;
+  const actionOverride = sneaksActionOverride(brandPath, vars);
+  return [vars, fontOverride, actionOverride].filter(Boolean).join("\n");
 }
 
 function main() {

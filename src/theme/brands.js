@@ -4,6 +4,7 @@ export const BRANDS = [
   { path: "survivor/winter-holiday", label: "Survivor Winter", sub: "Festive red", primary: "#bf3813", secondary: "#006210" },
   { path: "puente/default", label: "Puente", sub: "Clean & pro", primary: "#3d80fc", secondary: "#ffe680" },
   { path: "kooky/default", label: "Kooky", sub: "Playful display", primary: "#00abad", secondary: "#ffdd00" },
+  { path: "sneaks/default", label: "Sneaks", sub: "Bold & graphic", primary: "#d40000", secondary: "#6e6e6e" },
 ];
 
 export const STORAGE_KEY = "dlite-portfolio-theme-v1";
