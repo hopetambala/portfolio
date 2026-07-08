@@ -14,7 +14,7 @@ tech:
   - Next.js
   - Parse
   - GraphQL
-image: /images/projects/puente-manage-hero.png
+image: /images/projects/puente-manage-hero.gif
 ---
 
 Puente Manage is the web half of Puente's toolkit: a humanitarian data platform grassroots organizations use to design surveys, send them into the field on Puente Collect, and turn what comes back into decisions that reach people. It's built around three people doing one workflow instead of one generic CRUD app trying to be everyone's tool.
@@ -27,17 +27,19 @@ A program manager designs the survey and publishes it. A surveyor picks up a pho
 
 Form Creator is a drag-and-drop builder: headers, single/multi-select questions, number and text responses, geolocation blocks, all composable into a form a health worker runs on their phone. Publishing is immediate — no rebuild, no app-store round trip — because Collect reads form structure from Parse at runtime instead of shipping it baked into the app binary.
 
-![Form Creator's drag-and-drop builder: a canvas for form blocks on the left, a palette of block types (Number response, Text response, Single select, Multi-select, Header, Geolocation) on the right, and an Inspector panel below it](/images/projects/puente-manage-form-creator.png)
+![Dragging a "Question - Text response" block from the palette toward the Form Creator canvas](/images/projects/puente-manage-form-creator.gif)
 
 ## Every submission has to land somewhere reviewable
 
 Form Manager is where a program manager sees what's actually being collected: a table of every form the org runs, split into built-in templates (SurveyData, Vitals, HistoryEnvironmentalHealth) and organization-authored custom forms, each with status, last-updated date, and a one-click CSV export. It's the least glamorous screen in the app and the one a data manager opens first every morning.
 
-![Form Manager showing a table of built-in Puente forms (SurveyData, HistoryEnvironmentalHealth, Vitals, EvaluationMedical) and organization-authored custom forms in Spanish, each with status, update date, and Edit/Duplicate/Delete/Export actions](/images/projects/puente-manage-form-manager.png)
+![Form Manager loading then showing a table of built-in Puente forms (SurveyData, HistoryEnvironmentalHealth, Vitals, EvaluationMedical)](/images/projects/puente-manage-form-manager.gif)
 
 ## Data Curation: the step between "collected" and "usable"
 
 Field data is never clean on arrival — the same household gets surveyed twice, a community name gets spelled three different ways across surveyors, a form gets submitted 40% empty. `DataCurationManager` is the tool that closes that gap before a dataset goes anywhere: completeness scoring per record, same-day duplicate detection by household ID, anomaly flags below a completeness threshold, and a community-name audit that lets a data steward pick the canonical spelling and apply it across every matching record in one action — the kind of operation that's routine for a data steward and genuinely dangerous to get wrong, which is why it's a deliberate, confirmed action rather than a silent background job.
+
+![A confirmation modal reading "Rename all records in this group to 'test'? This updates every matching record and cannot be undone," over the Community Audit tab showing grouped near-duplicate spellings like "Ensanche Bermudez" / "Ensanches Bermudez" each with an Apply button](/images/projects/puente-manage-curation-confirm.png)
 
 `/data/data-curation` used to be a route that rendered an empty state and nothing else; it's now five subcomponents (`FilterBar`, `SourceSelector`, `RecordsTable`, `RecordInspector`, `CommunityAudit`/`DuplicateResolver`) sitting on top of three small, dependency-free, easily-unit-tested functions doing the actual scoring and matching logic.
 
