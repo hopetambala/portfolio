@@ -122,13 +122,13 @@ const Home = () => {
       <section className="wrap heroC ed">
         <span className="kicker">Software engineer · Design technologist</span>
         <h1 className="display" style={{ marginTop: "1.2rem" }}>
-          I build design systems for{" "}
+          I build design systems and{" "}
           <span className="brandword">beautifully simple</span> products.
         </h1>
         <div className="heroC-sub">
           <p className="lede">
             A decade of skin in the game across cross-platform mobile and web,
-            turning fuzzy ideas into systems teams can actually build on.
+            turning fuzzy ideas into delightful products and robust systems that teams can actually build on.
           </p>
           <div className="btn-row">
             <Link className="btn btn-primary" to="/work">
