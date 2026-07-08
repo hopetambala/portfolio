@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
 
-export function useScrollReveal(threshold = 0.15) {
+// threshold is a fraction of the TARGET's own height, not the viewport's — an
+// element taller than ~1/threshold viewports can never reach it, so it stays
+// hidden forever. Default low to stay safe for long, image-heavy content.
+export function useScrollReveal(threshold = 0.01) {
   const ref = useRef(null);
 
   useEffect(() => {

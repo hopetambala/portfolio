@@ -6,6 +6,7 @@ role: Software Engineer
 date: '2023-08-01'
 selectedProject: true
 links:
+  live: 'https://apps.apple.com/us/app/puente-collect/id1362371696'
   github: 'https://github.com/hopetambala/puente-reactnative-collect'
 description: >-
   Offline-first mobile data collection that lets community health workers
@@ -15,12 +16,24 @@ tech:
   - Expo
   - Reanimated
   - Offline-first
-image: /images/projects/puente-collect-onboarding.png
+image: /images/projects/puente-collect.gif
 ---
 
 Puente Collect is the field data-collection app for Puente Desarrollo Internacional, a small nonprofit doing community health and development work in the Dominican Republic. Community health workers go door to door — often somewhere cell signal is a rumor, not a guarantee — logging resident IDs, environmental health surveys, and medical intake forms that used to live on paper, in a filing cabinet, in whatever handwriting survived the humidity.
 
 The job the app has to do is boring on purpose: get a form filled out fast, in the field, whether or not the phone has signal, and get it into the org's system without the worker ever having to think about connectivity.
+
+## Onboarding that actually explains the app
+
+First run walks through what the app is for before it asks for anything: a short carousel covering the four kinds of evidence it captures (stories, metrics, location, photos), why it needs camera and location access, and how offline sync keeps a field team productive without signal.
+
+![Onboarding slide "How Field Teams Capture Impact" showing four cards: Stories & Insights, Metrics & Counts, Place & Geography, Visual Evidence](/images/projects/puente-collect-onboarding-features.png)
+
+Then it asks the worker to set up their own experience — language and theme — and applies each choice to the onboarding screens themselves, live, so the choice is legible immediately instead of a setting you configure blind and hope looks right later.
+
+![Onboarding language picker mid-selection, showing the entire screen re-rendered in Kreyòl after tapping "Kreyòl"](/images/projects/puente-collect-language-switch.png)
+
+Kreyòl sits next to English and Español, not as an afterthought — Haiti borders the Dominican Republic, and a health worker's community isn't guaranteed to share the org's default language.
 
 ## What a health worker actually sees
 
@@ -33,9 +46,19 @@ Collect Data is where the actual field work happens: a horizontally scrolling ro
 ![Collect Data screen in light mode](/images/projects/puente-collect-forms-light.png)
 ![Collect Data screen in dark mode](/images/projects/puente-collect-forms-dark.png)
 
-Find Records is full-text search across every resident and asset the org has ever collected. Tap a result and you can edit a previously submitted form instead of the old create-only workflow, with a "View Record History" button behind every record so a correction never silently overwrites what was there before.
+A Resident ID submission starts with a consent screen — a community member has to actively agree before anything about them gets typed in — then a Demographics form: name, date of birth, sex, marriage status, education level, occupation, photo, and an optional link to an existing household record so a family isn't re-entered from scratch every visit.
+
+![Resident ID form with demographics filled in — sex, marriage status, and education level selected](/images/projects/puente-collect-form-filled.png)
+
+Saving it doesn't just show a checkmark. It's a full-screen illustration and "great job, grab yourself a coffee" — a small thing, but a deliberate one. Nobody in the field gets a manager standing over their shoulder saying good work; the app is what tells them the data landed.
+
+![Full-screen success illustration reading "Form successfully submitted, great job, grab yourself a coffee"](/images/projects/puente-collect-form-success.png)
+
+Find Records is full-text search across every resident and asset the org has ever collected. Tap a result and you can edit a previously submitted form instead of the old create-only workflow, with a "View Record History" button behind every record so a correction never silently overwrites what was there before — this was the single most technically substantial feature I shipped on the app, and it's the difference between "fix a typo" meaning a phone call to me and meaning a two-minute in-app edit.
 
 ![Find Records screen showing a searchable list of resident records](/images/projects/puente-collect-find-records.png)
+
+![Edit Identification form pre-populated with an existing resident's demographics, ready to correct in place](/images/projects/puente-collect-edit-form.png)
 
 Offline Sync is the tab that matters most and gets looked at least: submit a form with no signal and it queues locally, syncing the moment the phone finds a connection — no re-entry, no lost work, no "did that actually save?" moment while standing in someone's living room.
 

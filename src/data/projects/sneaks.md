@@ -7,7 +7,6 @@ date: '2026-07-01'
 selectedProject: true
 links:
   live: 'https://sneaks-web.vercel.app'
-  github: 'https://github.com/hopetambala/sneaks'
 description: >-
   A personal sneaker collection tracker — a private app for logging what you
   own, and a public page for showing it off.
@@ -31,7 +30,7 @@ Anyone with my share link lands here — no login, just the collection as of the
 
 The mobile app is where the actual collection management happens: 29 pairs and counting, each with brand, model, colorway, size, and a wear count, sorted newest-first with filter and sort controls.
 
-![Collection tab showing a two-column grid of sneaker cards — New Balance 990v3, Air Jordan 12, Nike Cortez, Air Jordan 4 — each with brand, model, colorway, size, and wear count](/images/projects/sneaks-collection.jpg)
+![Scrolling the Collection tab's two-column grid of sneaker cards, then tapping into a Nike Dunk Low SB to see its full detail view — size, box status, and a wear counter](/images/projects/sneaks-mobile.gif)
 
 Wishlist is the same card layout, minus the price tag — three grails I don't own yet, waiting for the day I stop being reasonable about resale prices.
 
