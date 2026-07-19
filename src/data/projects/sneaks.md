@@ -1,15 +1,16 @@
 ---
 title: Sneaks
 slug: sneaks
-category: prototypes
+category: apps
 role: Full-Stack Engineer
 date: '2026-07-01'
 selectedProject: true
 links:
+  appstore: 'https://apps.apple.com/us/app/sneaks-collection-tracker/id6786520018'
   live: 'https://sneaks-web.vercel.app'
 description: >-
-  A personal sneaker collection tracker: a private app for logging what you
-  own, and a public page for showing it off.
+  A sneaker collection tracker on the App Store: a private iOS app for logging
+  what you own, and a public web page for showing it off.
 tech:
   - React Native
   - Next.js
@@ -18,7 +19,7 @@ tech:
 image: /images/projects/sneaks-web-share.jpg
 ---
 
-Sneaks is a sneaker collection tracker split across two apps that share one Supabase backend: a private mobile app where I log what I own, and a public read-only companion site anyone can visit via a permanent share code: no login, no account, just a link to my shelf.
+Sneaks is a sneaker collection tracker split across two apps that share one Supabase backend: an iOS app shipped on the App Store where I log what I own, and a public read-only companion site anyone can visit via a permanent share code: no login, no account, just a link to my shelf.
 
 I treat it as one product, not two separate builds. The mobile app is Expo + Expo Router; the web app is Next.js App Router; a shared `packages/theme` and `packages/supabase` keep both talking to the same tables and the same brand instead of drifting into their own conventions.
 
@@ -56,4 +57,4 @@ The web app inherits the same brand, down to the entry screen a visitor sees bef
 
 ## Stack
 
-Expo + Expo Router for mobile, Next.js App Router for web (CSS Modules only, no Tailwind), Supabase for auth/Postgres/storage across both, pnpm workspaces tying it together, and `style-dictionary-dlite-tokens` for the shared design layer, the same package powering this portfolio.
+Expo + Expo Router for mobile, Next.js App Router for web (CSS Modules only, no Tailwind), Supabase for auth/Postgres/storage across both, pnpm workspaces tying it together, and `style-dictionary-dlite-tokens` for the shared design layer, the same package powering this portfolio. The iOS app releases through EAS Build and Submit with fully automated version bumps: every production build gets a fresh version and build number with zero manual steps, then goes through standard App Store review.

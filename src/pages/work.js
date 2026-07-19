@@ -7,6 +7,7 @@ import { WorkCard } from "../components/work-card/work-card";
 const CATEGORIES = [
   { key: "design-systems", label: "Design Systems", slug: "design-systems" },
   { key: "nonprofit",       label: "Nonprofit",       slug: "nonprofit"       },
+  { key: "apps",            label: "Shipped Apps",    slug: "apps"            },
   { key: "prototypes",      label: "App Prototypes",  slug: "prototypes"      },
   { key: "personal",        label: "Personal Websites", slug: "personal"      },
 ];
@@ -30,6 +31,7 @@ const WorkPage = ({ pageContext = {} }) => {
             tech
             image
             links {
+              appstore
               live
               github
             }
@@ -83,8 +85,8 @@ const WorkPage = ({ pageContext = {} }) => {
         </h1>
         <div className="lead-row">
           <p className="lede">
-            Design systems, nonprofit tools, and weekend prototypes. A working
-            archive of the things I've built.
+            Design systems, nonprofit tools, apps on the App Store, and weekend
+            prototypes. A working archive of the things I've built.
           </p>
         </div>
       </div>

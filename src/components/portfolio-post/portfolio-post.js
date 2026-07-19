@@ -6,12 +6,13 @@ import { useScrollReveal } from "../../motion";
 const CATEGORY_LABELS = {
   "design-systems": "Design Systems",
   nonprofit: "Nonprofit Engineering",
+  apps: "Shipped App",
   personal: "Personal Websites",
   prototypes: "App Prototypes",
   professional: "Professional Work",
 };
 
-const LINK_LABELS = { github: "GitHub", npm: "npm", live: "Live demo" };
+const LINK_LABELS = { appstore: "App Store", github: "GitHub", npm: "npm", live: "Live demo" };
 
 export default function Post({ data }) {
   const { frontmatter, html } = data.markdownRemark;
@@ -49,16 +50,17 @@ export default function Post({ data }) {
           </div>
           {links && (
             <div className="btn-row" style={{ marginTop: "1.5rem" }}>
-              {["live", "github", "npm"].map((k) =>
+              {["appstore", "live", "github", "npm"].map((k) =>
                 links[k] ? (
                   <a
                     key={k}
-                    className={`btn ${k === "live" ? "btn-primary" : "btn-ghost"}`}
+                    className={`btn ${k === (links.appstore ? "appstore" : "live") ? "btn-primary" : "btn-ghost"}`}
                     href={links[k]}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {LINK_LABELS[k]} <span className="arr">→</span>
+                    {k === "live" && links.appstore ? "Web app" : LINK_LABELS[k]}{" "}
+                    <span className="arr">→</span>
                   </a>
                 ) : null
               )}
@@ -94,6 +96,7 @@ export const query = graphql`
         date
         tech
         links {
+          appstore
           github
           npm
           live

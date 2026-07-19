@@ -4,6 +4,7 @@ import { Link } from "gatsby";
 export const CATEGORY_LABELS = {
   "design-systems": "Design Systems",
   nonprofit: "Nonprofit",
+  apps: "Shipped Apps",
   prototypes: "App Prototypes",
   personal: "Personal Websites",
   professional: "Professional Work",
@@ -11,6 +12,7 @@ export const CATEGORY_LABELS = {
 
 function primaryLink(links) {
   if (!links) return null;
+  if (links.appstore) return { href: links.appstore, label: "App Store" };
   if (links.live) return { href: links.live, label: "Visit" };
   if (links.github) return { href: links.github, label: "GitHub" };
   return null;

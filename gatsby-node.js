@@ -122,6 +122,7 @@ exports.createPages = async function ({ actions, graphql }) {
   const WORK_CATEGORIES = [
     "design-systems",
     "nonprofit",
+    "apps",
     "prototypes",
     "personal",
   ];
