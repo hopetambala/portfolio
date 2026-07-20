@@ -2,11 +2,14 @@
 title: Puente Collect
 slug: puente-collect
 category: nonprofit
+categories:
+  - nonprofit
+  - apps
 role: Software Engineer
 date: '2023-08-01'
 selectedProject: true
 links:
-  live: 'https://apps.apple.com/us/app/puente-collect/id1362371696'
+  appstore: 'https://apps.apple.com/us/app/puente-collect/id1362371696'
   github: 'https://github.com/hopetambala/puente-reactnative-collect'
 description: >-
   Offline-first mobile data collection that lets community health workers

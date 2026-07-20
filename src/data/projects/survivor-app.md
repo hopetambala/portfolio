@@ -2,6 +2,8 @@
 title: Survivor App
 slug: survivor-app
 category: prototypes
+categories:
+  - prototypes
 role: Full-Stack Engineer
 date: '2024-03-01'
 selectedProject: false

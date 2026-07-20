@@ -2,6 +2,8 @@
 title: StakeOut
 slug: stakeout
 category: prototypes
+categories:
+  - prototypes
 role: Full-Stack Engineer
 date: '2026-05-01'
 selectedProject: false

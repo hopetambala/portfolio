@@ -11,7 +11,7 @@ const SELECTED = [
   { slug: "dlite-tokens", title: "dLite Design System", role: "Open source", tags: "Tokens · DTCG", image: "/images/projects/dlite-tokens.gif" },
   // { slug: "dlite-web-components", title: "dLite Web Components", role: "Open source", tags: "Lit · a11y", image: "/images/projects/dlite-web-components.gif" },
   { slug: "puente-collect", title: "Puente Collect & Manage", role: "Nonprofit", tags: "React Native · GraphQL", image: "/images/projects/puente-manage-hero.gif" },
-  { slug: "sneaks", title: "Sneaks", role: "Personal", tags: "React Native · Next.js · Supabase", image: "/images/projects/sneaks-mobile.gif" },
+  { slug: "sneaks", title: "Sneaks", role: "App Store", tags: "React Native · Next.js · Supabase", image: "/images/projects/sneaks-mobile.gif" },
   { slug: "commonplace-cityblock", title: "Commonplace @ Cityblock", role: "Sr. UX Engineer", tags: "React/TS · Figma", image: "/images/projects/commonplace-cityblock.gif" },
 ];
 

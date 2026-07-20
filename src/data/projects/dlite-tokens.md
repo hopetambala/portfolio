@@ -2,8 +2,10 @@
 title: dLite Tokens
 slug: dlite-tokens
 category: design-systems
+categories:
+  - design-systems
 role: Design Engineer
-date: '2024-05-01'
+date: '2026-07-06'
 selectedProject: true
 links:
   github: 'https://github.com/hopetambala/style-dictionary-dlite'

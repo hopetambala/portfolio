@@ -9,6 +9,7 @@ const CATEGORY_DESCRIPTIONS = {
     "Open-source design engineering: components, tokens, and tools for building consistent interfaces.",
   nonprofit:
     "Technology built for underserved communities: mobile apps and platforms for real-world impact.",
+  apps: "Real products with real users, shipped to the App Store and running in production.",
   personal: "Personal websites and small builds, made for the love of it.",
   prototypes:
     "Weekend experiments, side projects, and fun ideas brought to life.",
@@ -59,7 +60,7 @@ export const query = graphql`
     allMarkdownRemark(
       filter: {
         fileAbsolutePath: { regex: "/data/projects/" }
-        frontmatter: { category: { eq: $category } }
+        frontmatter: { categories: { in: [$category] } }
       }
       sort: { frontmatter: { date: DESC } }
     ) {
@@ -74,6 +75,7 @@ export const query = graphql`
           tech
           image
           links {
+            appstore
             live
             github
           }

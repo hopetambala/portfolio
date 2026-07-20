@@ -2,6 +2,8 @@
 title: dLite Web Components
 slug: dlite-web-components
 category: design-systems
+categories:
+  - design-systems
 role: Design Engineer
 date: '2024-06-15'
 selectedProject: false

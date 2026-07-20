@@ -7,6 +7,7 @@ import { WorkCard } from "../components/work-card/work-card";
 const CATEGORIES = [
   { key: "design-systems", label: "Design Systems", slug: "design-systems" },
   { key: "nonprofit",       label: "Nonprofit",       slug: "nonprofit"       },
+  { key: "apps",            label: "Shipped Apps",    slug: "apps"            },
   { key: "prototypes",      label: "App Prototypes",  slug: "prototypes"      },
   { key: "personal",        label: "Personal Websites", slug: "personal"      },
 ];
@@ -26,10 +27,12 @@ const WorkPage = ({ pageContext = {} }) => {
             title
             slug
             category
+            categories
             description
             tech
             image
             links {
+              appstore
               live
               github
             }
@@ -39,8 +42,10 @@ const WorkPage = ({ pageContext = {} }) => {
     }
   `);
 
+  const catsOf = (p) => p.frontmatter.categories || [p.frontmatter.category];
+
   const projects = useMemo(
-    () => data.projects.nodes.filter((n) => IN_SCOPE.includes(n.frontmatter.category)),
+    () => data.projects.nodes.filter((n) => catsOf(n).some((c) => IN_SCOPE.includes(c))),
     [data]
   );
 
@@ -49,11 +54,13 @@ const WorkPage = ({ pageContext = {} }) => {
   const counts = useMemo(() => {
     const c = { all: projects.length };
     for (const cat of IN_SCOPE) {
-      c[cat] = projects.filter((p) => p.frontmatter.category === cat).length;
+      c[cat] = projects.filter((p) => catsOf(p).includes(cat)).length;
     }
     return c;
   }, [projects]);
 
+  // Group by primary category for the "all" view; a project appears once,
+  // under its primary, even when it belongs to several categories.
   const ordered = useMemo(() => {
     const out = [];
     for (const cat of IN_SCOPE) {
@@ -65,7 +72,7 @@ const WorkPage = ({ pageContext = {} }) => {
   const visible =
     active === "all"
       ? ordered
-      : ordered.filter((p) => p.frontmatter.category === active);
+      : projects.filter((p) => catsOf(p).includes(active));
 
   const pad2 = (n) => String(n).padStart(2, "0");
 
@@ -83,8 +90,8 @@ const WorkPage = ({ pageContext = {} }) => {
         </h1>
         <div className="lead-row">
           <p className="lede">
-            Design systems, nonprofit tools, and weekend prototypes. A working
-            archive of the things I've built.
+            Design systems, nonprofit tools, apps on the App Store, and weekend
+            prototypes. A working archive of the things I've built.
           </p>
         </div>
       </div>

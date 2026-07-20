@@ -2,6 +2,8 @@
 title: Commonplace @ Cityblock
 slug: commonplace-cityblock
 category: design-systems
+categories:
+  - design-systems
 role: Sr. UX Engineer
 date: '2024-04-01'
 selectedProject: false
