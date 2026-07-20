@@ -2,6 +2,8 @@
 title: Baby T
 slug: baby-t
 category: personal
+categories:
+  - personal
 role: Full-Stack Engineer
 date: '2026-05-16'
 selectedProject: false

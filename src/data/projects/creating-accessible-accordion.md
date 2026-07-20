@@ -2,6 +2,8 @@
 title: "Creating an accessible accordion component"
 slug: "creating-accessible-accordion"
 category: "professional"
+categories:
+  - professional
 role: "Design System Engineer"
 date: "2023-06-02"
 selectedProject: false

@@ -2,6 +2,9 @@
 title: Puente Collect
 slug: puente-collect
 category: nonprofit
+categories:
+  - nonprofit
+  - apps
 role: Software Engineer
 date: '2023-08-01'
 selectedProject: true

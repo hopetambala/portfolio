@@ -2,6 +2,8 @@
 title: Sneaks
 slug: sneaks
 category: apps
+categories:
+  - apps
 role: Full-Stack Engineer
 date: '2026-07-01'
 selectedProject: true

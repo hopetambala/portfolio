@@ -69,6 +69,7 @@ exports.createPages = async function ({ actions, graphql }) {
             frontmatter {
               slug
               category
+              categories
             }
           }
         }
@@ -104,8 +105,9 @@ exports.createPages = async function ({ actions, graphql }) {
 
   const categories = [
     ...new Set(
-      data.allMarkdownRemark.edges.map(
-        (edge) => edge.node.frontmatter.category
+      data.allMarkdownRemark.edges.flatMap(
+        (edge) =>
+          edge.node.frontmatter.categories || [edge.node.frontmatter.category]
       )
     ),
   ];

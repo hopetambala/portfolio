@@ -60,7 +60,7 @@ export const query = graphql`
     allMarkdownRemark(
       filter: {
         fileAbsolutePath: { regex: "/data/projects/" }
-        frontmatter: { category: { eq: $category } }
+        frontmatter: { categories: { in: [$category] } }
       }
       sort: { frontmatter: { date: DESC } }
     ) {

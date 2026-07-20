@@ -2,6 +2,8 @@
 title: Collage @ Etsy
 slug: collage-etsy
 category: design-systems
+categories:
+  - design-systems
 role: 'Sr. SWE, Design Systems'
 date: '2024-09-01'
 selectedProject: true

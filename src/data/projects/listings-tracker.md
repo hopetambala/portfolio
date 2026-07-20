@@ -2,6 +2,8 @@
 title: Listings Tracker
 slug: listings-tracker
 category: prototypes
+categories:
+  - prototypes
 role: Full-Stack Engineer
 date: '2026-04-01'
 selectedProject: false
