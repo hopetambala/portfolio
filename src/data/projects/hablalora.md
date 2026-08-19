@@ -1,13 +1,14 @@
 ---
 title: HablaLora
 slug: hablalora
-category: prototypes
+category: apps
 categories:
-  - prototypes
+  - apps
 role: Full-Stack Engineer
 date: '2026-05-01'
-selectedProject: false
-links: {}
+selectedProject: true
+links:
+  appstore: 'https://apps.apple.com/us/app/hablalora/id6762737766'
 image: /images/projects/habladora.gif
 description: >-
   A Spanish verb conjugation trainer for serious learners, built with Expo and
