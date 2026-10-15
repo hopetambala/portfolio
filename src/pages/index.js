@@ -9,7 +9,7 @@ import { useTheme } from "../theme/theme-provider";
 const SELECTED = [
   // { slug: "collage-etsy", title: "Collage @ Etsy", role: "Sr. SWE · Design Systems", tags: "React/TS · Storybook", image: "/images/projects/collage-etsy.gif" },
   { slug: "dlite-tokens", title: "dLite Design System", role: "Open source", tags: "Tokens · DTCG", image: "/images/projects/dlite-tokens.gif" },
-  { slug: "puente-collect", title: "Puente Collect & Manage", role: "Nonprofit", tags: "React Native · GraphQL", image: "/images/projects/puente-manage-hero.gif" },
+  { slug: "puente-collect", title: "Puente Collect & Manage", role: "Nonprofit", tags: "React Native · Next.js · Flask · Django · AWS", image: "/images/projects/puente-manage-hero.gif" },
   { slug: "try", title: "Try — Your Triathlon Coach", role: "App Store", tags: "Swift · watchOS · HealthKit", image: "/images/projects/try-today.jpg" },
   { slug: "sneaks", title: "SNEAKS | Collection Tracker", role: "App Store", tags: "React Native · Next.js · Supabase", image: "/images/projects/sneaks-mobile.gif" },
   { slug: "hablalora", title: "HablaLora", role: "App Store", tags: "React Native · Expo", image: "/images/projects/hablalora-goal.jpg" },
@@ -121,7 +121,7 @@ const Home = () => {
     <Layout>
       {/* 1. Hero */}
       <section className="wrap heroC ed">
-        <span className="kicker">Software engineer · Design technologist</span>
+        <span className="kicker">Software engineer · AI engineer</span>
         <h1 className="display" style={{ marginTop: "1.2rem" }}>
           I build design systems and{" "}
           <span className="brandword">beautifully simple</span> products.
@@ -129,7 +129,7 @@ const Home = () => {
         <div className="heroC-sub">
           <p className="lede">
             A decade of skin in the game across cross-platform mobile and web,
-            turning fuzzy ideas into delightful products and robust systems that teams can actually build on.
+            turning fuzzy ideas into delightful websites, SaaS products, and robust frontend systems.
           </p>
           <div className="btn-row">
             <Link className="btn btn-primary" to="/work">
