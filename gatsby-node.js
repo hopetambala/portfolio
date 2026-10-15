@@ -35,16 +35,28 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
     );
     return;
   }
-  const posts = await sanityClient.fetch(
-    `*[_type == "post"] | order(publishedAt desc) {
-      _id,
-      title,
-      "slug": slug.current,
-      mainImage { alt, "url": asset->url },
-      gallery { images[] { "url": asset->url } },
-      publishedAt
-    }`
-  );
+  let posts;
+  try {
+    posts = await sanityClient.fetch(
+      `*[_type == "post"] | order(publishedAt desc) {
+        _id,
+        title,
+        "slug": slug.current,
+        mainImage { alt, "url": asset->url },
+        gallery { images[] { "url": asset->url } },
+        publishedAt
+      }`
+    );
+  } catch (error) {
+    // A disabled or unreachable Sanity project must not fail the site build.
+    // The journal renders an empty gallery when there are no posts.
+    console.warn(
+      `[sanity] Journal sourcing failed (${error.message}). Journal will be empty.`
+    );
+    return;
+  }
+
+  if (!Array.isArray(posts)) return;
 
   posts.forEach((post) => {
     actions.createNode({
