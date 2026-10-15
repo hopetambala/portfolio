@@ -18,7 +18,9 @@ const CATEGORY_DESCRIPTIONS = {
 
 export default function CategoryPage({ data, pageContext }) {
   const { category } = pageContext;
-  const projects = data.allMarkdownRemark.nodes;
+  const projects = data.allMarkdownRemark.nodes.filter(
+    (node) => node.frontmatter.active !== false
+  );
   const label = CATEGORY_LABELS[category] || category;
   const description = CATEGORY_DESCRIPTIONS[category] || "";
 
@@ -69,6 +71,7 @@ export const query = graphql`
           title
           slug
           category
+          active
           role
           date
           description

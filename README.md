@@ -70,14 +70,17 @@ Create a new `.md` file in `src/data/projects/` with this frontmatter:
 ---
 title: "Project Name"
 slug: "project-name"
-category: "design-systems" # design-systems | nonprofit | personal | prototypes | professional
+category: "design-systems" # design-systems | nonprofit | apps | personal | prototypes | professional
 role: "Your Role"
 date: "YYYY-MM-DD"
 selectedProject: false # true to feature on homepage
+active: true # false hides the project from the site
 links:
   github: "https://github.com/..."
   npm: "https://www.npmjs.com/..."
   live: "https://..."
+  website: "https://..."
+  appstore: "https://apps.apple.com/..."
 ---
 
 Your project description in Markdown.

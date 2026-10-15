@@ -43,10 +43,14 @@ const workFiles = allFiles.filter((f) => f.includes("/work-experience/"));
 const VALID_CATEGORIES = [
   "design-systems",
   "nonprofit",
+  "apps",
   "personal",
   "prototypes",
   "professional",
 ];
+
+const INACTIVE_SLUGS = ["dlite-web-components", "listings-tracker"];
+const SHIPPED_APP_SLUGS = ["try", "hablalora", "sneaks"];
 
 describe("Project files have required frontmatter", () => {
   test.each(projectFiles.map((f) => [relativePath(f), f]))(
@@ -72,8 +76,35 @@ describe("Project files have required frontmatter", () => {
       expect(data.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
 
       expect(typeof data.selectedProject).toBe("boolean");
+
+      if (data.active !== undefined) {
+        expect(typeof data.active).toBe("boolean");
+      }
     }
   );
+});
+
+describe("Shipped apps stay public, deactivated projects stay off", () => {
+  function projectBySlug(slug) {
+    const file = projectFiles.find((f) => {
+      const { data } = matter(fs.readFileSync(f, "utf-8"));
+      return data.slug === slug;
+    });
+    expect(file).toBeDefined();
+    return matter(fs.readFileSync(file, "utf-8")).data;
+  }
+
+  test.each(INACTIVE_SLUGS)("%s is deactivated", (slug) => {
+    expect(projectBySlug(slug).active).toBe(false);
+  });
+
+  test.each(SHIPPED_APP_SLUGS)("%s is a public App Store app with a webpage", (slug) => {
+    const data = projectBySlug(slug);
+    expect(data.active).not.toBe(false);
+    expect(data.category).toBe("apps");
+    expect(data.links.appstore).toMatch(/^https:\/\/apps\.apple\.com\//);
+    expect(data.links.website || data.links.live).toMatch(/^https:\/\//);
+  });
 });
 
 describe("Work experience files have required frontmatter", () => {

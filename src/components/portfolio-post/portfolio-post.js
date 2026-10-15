@@ -12,7 +12,14 @@ const CATEGORY_LABELS = {
   professional: "Professional Work",
 };
 
-const LINK_LABELS = { appstore: "App Store", github: "GitHub", npm: "npm", live: "Live demo" };
+const LINK_LABELS = {
+  appstore: "App Store",
+  website: "Website",
+  github: "GitHub",
+  npm: "npm",
+  live: "Live demo",
+};
+const LINK_ORDER = ["appstore", "website", "live", "github", "npm"];
 
 export default function Post({ data }) {
   const { frontmatter, html } = data.markdownRemark;
@@ -48,22 +55,20 @@ export default function Post({ data }) {
               </span>
             ))}
           </div>
-          {links && (
+          {links && LINK_ORDER.some((k) => links[k]) && (
             <div className="btn-row" style={{ marginTop: "1.5rem" }}>
-              {["appstore", "live", "github", "npm"].map((k) =>
-                links[k] ? (
-                  <a
-                    key={k}
-                    className={`btn ${k === (links.appstore ? "appstore" : "live") ? "btn-primary" : "btn-ghost"}`}
-                    href={links[k]}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {k === "live" && links.appstore ? "Web app" : LINK_LABELS[k]}{" "}
-                    <span className="arr">→</span>
-                  </a>
-                ) : null
-              )}
+              {LINK_ORDER.filter((k) => links[k]).map((k, i) => (
+                <a
+                  key={k}
+                  className={`btn ${i === 0 ? "btn-primary" : "btn-ghost"}`}
+                  href={links[k]}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {k === "live" && links.appstore ? "Web app" : LINK_LABELS[k]}{" "}
+                  <span className="arr">→</span>
+                </a>
+              ))}
             </div>
           )}
         </header>
@@ -97,6 +102,7 @@ export const query = graphql`
         tech
         links {
           appstore
+          website
           github
           npm
           live

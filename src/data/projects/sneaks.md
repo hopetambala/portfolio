@@ -1,5 +1,5 @@
 ---
-title: Sneaks
+title: SNEAKS | Collection Tracker
 slug: sneaks
 category: apps
 categories:

@@ -31,6 +31,7 @@ const WorkPage = ({ pageContext = {} }) => {
             description
             tech
             image
+            active
             links {
               appstore
               live
@@ -45,7 +46,10 @@ const WorkPage = ({ pageContext = {} }) => {
   const catsOf = (p) => p.frontmatter.categories || [p.frontmatter.category];
 
   const projects = useMemo(
-    () => data.projects.nodes.filter((n) => catsOf(n).some((c) => IN_SCOPE.includes(c))),
+    () =>
+      data.projects.nodes.filter(
+        (n) => n.frontmatter.active !== false && catsOf(n).some((c) => IN_SCOPE.includes(c))
+      ),
     [data]
   );
 

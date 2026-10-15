@@ -70,6 +70,7 @@ exports.createPages = async function ({ actions, graphql }) {
               slug
               category
               categories
+              active
             }
           }
         }
@@ -92,7 +93,11 @@ exports.createPages = async function ({ actions, graphql }) {
     }
   `);
 
-  data.allMarkdownRemark.edges.forEach((edge) => {
+  const activeProjects = data.allMarkdownRemark.edges.filter(
+    (edge) => edge.node.frontmatter.active !== false
+  );
+
+  activeProjects.forEach((edge) => {
     const slug = edge.node.frontmatter.slug;
     actions.createPage({
       path: slug,
@@ -105,7 +110,7 @@ exports.createPages = async function ({ actions, graphql }) {
 
   const categories = [
     ...new Set(
-      data.allMarkdownRemark.edges.flatMap(
+      activeProjects.flatMap(
         (edge) =>
           edge.node.frontmatter.categories || [edge.node.frontmatter.category]
       )

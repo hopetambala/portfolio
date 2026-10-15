@@ -7,6 +7,7 @@ categories:
 role: Full-Stack Engineer
 date: '2026-04-01'
 selectedProject: false
+active: false
 links:
   live: 'https://listings-tracker-three.vercel.app/'
   github: 'https://github.com/hopetambala/listings-tracker'

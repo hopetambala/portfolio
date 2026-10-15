@@ -7,6 +7,7 @@ categories:
 role: Design Engineer
 date: '2024-06-15'
 selectedProject: false
+active: false
 links:
   github: 'https://github.com/hopetambala/web-components-dlite'
   npm: >-
