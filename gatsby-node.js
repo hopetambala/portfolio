@@ -30,8 +30,13 @@ exports.createSchemaCustomization = ({ actions }) => {
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
   if (!hasSanity) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error(
+        "[sanity] SANITY_PROJECT_ID is required for a production build."
+      );
+    }
     console.warn(
-      "[sanity] SANITY_PROJECT_ID not set — skipping journal sourcing. Journal will be empty."
+      "[sanity] SANITY_PROJECT_ID not set — skipping journal sourcing in development."
     );
     return;
   }
@@ -48,12 +53,9 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
       }`
     );
   } catch (error) {
-    // A disabled or unreachable Sanity project must not fail the site build.
-    // The journal renders an empty gallery when there are no posts.
-    console.warn(
-      `[sanity] Journal sourcing failed (${error.message}). Journal will be empty.`
-    );
-    return;
+    // Do not publish a successful build with an empty journal when the CMS is
+    // unavailable. Failing here keeps the last healthy deployment online.
+    throw new Error(`[sanity] Journal sourcing failed: ${error.message}`);
   }
 
   if (!Array.isArray(posts)) return;
