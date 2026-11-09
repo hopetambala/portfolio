@@ -490,6 +490,43 @@ hr.rule { border: none; border-top: 1px solid var(--line); margin: 0; }
 .gal-item .media img { width: 100%; height: auto; }
 .gal-item .media-cap { opacity: 0; transition: opacity 0.3s ease; }
 .gal-item:hover .media-cap { opacity: 1; }
+/* Journal index: uniform cards, one cover photo per post. */
+.jgrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.8rem, 1.6vw, 1.2rem);
+}
+@media (max-width: 900px) { .jgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .jgrid { grid-template-columns: 1fr; } }
+.jcard { display: block; border-radius: var(--tk-dlite-semantic-border-radius-lg); overflow: hidden; }
+.jcard .media { aspect-ratio: 4 / 5; }
+.jcard .media img { transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.jcard:hover .media img { transform: scale(1.03); }
+.jcard .media-cap {
+  max-width: calc(100% - 8.5rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.jcard:hover .media-cap, .jcard:focus-visible .media-cap { opacity: 1; }
+/* Touch screens can't hover, so keep titles visible there. */
+@media (hover: none) { .jcard .media-cap { opacity: 1; } }
+.media-count {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.9rem;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
 .entries { border-top: 1px solid var(--line); }
 .entry {
   display: grid;

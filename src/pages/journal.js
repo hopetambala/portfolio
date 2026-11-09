@@ -16,6 +16,11 @@ const Journal = () => {
             alt
             url
           }
+          gallery {
+            images {
+              url
+            }
+          }
         }
       }
     }
@@ -39,19 +44,25 @@ const Journal = () => {
       </div>
 
       <div className="wrap" style={{ paddingBottom: "clamp(4rem, 9vw, 9rem)" }}>
-        <div className="gallery" ref={galleryRef}>
+        <div className="jgrid" ref={galleryRef}>
           {posts.map((post) => {
             const imageUrl = post.mainImage?.url;
             if (!imageUrl) return null;
+            // Same count as the post page: main photo plus gallery photos.
+            const photoCount =
+              1 + (post.gallery?.images || []).filter((img) => img.url).length;
             return (
-              <Link key={post._id} to={`/journal/${post.slug}`} className="gal-item">
+              <Link key={post._id} to={`/journal/${post.slug}`} className="jcard">
                 <div className="media">
                   <img
-                    src={`${imageUrl}?w=600&auto=format`}
+                    src={`${imageUrl}?w=800&h=1000&fit=crop&auto=format`}
                     alt={post.mainImage?.alt || post.title}
                     loading="lazy"
                   />
                   <span className="media-cap">{post.title}</span>
+                  <span className="media-count">
+                    {photoCount} {photoCount === 1 ? "photo" : "photos"}
+                  </span>
                 </div>
               </Link>
             );
