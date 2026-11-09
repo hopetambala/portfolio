@@ -1,14 +1,22 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { Link } from "gatsby";
 import Layout from "../layout/layout";
 import * as styles from "./journal-post.module.css";
 import { formatExif } from "./format-exif";
+import { useVariedMasonry } from "./use-varied-masonry";
 
 export default function JournalPost({ pageContext }) {
   const post = pageContext.post;
   const mainImageUrl = post.mainImage?.url;
   const galleryImages = (post.gallery?.images || []).filter((img) => img.url);
   const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  const galleryRef = useRef(null);
+  useVariedMasonry(
+    galleryRef,
+    galleryImages.map((img) => img.size),
+    styles.masonryReady
+  );
 
   const allImages = [
     ...(mainImageUrl
@@ -57,25 +65,48 @@ export default function JournalPost({ pageContext }) {
 
   return (
     <Layout>
-      <div className={styles.journalPost}>
-        <nav className={styles.breadcrumbs}>
+      <article className="wrap ed" style={{ paddingBottom: "clamp(4rem, 9vw, 9rem)" }}>
+        <nav className="postcrumbs" aria-label="Breadcrumb">
           <Link to="/">Home</Link>
-          <span> / </span>
+          <span aria-hidden="true"> / </span>
           <Link to="/journal">Journal</Link>
-          <span> / </span>
+          <span aria-hidden="true"> / </span>
           <span>{post.title}</span>
         </nav>
 
-        <h1>{post.title}</h1>
+        <header className="pagehead" style={{ paddingTop: "clamp(1.5rem, 4vw, 3rem)" }}>
+          <span className="kicker">Journal</span>
+          <h1 className="h-xl" style={{ marginTop: "0.8rem" }}>
+            {post.title}
+          </h1>
+          {(post.publishedAt || allImages.length > 0) && (
+            <div className="postmeta">
+              {post.publishedAt && <span className="mono">{post.publishedAt}</span>}
+              {allImages.length > 0 && (
+                <span className="mono">
+                  {allImages.length} {allImages.length === 1 ? "photo" : "photos"}
+                </span>
+              )}
+            </div>
+          )}
+        </header>
 
         {mainImageUrl && (
-          <figure className={styles.mainImage}>
-            <img
-              src={`${mainImageUrl}?w=1200&auto=format`}
-              alt={post.mainImage?.alt || post.title}
-              loading="eager"
+          <figure className={styles.hero}>
+            <button
+              type="button"
+              className="posthero"
               onClick={() => openLightbox(0)}
-            />
+              aria-label="Open photo"
+            >
+              <img
+                src={`${mainImageUrl}?w=1600&auto=format`}
+                alt={post.mainImage?.alt || post.title}
+                width={post.mainImage?.size?.width}
+                height={post.mainImage?.size?.height}
+                loading="eager"
+              />
+            </button>
             {allImages[0].caption && (
               <figcaption className={styles.caption}>
                 {allImages[0].caption}
@@ -85,29 +116,33 @@ export default function JournalPost({ pageContext }) {
         )}
 
         {galleryImages.length > 0 && (
-          <div className={styles.gallery}>
+          <div
+            ref={galleryRef}
+            className={`gallery ${styles.masonry}`}
+          >
             {galleryImages.map((img, i) => {
               const caption = formatExif(img.exif);
+              const index = mainImageUrl ? i + 1 : i;
               return (
-                <figure
-                  key={i}
-                  className={styles.galleryItem}
-                  onClick={() => openLightbox(mainImageUrl ? i + 1 : i)}
-                  onKeyDown={(e) =>
-                    e.key === "Enter" && openLightbox(mainImageUrl ? i + 1 : i)
-                  }
-                  role="button"
-                  tabIndex={0}
-                >
-                  <img
-                    src={`${img.url}?w=600&auto=format`}
-                    alt={post.title}
-                    loading="lazy"
-                  />
+                <figure key={img.url} className={`gal-item ${styles.galleryItem}`}>
+                  <button
+                    type="button"
+                    className="media"
+                    onClick={() => openLightbox(index)}
+                    aria-label={`Open photo ${index + 1}`}
+                  >
+                    <img
+                      src={`${img.url}?w=800&auto=format`}
+                      srcSet={`${img.url}?w=800&auto=format 800w, ${img.url}?w=1400&auto=format 1400w`}
+                      sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 33vw"
+                      alt={post.title}
+                      width={img.size?.width}
+                      height={img.size?.height}
+                      loading="lazy"
+                    />
+                  </button>
                   {caption && (
-                    <figcaption className={styles.caption}>
-                      {caption}
-                    </figcaption>
+                    <figcaption className={styles.caption}>{caption}</figcaption>
                   )}
                 </figure>
               );
@@ -170,7 +205,7 @@ export default function JournalPost({ pageContext }) {
             </span>
           </div>
         )}
-      </div>
+      </article>
     </Layout>
   );
 }

@@ -29,6 +29,10 @@ const EXIF_PROJECTION = `"exif": {${EXIF_FIELDS.map(
   (f) => `"${f}": coalesce(exif.${f}, asset->metadata.exif.${f})`
 ).join(", ")}}`;
 
+// Pixel size of a photo, so the page can reserve its space before it loads.
+// Without it the masonry gallery reshuffles as each lazy image arrives.
+const SIZE_PROJECTION = `"size": asset->metadata.dimensions { width, height }`;
+
 exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
     type SanityExif {
@@ -40,8 +44,14 @@ exports.createSchemaCustomization = ({ actions }) => {
       ISO: Float
       FocalLength: Float
     }
-    type SanityImageRef { alt: String, url: String, exif: SanityExif }
-    type SanityGalleryImage { url: String, exif: SanityExif }
+    type SanityImageSize { width: Int, height: Int }
+    type SanityImageRef {
+      alt: String
+      url: String
+      size: SanityImageSize
+      exif: SanityExif
+    }
+    type SanityGalleryImage { url: String, size: SanityImageSize, exif: SanityExif }
     type SanityGallery { images: [SanityGalleryImage] }
     type SanityPost implements Node @dontInfer {
       _id: String
@@ -77,8 +87,8 @@ exports.sourceNodes = async ({
         _id,
         title,
         "slug": slug.current,
-        mainImage { alt, "url": asset->url, ${EXIF_PROJECTION} },
-        gallery { images[] { "url": asset->url, ${EXIF_PROJECTION} } },
+        mainImage { alt, "url": asset->url, ${SIZE_PROJECTION}, ${EXIF_PROJECTION} },
+        gallery { images[] { "url": asset->url, ${SIZE_PROJECTION}, ${EXIF_PROJECTION} } },
         publishedAt
       }`
     );
@@ -123,9 +133,14 @@ exports.createPages = async function ({ actions, graphql }) {
         nodes {
           slug
           title
+          publishedAt(formatString: "MMMM D, YYYY")
           mainImage {
             alt
             url
+            size {
+              width
+              height
+            }
             exif {
               Make
               Model
@@ -139,6 +154,10 @@ exports.createPages = async function ({ actions, graphql }) {
           gallery {
             images {
               url
+              size {
+                width
+                height
+              }
               exif {
                 Make
                 Model

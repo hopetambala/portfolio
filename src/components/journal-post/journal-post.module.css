@@ -1,107 +1,78 @@
-.journalPost {
-  padding: var(--spacer-l) var(--spacer-xl);
-  max-width: 1200px;
-  margin: 0 auto;
+/* Layout, type and colors come from the shared editorial classes
+   (.wrap, .ed, .postcrumbs, .pagehead, .posthero, .gallery, .gal-item).
+   This file only covers what's specific to photo posts. */
+
+.hero {
+  margin: clamp(1.5rem, 4vw, 3rem) 0;
 }
 
-.breadcrumbs {
-  font-size: var(--font-size-body-small);
-  margin-bottom: var(--spacer-l);
-}
-
-.breadcrumbs a {
-  color: var(--color-neutral-700);
-  text-decoration: none;
-}
-
-.breadcrumbs a:hover {
-  text-decoration: underline;
-}
-
-.breadcrumbs span:last-child {
-  color: var(--color-neutral-900);
-  font-weight: var(--font-weight-emphasis);
-}
-
-h1 {
-  margin-bottom: var(--spacer-l);
-}
-
-/* Main image */
-.mainImage {
-  margin: 0 0 var(--spacer-xl);
-  cursor: pointer;
-}
-
-.mainImage img {
+.hero :global(.posthero) {
   width: 100%;
-  height: auto;
-  border-radius: var(--border-radius-s);
-  border: var(--spacer-xs) solid var(--color-neutral-900);
+  margin: 0;
+  padding: 0;
+  cursor: zoom-in;
 }
 
-/* Gallery — CSS masonry */
-.gallery {
-  column-count: 3;
-  column-gap: var(--spacer-m);
+/* Masonry. The server render uses the shared CSS-columns .gallery; then
+   use-varied-masonry.js adds .masonryReady and places every tile on this
+   grid itself (in capture order, with random two-column features). */
+.masonry {
+  --masonry-cols: 3;
+  --masonry-gap: clamp(0.8rem, 1.6vw, 1.2rem);
 }
 
 @media (max-width: 900px) {
-  .gallery {
-    column-count: 2;
-  }
+  .masonry { --masonry-cols: 2; }
 }
 
-@media (max-width: 500px) {
-  .gallery {
-    column-count: 1;
-  }
+@media (max-width: 560px) {
+  .masonry { --masonry-cols: 1; }
+}
+
+.masonry.masonryReady {
+  display: grid;
+  columns: auto;
+  grid-template-columns: repeat(var(--masonry-cols), minmax(0, 1fr));
+  grid-auto-rows: 4px; /* ROW_PX in use-varied-masonry.js */
+  column-gap: var(--masonry-gap);
+  row-gap: 0;
+  align-items: start;
 }
 
 .galleryItem {
-  margin: 0;
-  break-inside: avoid;
-  margin-bottom: var(--spacer-m);
-  cursor: pointer;
-  border-radius: var(--border-radius-s);
-  overflow: hidden;
-  border: var(--spacer-xxs) solid var(--color-neutral-900);
-  transition: transform var(--duration-default) var(--ease-default),
-              box-shadow var(--duration-default) var(--ease-default);
+  margin-top: 0;
+  margin-inline: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
 }
 
-.galleryItem:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--spacer-s) var(--spacer-s) 0 0 var(--color-neutral-900);
+.galleryItem :global(.media) {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  cursor: zoom-in;
 }
 
-.galleryItem img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Camera caption */
+/* Camera details */
 .caption {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.02em;
   line-height: 1.5;
-  color: var(--fg-3, var(--color-neutral-700));
-  padding: var(--spacer-xs) 0 0;
+  color: var(--fg-3);
+  padding-top: 0.6rem;
 }
 
 .galleryItem .caption {
-  padding: var(--spacer-xs) var(--spacer-s);
-  border-top: var(--spacer-xxs) solid var(--color-neutral-900);
-  background: var(--surface, transparent);
+  padding: 0.5rem 0.75rem;
+  border-top: 1px solid var(--line);
 }
 
 /* Lightbox */
 .lightbox {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 300; /* above the sticky site menu (200) */
   background: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
@@ -145,7 +116,7 @@ h1 {
   font-size: 2.5rem;
   cursor: pointer;
   line-height: 1;
-  z-index: 101;
+  z-index: 301;
 }
 
 .lightboxNav {
@@ -158,7 +129,7 @@ h1 {
   font-size: 3rem;
   cursor: pointer;
   padding: var(--spacer-m);
-  z-index: 101;
+  z-index: 301;
   line-height: 1;
 }
 
