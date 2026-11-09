@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "gatsby";
 import Layout from "../layout/layout";
 import * as styles from "./journal-post.module.css";
+import { formatExif } from "./format-exif";
 
 export default function JournalPost({ pageContext }) {
   const post = pageContext.post;
@@ -10,8 +11,20 @@ export default function JournalPost({ pageContext }) {
   const [lightboxIndex, setLightboxIndex] = useState(null);
 
   const allImages = [
-    ...(mainImageUrl ? [{ url: mainImageUrl, alt: post.mainImage?.alt || post.title }] : []),
-    ...galleryImages.map((img) => ({ url: img.url, alt: post.title })),
+    ...(mainImageUrl
+      ? [
+          {
+            url: mainImageUrl,
+            alt: post.mainImage?.alt || post.title,
+            caption: formatExif(post.mainImage?.exif),
+          },
+        ]
+      : []),
+    ...galleryImages.map((img) => ({
+      url: img.url,
+      alt: post.title,
+      caption: formatExif(img.exif),
+    })),
   ];
 
   const openLightbox = (index) => setLightboxIndex(index);
@@ -25,7 +38,9 @@ export default function JournalPost({ pageContext }) {
 
   const goPrev = useCallback(() => {
     if (lightboxIndex !== null) {
-      setLightboxIndex((lightboxIndex - 1 + allImages.length) % allImages.length);
+      setLightboxIndex(
+        (lightboxIndex - 1 + allImages.length) % allImages.length
+      );
     }
   }, [lightboxIndex, allImages.length]);
 
@@ -54,34 +69,49 @@ export default function JournalPost({ pageContext }) {
         <h1>{post.title}</h1>
 
         {mainImageUrl && (
-          <div className={styles.mainImage}>
+          <figure className={styles.mainImage}>
             <img
               src={`${mainImageUrl}?w=1200&auto=format`}
               alt={post.mainImage?.alt || post.title}
               loading="eager"
               onClick={() => openLightbox(0)}
             />
-          </div>
+            {allImages[0].caption && (
+              <figcaption className={styles.caption}>
+                {allImages[0].caption}
+              </figcaption>
+            )}
+          </figure>
         )}
 
         {galleryImages.length > 0 && (
           <div className={styles.gallery}>
-            {galleryImages.map((img, i) => (
-              <div
-                key={i}
-                className={styles.galleryItem}
-                onClick={() => openLightbox(mainImageUrl ? i + 1 : i)}
-                onKeyDown={(e) => e.key === "Enter" && openLightbox(mainImageUrl ? i + 1 : i)}
-                role="button"
-                tabIndex={0}
-              >
-                <img
-                  src={`${img.url}?w=600&auto=format`}
-                  alt={post.title}
-                  loading="lazy"
-                />
-              </div>
-            ))}
+            {galleryImages.map((img, i) => {
+              const caption = formatExif(img.exif);
+              return (
+                <figure
+                  key={i}
+                  className={styles.galleryItem}
+                  onClick={() => openLightbox(mainImageUrl ? i + 1 : i)}
+                  onKeyDown={(e) =>
+                    e.key === "Enter" && openLightbox(mainImageUrl ? i + 1 : i)
+                  }
+                  role="button"
+                  tabIndex={0}
+                >
+                  <img
+                    src={`${img.url}?w=600&auto=format`}
+                    alt={post.title}
+                    loading="lazy"
+                  />
+                  {caption && (
+                    <figcaption className={styles.caption}>
+                      {caption}
+                    </figcaption>
+                  )}
+                </figure>
+              );
+            })}
           </div>
         )}
 
@@ -102,20 +132,35 @@ export default function JournalPost({ pageContext }) {
             </button>
             <button
               className={`${styles.lightboxNav} ${styles.lightboxPrev}`}
-              onClick={(e) => { e.stopPropagation(); goPrev(); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                goPrev();
+              }}
               aria-label="Previous image"
             >
               ‹
             </button>
-            <img
-              src={`${allImages[lightboxIndex].url}?w=1600&auto=format`}
-              alt={allImages[lightboxIndex].alt}
-              className={styles.lightboxImage}
+            <figure
+              className={styles.lightboxFigure}
               onClick={(e) => e.stopPropagation()}
-            />
+            >
+              <img
+                src={`${allImages[lightboxIndex].url}?w=1600&auto=format`}
+                alt={allImages[lightboxIndex].alt}
+                className={styles.lightboxImage}
+              />
+              {allImages[lightboxIndex].caption && (
+                <figcaption className={styles.lightboxCaption}>
+                  {allImages[lightboxIndex].caption}
+                </figcaption>
+              )}
+            </figure>
             <button
               className={`${styles.lightboxNav} ${styles.lightboxNext}`}
-              onClick={(e) => { e.stopPropagation(); goNext(); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                goNext();
+              }}
               aria-label="Next image"
             >
               ›

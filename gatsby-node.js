@@ -12,10 +12,36 @@ const sanityClient = hasSanity
     })
   : null;
 
+// Camera settings for a photo caption. `exif` on the image object is filled by
+// the Studio at upload (and by the one-off backfill); `asset->metadata.exif`
+// is Sanity's own extraction, which lacks Make/Model. Field-level coalesce so
+// each value falls back on its own.
+const EXIF_FIELDS = [
+  "Make",
+  "Model",
+  "LensModel",
+  "FNumber",
+  "ExposureTime",
+  "ISO",
+  "FocalLength",
+];
+const EXIF_PROJECTION = `"exif": {${EXIF_FIELDS.map(
+  (f) => `"${f}": coalesce(exif.${f}, asset->metadata.exif.${f})`
+).join(", ")}}`;
+
 exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
-    type SanityImageRef { alt: String, url: String }
-    type SanityGalleryImage { url: String }
+    type SanityExif {
+      Make: String
+      Model: String
+      LensModel: String
+      FNumber: Float
+      ExposureTime: Float
+      ISO: Float
+      FocalLength: Float
+    }
+    type SanityImageRef { alt: String, url: String, exif: SanityExif }
+    type SanityGalleryImage { url: String, exif: SanityExif }
     type SanityGallery { images: [SanityGalleryImage] }
     type SanityPost implements Node @dontInfer {
       _id: String
@@ -28,7 +54,11 @@ exports.createSchemaCustomization = ({ actions }) => {
   `);
 };
 
-exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
+exports.sourceNodes = async ({
+  actions,
+  createNodeId,
+  createContentDigest,
+}) => {
   if (!hasSanity) {
     if (process.env.NODE_ENV === "production") {
       throw new Error(
@@ -47,8 +77,8 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
         _id,
         title,
         "slug": slug.current,
-        mainImage { alt, "url": asset->url },
-        gallery { images[] { "url": asset->url } },
+        mainImage { alt, "url": asset->url, ${EXIF_PROJECTION} },
+        gallery { images[] { "url": asset->url, ${EXIF_PROJECTION} } },
         publishedAt
       }`
     );
@@ -96,10 +126,28 @@ exports.createPages = async function ({ actions, graphql }) {
           mainImage {
             alt
             url
+            exif {
+              Make
+              Model
+              LensModel
+              FNumber
+              ExposureTime
+              ISO
+              FocalLength
+            }
           }
           gallery {
             images {
               url
+              exif {
+                Make
+                Model
+                LensModel
+                FNumber
+                ExposureTime
+                ISO
+                FocalLength
+              }
             }
           }
         }
